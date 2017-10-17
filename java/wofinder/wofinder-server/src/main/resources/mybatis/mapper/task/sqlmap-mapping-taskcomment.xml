@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.task.mapper.TaskCommentMapper">
+
+	<!-- t_task_comment字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 主键-->
+			task_id AS "task.id", <!-- 事件id-->
+			content AS "content", <!-- 评论内容-->
+			parent_id AS "parentComment.id", <!-- 父级评论id-->
+			like_num AS "likeNum", <!-- 点赞数量-->
+			status AS "status.value", <!-- 状态-->
+			create_id AS "createUser.id", <!-- 创建者-->
+			create_time AS "createTime", <!-- 创建时间-->
+			update_time AS "updateTime", <!-- 修改时间-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_task_comment分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.task.model.TaskCommentEntity">
+		select  
+			<include refid="columnList"/>
+		from t_task_comment 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="taskId != null and taskId != ''">
+				AND task_id=#{taskId}
+			</if>
+			<if test="content != null and content != ''">
+				AND lower(content) like concat('%',lower(#{content}),'%')
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 根据entity查询t_task_comment -->
+	<select id="queryListByEntity" resultType="com.webside.task.model.TaskCommentEntity" parameterType="com.webside.task.model.TaskCommentEntity">
+		select
+		<include refid="columnList" />
+		from t_task_comment 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="id != null and id != ''">
+				AND id != #{id}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 根据ID查询t_task_comment -->
+	<select id="findById" resultType="com.webside.task.model.TaskCommentEntity" parameterType="String">
+		select  
+			<include refid="columnList"/>
+		from t_task_comment 
+		where id = #{id}
+	</select>
+	
+	<!-- 根据条件查询t_task_comment数量 -->
+	<select id="count" resultType="Integer" parameterType="map">
+		select count(id) 
+		from t_task_comment 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="taskId != null and taskId != ''">
+				AND task_id = #{taskId}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 根据事件id查询t_task_comment最近一条数据 -->
+	<select id="findNewByTask" resultType="com.webside.task.model.TaskCommentEntity" parameterType="String">
+		select content
+		from t_task_comment 
+		where task_id = #{taskId}
+		order by create_time desc limit 1
+	</select>
+	
+	<!-- 新增t_task_comment -->
+	<insert id="insert" 
+			parameterType="com.webside.task.model.TaskCommentEntity">
+		insert into t_task_comment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		id,<!-- 主键 -->
+		task_id,<!-- 事件id -->
+		<if test="content != null">content,</if><!-- 评论内容-->
+		<if test="parentComment != null and parentComment.id != null">parentComment_id,</if><!-- 父级评论id-->
+		<if test="likeNum != null">like_num,</if><!-- 点赞数量-->
+		create_id,<!--创建人-->
+		create_time,<!-- 创建时间 -->
+		status,<!-- 状态 -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		#{id},<!-- 主键 -->
+		#{task.id},<!-- 视频id -->
+		<if test="content != null">#{content},</if><!-- 评论内容-->
+		<if test="parentComment != null and parentComment.id !=null">#{parentComment.id},</if><!-- 父级评论id-->
+		<if test="likeNum != null">#{likeNum},</if><!-- 点赞数量-->
+		#{createUser.id},<!-- 创建人 -->
+		#{createTime},<!-- 创建时间 -->
+		#{status.value},<!-- 状态 -->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID更新t_task_comment -->
+	<update id="updateById" parameterType="com.webside.task.model.TaskCommentEntity" >
+		update t_task_comment
+		<trim prefix="SET" suffixOverrides=",">  
+			<if test="task != null and task.id !=null">task_id=#{task.id},</if><!-- 事件id-->
+			<if test="content != null">content=#{content},</if><!-- 评论内容-->
+			<if test="parentComment != null and parentComment.id != null">parent_id=#{parentComment.id},</if><!-- 父级评论id-->
+			<if test="likeNum != null">like_num=#{likeNum},</if><!-- 点赞数量-->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态-->
+			<if test="updateTime != null">update_time=#{updateTime},</if><!-- 修改时间-->
+		</trim>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID删除t_task_comment -->
+	<delete id="deleteById" parameterType="String" >
+		delete from t_task_comment 
+		where id = #{id}
+	</delete>
+	
+	<!-- 根据entity删除t_task_comment -->
+	<delete id="deleteByEntity" parameterType="com.webside.task.model.TaskCommentEntity">
+		delete from t_task_comment
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="task != null and task.id != null and task.id != ''">
+				AND task_id=#{task.id}
+			</if>
+		</trim>
+	</delete>
+	
+	<!-- 根据ID更新事件点赞 -->
+	<update id="updateLikeNumById" parameterType="map">
+		update t_task_comment set view_count = like_num+${likeNum},update_time=#{updateTime} where id = #{id}
+	</update>
+</mapper>

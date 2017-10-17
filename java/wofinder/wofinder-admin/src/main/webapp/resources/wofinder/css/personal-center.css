@@ -1,0 +1,669 @@
+body{
+    overflow: hidden!important;
+}
+.personal-center-main{
+    width: 1720px;
+    margin: 110px auto 0 auto;
+}
+.personal-center-main-inside{
+    overflow: hidden;
+    position: relative;
+    webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+    -webkit-transition: all .3s cubic-bezier(.4,0,.2,1);
+    transition: all .3s cubic-bezier(.4,0,.2,1);
+}
+.personal-center-main .personal-center-main-left{
+    width: 240px;
+    background-color: #fff;
+    position: absolute;
+    border-right: 1px solid #efefef;
+    z-index: 1;
+    left: 0;
+    top: 0;
+}
+.personal-center-main .personal-center-main-right{
+    position: relative;
+    width: 100%;
+    background-color: #fff;
+    padding-left: 240px;
+}
+.personal-center-main .personal-center-main-left .title{
+    height: 48px;
+    line-height: 48px;
+    padding-left: 55px;
+    color: #db4437;
+    font-size: 18px;
+}
+.personal-center-main .personal-center-main-left .list{
+    overflow: hidden;
+}
+.personal-center-main .personal-center-main-left .list li{
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+}
+.personal-center-main .personal-center-main-left .list li:hover{
+    background-color: #efefef;
+}
+.personal-center-main .personal-center-main-left .list li.list-one{
+    color: #414141;
+}
+.personal-center-main .personal-center-main-left .list li.list-two{
+    color: #757575;
+}
+.personal-center-main .personal-center-main-left .list li.list-one.checked,.personal-center-main .personal-center-main-left .list li.list-two.checked{
+    color: #db4437;
+}
+.personal-center-main .personal-center-main-left .list li.list-one.checked,.personal-center-main .personal-center-main-left .list li.list-two.checked{
+    color: #db4437;
+}
+.personal-center-main .personal-center-main-left .list li .first{
+    position: absolute;
+    width: 5px;
+    height: 16px;
+    float: left;
+    top: 12px;
+    left: 0;
+    background-color: #db4437;
+    display: none;
+}
+.personal-center-main .personal-center-main-left .list li.checked .first{
+    display: block;
+}
+.personal-center-main .personal-center-main-left .list li .iconfont{
+    position: absolute;
+    font-size: 16px;
+    left: 24px;
+    top: 12px;
+    width: 16px;
+    height: 16px;
+}
+.personal-center-main .personal-center-main-left .list li .icon-wf_touxiang:before{
+    position: relative;
+    top: -3.6px;
+}
+.personal-center-main .personal-center-main-left .list li .icon-wf_shezhi-copy:before{
+    position: relative;
+    top: -3.8px;
+}
+.personal-center-main .personal-center-main-left .list li .icon-wf_pinglun1:before{
+    position: relative;
+    top: -3.8px;
+}
+.personal-center-main .personal-center-main-left .list li .icon-wf_mima1:before{
+    position: relative;
+    top: -3.8px;
+}
+.personal-center-main .personal-center-main-left .list li .icon-help_aibaba_test:before{
+    position: relative;
+    top: -3.8px;
+}
+.personal-center-main .personal-center-main-left .list li .icon-wf_tuichu:before{
+    position: relative;
+    top: -3.8px;
+}
+.personal-center-main .personal-center-main-left .list li .left-label{
+    position: absolute;
+    left: 55px;
+    top: 0;
+    height: 40px;
+    line-height: 40px;
+    display: block;
+}
+.personal-center-main .personal-center-main-left .list li .new-message{
+    position: absolute;
+    right: 20px;
+    top: 12px;
+    height: 16px;
+    line-height: 16px;
+    display: block;
+    background-color: #db4437;
+    color: #fff;
+    padding: 0 5px;
+    border-radius: 10px;
+}
+.personal-center-main .personal-center-main-right-inside{
+    width: 100%;
+}
+.personal-center-main .personal-center-main-right .title-outside{
+    height: 48px;
+    line-height: 48px;
+    position: relative;
+}
+.personal-center-main .personal-center-main-right .title-outside .icon-wf_liebiao{
+    color: #fff;
+    font-size: 24px;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 12px;
+    top:12px;
+    display: none;
+}
+.personal-center-main .personal-center-main-right .title{
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    background-color: #db4437;
+    color: #fff;
+    font-size: 18px;
+}
+.personal-center-main-right-main-inside .welcome{
+    width: 100%;
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+.personal-center-main-right-main-inside .welcome .header{
+    width: 133px;
+    height: 133px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.personal-center-main-right-main-inside .welcome .header img{
+    width: 133px;
+    height: 133px;
+}
+.personal-center-main-right-main-inside .welcome .header .no_header{
+    font-size: 70px;
+    line-height: 133px;
+}
+.personal-center-main-right-main-inside .welcome .name{
+    text-align: center;
+    margin-top: 30px;
+    font-size: 16px;
+    color: #757575;
+}
+.personal-center-main-right-main-inside .welcome .name .re{
+    color: #db4437;
+    font-size: 16px;
+}
+.personal-center-main-right-main-inside .welcome .describe{
+    font-size: 24px;
+    text-align: center;
+    color: #757575;
+    margin-top: 60px;
+}
+.personal-center-main-right-main-inside .welcome .IP{
+    font-size: 14px;
+    color: #757575;
+    text-align: center;
+    margin-top: 30px;
+}
+.personal-center-main-right-main-inside .welcome .tb{
+    height: 90px;
+    margin: 140px auto 0 auto;
+    display: block;
+}
+.personal-center-main-right-main-inside .welcome .last{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #757575;
+}
+.personal-center-main-right-main-inside .safety{
+    position: relative;
+    padding: 100px 20px;
+}
+.personal-center-main-right-main-inside .safety .list{
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    overflow: auto;
+}
+.personal-center-main-right-main-inside .safety .list-header{
+    height: 50px;
+    border-bottom: 1px solid #efefef;
+    color: #000;
+    overflow: hidden;
+    width: 1100px;
+}
+.personal-center-main-right-main-inside .safety .list-header .one,.personal-center-main-right-main-inside .safety .list-content li .one{
+    margin-left: 50px;
+    width: 275px;
+    display: block;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+}
+.personal-center-main-right-main-inside .safety .list-header .two,.personal-center-main-right-main-inside .safety .list-content li .two{
+    width: 255px;
+    display: block;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+}
+.personal-center-main-right-main-inside .safety .list-header .three,.personal-center-main-right-main-inside .safety .list-content li .three{
+    width: 350px;
+    display: block;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+}
+.personal-center-main-right-main-inside .safety .list-content{
+    width: 1100px;
+}
+.personal-center-main-right-main-inside .safety .list-content li{
+    height: 50px;
+    color: #757575;
+    overflow: hidden;
+    border-bottom: 1px solid #efefef;
+}
+.personal-center-main-right-main-inside .safety .list-content li:hover{
+    background-color: #f6f6f6;
+}
+.personal-center-main-right-main-inside .safety .list-content li .four{
+    width: 170px;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+}
+.personal-center-main-right-main-inside .safety .list-content li .four span{
+    display: block;
+    width: 76px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 2px;
+    margin-top: 8px;
+    margin-left: 47px;
+    text-align: center;
+    cursor: pointer;
+}
+.personal-center-main-right-main-inside .safety .list-content li:hover .four span{
+    background-color: #db4437;
+    color: #fff;
+}
+.integration-task{
+    padding: 100px 20px 50px 20px;
+}
+.integration-task .integration-task-inside{
+    width: 100%;
+    max-width: 1040px;
+    margin: 0 auto;
+}
+.integration-task .integration-task-inside .team2,.integration-task .integration-task-inside .team3{
+    margin-top: 45px;
+}
+.browse-configuration{
+    padding-top: 100px;
+}
+.browse-configuration .browse-configuration-inside{
+    width: 280px;
+    position: relative;
+    left: 50%;
+    margin-left: -140px;
+}
+.browse-configuration .browse-configuration-content li{
+    overflow: hidden;
+    height: 50px;
+}
+.browse-configuration .browse-configuration-content li .one{
+    height: 20px;
+    line-height: 20px;
+    display: block;
+    float: left;
+    margin-top:15px;
+}
+.browse-configuration .browse-configuration-content li .togglebutton{
+    float:right;
+    margin-top: 17.5px;
+    margin-right: 10px;
+}
+.browse-configuration .browse-configuration-content li .on-off{
+    margin: 2px 0 0 0;
+}
+.account-number-setting{
+    padding-top: 100px;
+}
+.account-number-setting-inside{
+    width: 1100px;
+    position: relative;
+    left: 50%;
+    margin-left: -550px;
+}
+.account-number-setting-inside .one{
+    width: 480px;
+    margin-top: 140px;
+    margin-left: 310px;
+}
+.account-number-setting-inside .form-group label,.account-number-setting-inside .form-group.is-focused label{
+    color: #d8d8d8;
+}
+.account-number-setting-inside .form-group .help-block{
+    color: #db4437;
+}
+.account-number-setting-inside .btn,.account-number-setting-inside .btn:hover,.account-number-setting-inside .btn:focus,.account-number-setting-inside .btn:active{
+    color: #fff!important;
+    background-color: #db4437!important;
+    width: 480px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    margin-top: 35px;
+    font-size: 14px;
+    outline: none;
+}
+.account-number-setting-inside .btn[disabled],.account-number-setting-inside .btn[disabled]:hover,.account-number-setting-inside .btn[disabled]:focus,.account-number-setting-inside .btn[disabled]:active{
+    color: #fff!important;
+    background-color: #e7e7e7!important;
+}
+.account-number-setting-inside .two,.account-number-setting-inside .three{
+    width: 1050px;
+    margin-left: 25px;
+}
+.account-number-setting-inside .two .form-group,.account-number-setting-inside .three .form-group{
+    width: 480px;
+    margin: 0 285px 0 285px;
+}
+.account-number-setting-inside .two .btn,.account-number-setting-inside .three .btn{
+    margin-left: 285px;
+}
+.account-number-setting-inside .top-title{
+    overflow: hidden;
+    height: 25px;
+}
+.account-number-setting-inside .top-title .iconfont{
+    float: left;
+    font-size: 25px;
+    display: block;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+.account-number-setting-inside .top-title .iconfont:before{
+    position: relative;
+    top: -6px;
+}
+.account-number-setting-inside .top-title div{
+    height: 25px;
+    line-height: 25px;
+    float: left;
+    margin-left: 260px;
+    overflow: hidden;
+}
+.account-number-setting-inside .top-title div .one{
+    height: 16px;
+    width: 5px;
+    display: block;
+    background-color: #db4437;
+    margin: 4.5px 0 0 0;
+    float: left;
+}
+.account-number-setting-inside .top-title div .two{
+    height: 25px;
+    line-height: 25px;
+    font-size: 16px;
+    margin: 0 0 0 15px;
+    float: left;
+    display: block;
+    width: auto;
+}
+.account-number-setting-inside .two .form-group-one,.account-number-setting-inside .three .form-group-one{
+    margin-top: 115px;
+}
+.account-number-setting-inside .two .form-group-two,.account-number-setting-inside .three .form-group-two{
+    margin-top: 30px;
+}
+.account-number-setting-inside .two .yanzheng,.account-number-setting-inside .three .yanzheng{
+    margin-top: 30px;
+}
+.account-number-setting-inside .two .number,.account-number-setting-inside .three .number{
+    color: #414141;
+    width: 480px;
+    margin: 10px 285px 0 285px;
+    text-align: center;
+}
+.account-number-setting-inside .two .number,.account-number-setting-inside .three .number{
+    color: #414141;
+    width: 480px;
+    margin: 10px 285px 0 285px;
+    text-align: center;
+}
+.main{
+    height: auto;
+    min-height:0;
+    width:480px;
+    margin: 0 auto 50px auto;
+}
+.main .geetest_radar_tip span,.main .geetest_success_radar_tip span{
+    position: relative;
+    top: 11px;
+}
+.personal-center-main .personal-center-main-left .list li.list-one a{
+    color: #414141;
+}
+.personal-center-main .personal-center-main-left .list li.list-two a{
+    color: #757575;
+}
+@media screen and (max-width: 480px) {
+    .personal-center-main{width: 100%;padding: 0 20px;}
+    .personal-center-main-inside{
+        position: relative;
+    }
+    .personal-center-main .personal-center-main-left{
+        display: none;
+        width: 220px;
+        z-index: 3;
+    }
+    .personal-center-main .personal-center-main-right{
+        padding-left: 0;
+    }
+    .personal-center-main .personal-center-main-right .title-outside .icon-wf_liebiao{
+        display: block;
+    }
+    .personal-center-main-right-main-inside .welcome .describe{
+        padding: 0 40px;
+        font-size: 20px;
+    }
+    .integration-task .integration-task-inside {
+        max-width: 408px;
+    }
+    .account-number-setting-inside .one{
+        width: 200px;
+        margin-left: 450px;
+    }
+    .account-number-setting-inside .btn, .account-number-setting-inside .btn:hover, .account-number-setting-inside .btn:focus, .account-number-setting-inside .btn:active{
+        width: 200px;
+    }
+    .account-number-setting-inside .two, .account-number-setting-inside .three{
+        width: 260px;
+        margin-left: 420px;
+    }
+    .account-number-setting-inside .top-title div{
+        margin-left: 5px;
+    }
+    .account-number-setting-inside .two .form-group, .account-number-setting-inside .three .form-group{
+        width: 200px;
+        margin: 0 30px 0 30px;
+    }
+    .account-number-setting-inside .two .form-group-one, .account-number-setting-inside .three .form-group-one{
+        margin-top: 115px;
+    }
+    .account-number-setting-inside .two .form-group-two, .account-number-setting-inside .three .form-group-two{
+        margin-top: 30px;
+    }
+    .account-number-setting-inside .two .btn, .account-number-setting-inside .three .btn{
+        margin-left: 30px;
+    }
+    .account-number-setting-inside .two .number, .account-number-setting-inside .three .number{
+        width: 260px;
+        margin: 0;
+    }
+    .browse-configuration .browse-configuration-inside{
+        width: 240px;
+        margin-left: -120px;
+    }
+    .browse-configuration{
+        padding-bottom: 50px;
+    }
+    .account-number-setting{
+        padding-bottom: 50px;
+    }
+    .main{
+    	width: 200px;
+    }
+    .main .geetest_holder.geetest_wind{
+    	min-width:200px;
+    }
+}
+@media screen and (min-width: 481px) and (max-width: 767px) {
+    .personal-center-main{width: 100%;padding: 0 20px;}
+    .personal-center-main-inside{
+        position: relative;
+    }
+    .personal-center-main .personal-center-main-left{
+        display: none;
+        width: 220px;
+        z-index: 3;
+    }
+    .personal-center-main .personal-center-main-right{
+        padding-left: 0;
+    }
+    .personal-center-main .personal-center-main-right .title-outside .icon-wf_liebiao{
+        display: block;
+    }
+    .personal-center-main-right-main-inside .welcome .describe{
+        padding: 0 40px;
+    }
+    .integration-task .integration-task-inside {
+        max-width: 408px;
+    }
+    .account-number-setting-inside .one{
+        width: 348px;
+        margin-left: 376px;
+    }
+    .account-number-setting-inside .btn, .account-number-setting-inside .btn:hover, .account-number-setting-inside .btn:focus, .account-number-setting-inside .btn:active{
+        width: 348px;
+    }
+    .account-number-setting-inside .two, .account-number-setting-inside .three{
+        width: 428px;
+        margin-left: 336px;
+    }
+    .account-number-setting-inside .top-title div{
+        margin-left: 15px;
+    }
+    .account-number-setting-inside .two .form-group, .account-number-setting-inside .three .form-group{
+        width: 348px;
+        margin: 0 40px 0 40px;
+    }
+    .account-number-setting-inside .two .form-group-one, .account-number-setting-inside .three .form-group-one{
+        margin-top: 115px;
+    }
+    .account-number-setting-inside .two .form-group-two, .account-number-setting-inside .three .form-group-two{
+        margin-top: 30px;
+    }
+    .account-number-setting-inside .two .btn, .account-number-setting-inside .three .btn{
+        margin-left: 40px;
+    }
+    .account-number-setting-inside .two .number, .account-number-setting-inside .three .number{
+        width: 428px;
+        margin: 0;
+    }
+    .main{
+    	width: 348px;
+    }
+}
+@media screen and (max-width: 1009px){
+    .personal-center-main .personal-center-main-right .title-outside .icon-wf_liebiao{
+        display: block;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+    .personal-center-main{width: 100%;padding: 0 50px;}
+    .personal-center-main .personal-center-main-left{
+        width: 220px;
+    }
+    .personal-center-main .personal-center-main-right{
+        padding-left: 220px;
+    }
+    .personal-center-main-right-main-inside .welcome .describe{
+        padding: 0 40px;
+    }
+    .integration-task .integration-task-inside {
+        max-width: 408px;
+    }
+    .account-number-setting-inside .one{
+        width: 348px;
+        margin-left: 376px;
+    }
+    .account-number-setting-inside .btn, .account-number-setting-inside .btn:hover, .account-number-setting-inside .btn:focus, .account-number-setting-inside .btn:active{
+        width: 348px;
+    }
+    .account-number-setting-inside .two, .account-number-setting-inside .three{
+        width: 428px;
+        margin-left: 336px;
+    }
+    .account-number-setting-inside .top-title div{
+        margin-left: 15px;
+    }
+    .account-number-setting-inside .two .form-group, .account-number-setting-inside .three .form-group{
+        width: 348px;
+        margin: 0 40px 0 40px;
+    }
+    .account-number-setting-inside .two .form-group-one, .account-number-setting-inside .three .form-group-one{
+        margin-top: 115px;
+    }
+    .account-number-setting-inside .two .form-group-two, .account-number-setting-inside .three .form-group-two{
+        margin-top: 30px;
+    }
+    .account-number-setting-inside .two .btn, .account-number-setting-inside .three .btn{
+        margin-left: 40px;
+    }
+    .account-number-setting-inside .two .number, .account-number-setting-inside .three .number{
+        width: 428px;
+        margin: 0;
+    }
+    .main{
+    	width: 348px;
+    }
+}
+@media screen and (min-width: 1200px) and (max-width: 1920px) {
+    .personal-center-main{width: 100%;padding: 0 100px;}
+}
+@media screen and (min-width: 1920px) {
+    .personal-center-main{width: 1720px;}
+}
+@media screen and (min-width: 1200px) and (max-width: 1519px) {
+    .integration-task .integration-task-inside {
+        max-width: 718px;
+    }
+    .account-number-setting-inside .one{
+        width: 348px;
+        margin-left: 376px;
+    }
+    .account-number-setting-inside .btn, .account-number-setting-inside .btn:hover, .account-number-setting-inside .btn:focus, .account-number-setting-inside .btn:active{
+        width: 348px;
+    }
+    .account-number-setting-inside .two, .account-number-setting-inside .three{
+        width: 600px;
+        margin-left: 250px;
+    }
+    .account-number-setting-inside .top-title div{
+        margin-left: 100px;
+    }
+    .account-number-setting-inside .two .form-group, .account-number-setting-inside .three .form-group{
+        width: 348px;
+        margin: 0 126px 0 126px;
+    }
+    .account-number-setting-inside .two .form-group-one, .account-number-setting-inside .three .form-group-one{
+        margin-top: 115px;
+    }
+    .account-number-setting-inside .two .form-group-two, .account-number-setting-inside .three .form-group-two{
+        margin-top: 30px;
+    }
+    .account-number-setting-inside .two .btn, .account-number-setting-inside .three .btn{
+        margin-left: 126px;
+    }
+    .account-number-setting-inside .two .number, .account-number-setting-inside .three .number{
+        width: 348px;
+        margin:0 0 0 126px;
+    }
+    .main{
+    	width: 348px;
+    }
+}

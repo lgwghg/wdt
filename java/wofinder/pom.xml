@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<properties>
+		<version>3.0-SNAPSHOT</version>
+		<jdk.version>1.8</jdk.version>
+	</properties>
+	
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.wodota</groupId>
+	<artifactId>wofinder</artifactId>
+	<version>${version}</version>
+	<packaging>pom</packaging>
+	
+	<build />
+
+	<modules>
+		<!-- 支撑服务1： -->
+		<module>wofinder-base</module>
+		<!-- 统一的服务处理 -->
+		<module>wofinder-server</module>
+		<!-- 支撑服务2：统一的后台管理 -->
+		<module>wofinder-admin</module>
+		<!-- 全文检索 -->
+		<module>wofinder-solr</module>
+		<!-- 第三方登录引入 -->
+		<module>wofinder-login</module>
+		<!-- 定时任务 -->
+		<module>wofinder-schedule</module>
+		<!-- 爬虫系统 -->
+		<module>wofinder-crawler</module>
+		
+	</modules>
+</project>

@@ -1,0 +1,206 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+  http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+  http://www.springframework.org/schema/context
+  http://www.springframework.org/schema/context/spring-context-4.0.xsd
+  http://www.springframework.org/schema/aop   
+  http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+  http://www.springframework.org/schema/mvc
+  http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+  http://www.springframework.org/schema/util        
+  http://www.springframework.org/schema/util/spring-util-4.0.xsd ">
+
+	<!--引入属性文件:
+		1、spring4.x dispatcherServlet 和  applicationContext是两个独立的context
+	    2、如果要在controller中使用@Value获取property文件中的属性值，必须在springmvc.xml文件中再次引入属性文件
+	   -->
+	<bean id="configProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"></property>
+        <property name="locations">
+            <list>
+				<value>classpath:webside.properties</value>
+            </list>
+        </property>
+    </bean>
+	
+	<mvc:annotation-driven conversion-service="conversionService" content-negotiation-manager="contentNegotiationManager">
+		<mvc:message-converters register-defaults="true">
+			<ref bean="stringConverter" />
+			<ref bean="fastjsonConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!--通知spring使用cglib而不是jdk的来生成代理方法, AOP可以拦截到Controller,因为是拦截Controller,这句必须加在springmvc配置文件中 -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<!-- 设置只扫描 controller包下的Bean -->
+	<!-- <context:component-scan base-package="com.webside.*.controller" /> -->
+	<context:component-scan base-package="com.webside" use-default-filters="false">
+	  	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+
+	<!-- 也可如下配置 -->
+	<!-- <context:component-scan base-package="com.webside.*.controller" use-default-filters="false"> 
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" 
+		/> <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" 
+		/> </context:component-scan> -->
+
+	<!-- 类型转换 -->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="formatters">
+			<set>
+				<bean class="com.webside.util.DateFormatterUtil"></bean>
+			</set>
+		</property>
+	</bean>
+
+	<!-- 解析String请求数据 -->
+	<bean id="stringConverter"
+		class="org.springframework.http.converter.StringHttpMessageConverter">
+		<constructor-arg value="UTF-8" index="0"></constructor-arg>
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/plain;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 解析json请求数据，将json转换为java对象 -->
+	<bean id="fastjsonConverter"
+		class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<!-- 这里顺序不能反，一定先写text/html，不然ie下出现下载提示 -->
+				<value>text/html;charset=UTF-8</value>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+		<property name="features">
+			<array value-type="com.alibaba.fastjson.serializer.SerializerFeature">
+				<!-- 空值继续输出 -->
+				<value>WriteMapNullValue</value>
+				<value>QuoteFieldNames</value>
+				<!-- 防止循环引用 -->
+				<value>DisableCircularReferenceDetect</value>
+				<!-- 格式化日期,默认格式为：yyyy-MM-dd HH:mm:ss -->
+				<value>WriteDateUseDateFormat</value>
+			</array>
+		</property>
+	</bean>
+
+
+
+	<!-- 返回类型定义 -->
+	<util:list id="messageConverters">
+		<ref bean="stringConverter" />
+		<ref bean="fastjsonConverter" />
+	</util:list>
+
+	<!-- 防止循环引用 -->
+	<bean id="DisableCircularReferenceDetect"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField"
+			value="com.alibaba.fastjson.serializer.SerializerFeature.DisableCircularReferenceDetect"></property>
+	</bean>
+
+	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">  
+        <!-- 这里是否忽略掉accept header，默认就是false -->
+		<property name="ignoreAcceptHeader" value="true" />
+		<!-- 启用参数支持 -->
+		<property name="favorParameter" value="false"></property>
+		<!-- 启用扩展名支持 -->
+		<property name="favorPathExtension" value="true"></property>
+		<!-- 如果所有的mediaType都没匹配上，就会使用defaultContentType -->
+		<property name="defaultContentType" value="text/html"/>  
+        <property name="mediaTypes">  
+            <map>
+				<entry key="json" value="application/json" />
+				<entry key="xml" value="application/xml" />
+			</map>
+        </property>  
+    </bean>
+
+	<!-- ContentNegotiatingViewResolver视图解析器，返回多视图 -->
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="order" value="1"></property>
+		<property name="contentNegotiationManager" ref="contentNegotiationManager"/> 
+		<property name="defaultViews">
+			<list>
+				<!-- json视图 -->
+				<bean class="com.alibaba.fastjson.support.spring.FastJsonJsonView">
+					<property name="extractValueFromSingleKeyModel" value="true" />
+					<property name="features">
+						<array value-type="com.alibaba.fastjson.serializer.SerializerFeature">
+							<!-- 空值继续输出 -->
+							<value>WriteMapNullValue</value>
+							<!-- 防止循环引用 -->
+							<value>DisableCircularReferenceDetect</value>
+							<!-- 格式化日期,默认格式为：yyyy-MM-dd HH:mm:ss -->
+							<value>WriteDateUseDateFormat</value>
+						</array>
+					</property>
+				</bean>
+			</list>
+		</property>
+		<property name="viewResolvers">
+			<list>
+				<!-- 视图解析器，根据视图的名称new ModelAndView(name)，在配置文件查找对应的bean配置 -->
+				<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+				<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+					<property name="contentType" value="text/html" />
+					<property name="prefix" value="" />
+					<property name="suffix" value=".jsp" />
+				</bean>
+
+			</list>
+		</property>
+	</bean>
+
+	<!-- 先走默认的web.xml配置的servlet，没有的话才找对应controller,相当于处理配置静态资源，这种方式效率相对比较低,如果DispatcherServlet拦截类似 
+		*.do 这种格式的URL，就不存在访问不到静态资源的问题,静态资源访问详见web.xml -->
+	<mvc:default-servlet-handler />
+
+	<!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 默认编码 -->
+		<property name="defaultEncoding" value="utf-8" />
+		<!-- 文件大小最大值 -->
+		<property name="maxUploadSize" value="10485760000" />
+		<!-- 内存中的最大值 -->
+		<property name="maxInMemorySize" value="40960" />
+	</bean>
+
+	<!-- restTemplate -->
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+		<property name="messageConverters" ref="messageConverters">
+		</property>
+	</bean>
+	
+	<mvc:interceptors>  
+	    <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求
+	    <bean class="com.host.app.web.interceptor.AllInterceptor"/>   -->  
+	    <mvc:interceptor>  
+	        <mvc:mapping path="/admin"/>
+	        <mvc:mapping path="/admin.*"/>
+	        <!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 -->
+	        <!--不需要拦截的地址可以用此排除 <mvc:exclude-mapping path="/index"/> -->
+	        <bean class="com.webside.interceptor.BackendInterceptor"/>  
+	    </mvc:interceptor>
+	    
+	    <!-- 配置Token拦截器，防止用户重复提交数据 -->
+	    <mvc:interceptor>  
+	        <mvc:mapping path="/register"/>
+	        <mvc:mapping path="/steam/oauth"/>
+	        <mvc:mapping path="/index"/>
+	        <bean class="com.webside.interceptor.TokenInterceptor"/>
+	    </mvc:interceptor>  
+	</mvc:interceptors> 
+</beans>

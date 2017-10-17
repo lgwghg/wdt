@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webside.user.mapper.UserMapper">
+
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			u.id AS "id", <!-- 主键-->
+			u.password AS "password", <!-- 密码-->
+			u.credentials_salt AS "credentialsSalt", <!-- 密码加密盐-->
+			u.nick_name AS "nickName", <!-- 昵称-->
+			u.mobile AS "mobile", <!-- 手机号码-->
+			u.photo AS "photo", <!-- 头像-->
+			u.email AS "email", <!-- 邮箱-->
+			u.sign AS "sign", <!-- 签名-->
+			u.steam_key AS "steamKey", <!-- steam key-->
+			u.steam_nick AS "steamNick", <!-- steam 用户昵称-->
+			u.qq_key AS "qqKey", <!-- qq key-->
+			u.qq_nick AS "qqNick", <!-- qq 用户昵称-->
+			u.wechat_key AS "wechatKey", <!-- 微信 key-->
+			u.wechat_nick AS "wechatNick", <!-- 微信 用户昵称-->
+			u.weibo_key AS "weiboKey", <!-- 微博 key-->
+			u.weibo_nick AS "weiboNick", <!-- 微博 用户昵称-->
+			u.locked AS "locked.value", <!-- 是否锁定-->
+			u.status AS "status.value", <!-- 状态-->
+			u.create_id AS "createUser.id", <!-- 创建者id-->
+			u.create_time AS "createTime", <!-- 创建时间-->
+			u.update_id AS "updateUser.id", <!-- 修改者id-->
+			u.update_time AS "updateTime", <!-- 修改时间-->
+			u.account_update_time as "accountUpdateTime",
+		</trim>
+	</sql>
+	<sql id="incrementColumnList">
+		<trim suffixOverrides=",">
+			i.id AS "userIncrement.id", <!-- 主键-->
+			i.user_id AS "userIncrement.user.id", <!-- 用户ID-->
+			i.status AS "userIncrement.status.value", <!-- 状态-->
+			i.create_id AS "userIncrement.createUser.id", <!-- 创建者id-->
+			i.create_time AS "userIncrement.createTime", <!-- 创建时间-->
+			i.update_id AS "userIncrement.updateUser.id", <!-- 修改者id-->
+			i.update_time AS "userIncrement.updateTime", <!-- 修改时间-->
+			i.integral as "userIncrement.integral",
+			i.sex as "userIncrement.sex",
+			i.birthday as "userIncrement.birthday",
+		</trim>
+	</sql>
+	<!-- 查询tb_user分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.user.model.UserEntity">
+		select  
+			<include refid="columnList"/>
+		FROM tb_user u
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="nickName != null and nickName != ''">
+				AND lower(u.nick_name) like concat('%',lower(#{nickName}),'%')  or lower(u.mobile) like concat('%',lower(#{nickName}),'%')  or lower(u.email) like concat('%',lower(#{nickName}),'%') 
+			</if>
+			<if test="lockedValue != null and lockedValue != ''">
+				AND u.locked=#{lockedValue}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND u.status=#{statusValue}
+			</if>
+			<if test="beginCreateTime != null and beginCreateTime != ''">
+				AND u.create_time >= #{beginCreateTime}
+			</if>
+			<if test="endCreateTime != null and endCreateTime != ''">
+				AND u.create_time &lt;= #{endCreateTime}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 根据ID查询tb_user -->
+	<select id="findById" parameterType="String" resultType="com.webside.user.model.UserEntity">
+		SELECT 
+			<include refid="columnList" />
+		FROM tb_user u 
+		where u.id = #{id}
+	</select>
+	
+	<!-- 根据entity查询tb_user -->
+	<select id="findByEntity" parameterType ="com.webside.user.model.UserEntity" resultType="com.webside.user.model.UserEntity">
+		SELECT 
+			<include refid="columnList" />
+		FROM tb_user u
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="nickName != null and nickName != ''">
+				and u.nick_name = #{nickName} 
+			</if>
+			<if test="email != null and email != ''">
+				and u.email = #{email} 
+			</if>
+			<if test="mobile != null and mobile != ''">
+				and u.mobile = #{mobile} 
+			</if>
+			<if test="steamKey != null and steamKey != ''">
+				and u.steam_key = #{steamKey} 
+			</if>
+			<if test="qqKey != null and qqKey != ''">
+				and u.qq_key = #{qqKey} 
+			</if>
+			<if test="weiboKey != null and weiboKey != ''">
+				and u.weibo_key = #{weiboKey} 
+			</if>
+			<if test="wechatKey != null and wechatKey != ''">
+				and u.wechat_key = #{wechatKey} 
+			</if>
+			<if test="id != null and id != ''">
+				and u.id = #{id} 
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增tb_user -->
+	<insert id="insert" parameterType="com.webside.user.model.UserEntity">
+		insert into tb_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		id,<!-- 主键-->
+		password,<!-- 密码-->
+		credentials_salt,<!-- 加密盐-->
+		nick_name,<!-- 昵称-->
+		mobile,<!-- 手机号码-->
+		photo,<!-- 头像-->
+		<if test="email != null">email,</if><!-- 邮箱-->
+		<if test="sign != null">sign,</if><!-- 签名-->
+		<if test="steamKey != null">steam_key,</if><!-- steam key-->
+		<if test="steamNick != null">steam_nick,</if><!-- steam 用户昵称-->
+		<if test="qqKey != null">qq_key,</if><!-- qq key-->
+		<if test="qqNick != null">qq_nick,</if><!-- qq 用户昵称-->
+		<if test="wechatKey != null">wechat_key,</if><!-- 微信 key-->
+		<if test="wechatNick != null">wechat_nick,</if><!-- 微信 用户昵称-->
+		<if test="weiboKey != null">weibo_key,</if><!-- 微博 key-->
+		<if test="weiboNick != null">weibo_nick,</if><!-- 微博 用户昵称-->
+		<if test="locked != null and locked.value != null">locked,</if><!-- 是否锁定-->
+		<if test="status != null and status.value != null">status,</if><!-- 状态-->
+		<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者-->
+		create_time,<!-- 创建时间-->
+		account_update_time,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		#{id},<!-- 主键-->
+		#{password},<!-- 密码-->
+		#{credentialsSalt},<!-- 加密盐-->
+		#{nickName},<!-- 昵称-->
+		#{mobile},<!-- 手机号码-->
+		#{photo},<!-- 头像-->
+		<if test="email != null">#{email},</if><!-- 邮箱-->
+		<if test="sign != null">#{sign},</if><!-- 签名-->
+		<if test="steamKey != null">#{steamKey},</if><!-- steam key-->
+		<if test="steamNick != null">#{steamNick},</if><!-- steam 用户昵称-->
+		<if test="qqKey != null">#{qqKey},</if><!-- qq key-->
+		<if test="qqNick != null">#{qqNick},</if><!-- qq 用户昵称-->
+		<if test="wechatKey != null">#{wechatKey},</if><!-- 微信 key-->
+		<if test="wechatNick != null">#{wechatNick},</if><!-- 微信 用户昵称-->
+		<if test="weiboKey != null">#{weiboKey},</if><!-- 微博 key-->
+		<if test="weiboNick != null">#{weiboNick},</if><!-- 微博 用户昵称-->
+		#{locked.value},<!-- 是否锁定-->
+		#{status.value},<!-- 状态-->
+		<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者-->
+		#{createTime},<!-- 创建时间-->
+		#{accountUpdateTime},
+		</trim>
+	</insert>
+	
+	<!-- 更新tb_user -->
+	<update id="updateById" parameterType="com.webside.user.model.UserEntity" >
+		update tb_user
+		<trim prefix="SET" suffixOverrides=",">  
+			<if test="password != null">password=#{password},</if><!-- 密码-->
+			<if test="credentialsSalt != null">credentials_salt=#{credentialsSalt},</if><!-- 加密盐-->
+			<if test="nickName != null">nick_name=#{nickName},</if><!-- 昵称-->
+			<if test="mobile != null">mobile=#{mobile},</if><!-- 手机号码-->
+			<if test="photo != null">photo=#{photo},</if><!-- 头像-->
+			<if test="email != null">email=#{email},</if><!-- 邮箱-->
+			<if test="sign != null">sign=#{sign},</if><!-- 签名-->
+			<if test="steamKey != null">steam_key=#{steamKey},</if><!-- steam key-->
+			<if test="steamNick != null">steam_nick=#{steamNick},</if><!-- steam 用户昵称-->
+			<if test="qqKey != null">qq_key=#{qqKey},</if><!-- qq key-->
+			<if test="qqNick != null">qq_nick=#{qqNick},</if><!-- qq 用户昵称-->
+			<if test="wechatKey != null">wechat_key=#{wechatKey},</if><!-- 微信 key-->
+			<if test="wechatNick != null">wechat_nick=#{wechatNick},</if><!-- 微信 用户昵称-->
+			<if test="weiboKey != null">weibo_key=#{weiboKey},</if><!-- 微博 key-->
+			<if test="weiboNick != null">weibo_nick=#{weiboNick},</if><!-- 微博 用户昵称-->
+			<if test="locked != null and locked.value != null">locked=#{locked.value},</if><!-- 是否锁定-->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态-->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者-->
+			update_time=#{updateTime},<!-- 修改时间-->
+			<if test="accountUpdateTime != null">account_update_time=#{accountUpdateTime},</if>
+		</trim>
+		where id = #{id}
+	</update>
+
+	<!-- 取消第三方绑定 -->
+	<update id="updateCancelBind" parameterType="map">
+		update tb_user set update_time = #{updateTime}
+		<if test="thirdType != null and thirdType == 'steam'">
+			,steam_key = ''
+			,steam_nick = ''
+		</if>
+		<if test="thirdType != null and thirdType == 'qq'">
+			,qq_key = ''
+			,qq_nick = ''
+		</if>
+		<if test="thirdType != null and thirdType == 'weibo'">
+			,weibo_key = ''
+			,weibo_nick = ''
+		</if>
+		<if test="thirdType != null and thirdType == 'wechat'">
+			,wechat_key = ''
+			,wechat_nick = ''
+		</if>
+		where id = #{userId}
+	</update>
+	
+	<!-- 根据ID删除tb_user -->
+	<delete id="deleteById" parameterType="String">
+		delete from tb_user 
+		where id = #{id}
+	</delete>
+	
+	
+	<!-- 用户头像 -->
+	<!-- 新增t_user_photo -->
+	<insert id="insertUserPhoto" 
+			parameterType="com.webside.user.model.UserPhoto">
+		insert into t_user_photo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="userId != null">user_id,</if><!-- 用户-->
+		<if test="photo != null">photo,</if><!-- 头像-->
+		<if test="status != null">status,</if>
+		<if test="isCurrent != null">is_current,</if><!-- -->
+		<if test="createTime != null">create_time,</if><!-- 上传时间-->
+		<if test="updateTime != null">update_time,</if><!-- 更新时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="userId != null">#{userId},</if><!-- 用户-->
+		<if test="photo != null">#{photo},</if><!-- 头像-->
+		<if test="status != null">#{status},</if>
+		<if test="isCurrent != null">#{isCurrent},</if><!-- -->
+		<if test="createTime != null">#{createTime},</if><!-- 上传时间-->
+		<if test="updateTime != null">#{updateTime},</if><!-- 更新时间-->
+		</trim>
+	</insert>
+	
+	<select id="findUserAndIncrementById" parameterType="String" resultType="com.webside.user.model.UserEntity">
+		select 
+		<include refid="columnList" />
+		,
+		<include refid="incrementColumnList" />
+		from tb_user u inner join t_user_increment i on u.id = i.user_id
+		where u.id = #{userId} and u.status = 1
+	</select>
+</mapper>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.submit.mapper.SubmitKeywordMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache" />
+
+	<!-- t_submit_keyword字段列表 -->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 主键 -->
+			keyword AS "keyword", <!-- 关键字 -->
+			status AS "status.value", <!-- 状态 -->
+			create_id AS "createUser.id", <!-- 创建者id -->
+			create_time AS "createTime", <!-- 创建时间 -->
+		</trim>
+	</sql>
+
+	<!-- 查询t_submit_keyword分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.submit.model.SubmitKeywordEntity" flushCache="false" useCache="true">
+		select
+		<include refid="columnList" />
+		from t_submit_keyword
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="keyword != null and keyword != ''">
+				AND lower(keyword) like concat('%',lower(#{keyword}),'%')
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND createTime >= #{createTime}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 新增t_submit_keyword -->
+	<insert id="insert" parameterType="com.webside.submit.model.SubmitKeywordEntity" flushCache="true">
+		insert into t_submit_keyword
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,<!-- 主键 -->
+			keyword,<!-- 关键字 -->
+			status,<!-- 状态 -->
+			create_time,<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},<!-- 主键 -->
+			#{keyword},<!-- 关键字 -->
+			#{status.value},<!-- 状态 -->
+			#{createTime},<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者id -->
+		</trim>
+	</insert>
+
+	<!-- 根据ID查询t_submit_keyword -->
+	<select id="findById" resultType="com.webside.submit.model.SubmitKeywordEntity" parameterType="String" flushCache="false" useCache="true">
+		select
+		<include refid="columnList" />
+		from t_submit_keyword
+		where id = #{id}
+	</select>
+
+	<!-- 根据ID更新t_submit_keyword -->
+	<update id="updateById" parameterType="com.webside.submit.model.SubmitKeywordEntity" flushCache="true">
+		update t_submit_keyword
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="keyword != null">keyword=#{keyword},</if><!-- 关键字 -->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态 -->
+		</trim>
+		where id = #{id}
+	</update>
+
+	<!-- 根据ID删除t_submit_keyword -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_submit_keyword
+		where id = #{id}
+	</delete>
+</mapper>

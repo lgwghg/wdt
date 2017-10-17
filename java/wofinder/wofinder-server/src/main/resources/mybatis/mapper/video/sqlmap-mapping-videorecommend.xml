@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.video.mapper.VideoRecommendMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache" />
+
+	<!-- t_video_recommend字段列表 -->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 主键 -->
+			video_id AS "video.id", <!-- 视频id -->
+			url AS "url", <!-- 展示视频地址 -->
+			start_time AS "startTime", <!-- 展示时间开始 -->
+			end_time AS "endTime", <!-- 展示时间结束 -->
+			status AS "status.value", <!-- 状态 -->
+			create_id AS "createUser.id", <!-- 创建者id -->
+			create_time AS "createTime", <!-- 创建时间 -->
+			update_id AS "updateUser.id", <!-- 修改者id -->
+			update_time AS "updateTime", <!-- 修改时间 -->
+		</trim>
+	</sql>
+
+	<!-- 查询t_video_recommend分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.video.model.VideoRecommendEntity" flushCache="false" useCache="true">
+		select
+		<include refid="columnList" />
+		from t_video_recommend
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="videoId != null and videoId != ''">
+				AND video_id=#{videoId}
+			</if>
+			<if test="startTime != null and startTime != ''">
+				AND start_time >= #{startTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				AND end_time &lt;= #{endTime}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据entity查询t_video_recommend -->
+	<select id="queryListByEntity" resultType="com.webside.video.model.VideoRecommendEntity" parameterType="com.webside.video.model.VideoRecommendEntity" flushCache="false" useCache="true">
+		select
+		<include refid="columnList" />
+		from t_video_recommend
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="video != null and video.id != null and video.id != ''">
+				AND video_id=#{video.id}
+			</if>
+			<if test="id != null and id != ''">
+				AND id != #{id}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据ID查询t_video_recommend -->
+	<select id="findById" resultType="com.webside.video.model.VideoRecommendEntity" parameterType="String" flushCache="false" useCache="true">
+		select
+		<include refid="columnList" />
+		from t_video_recommend
+		where id = #{id}
+	</select>
+	
+	<!-- 查询首页推荐视频9个视频 -->
+	<select id="queryListByParam" parameterType="map" resultType="com.webside.video.model.VideoRecommendEntity" flushCache="false" useCache="true">
+		select
+		<include refid="columnList" />
+		from t_video_recommend
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="startTime != null and startTime != ''">
+				AND start_time &lt;= #{startTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				AND (end_time >= #{endTime} OR end_time is null)
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+		</trim>
+		order by startTime limit 0,9
+	</select>
+
+	<!-- 新增t_video_recommend -->
+	<insert id="insert" parameterType="com.webside.video.model.VideoRecommendEntity" flushCache="true">
+		insert into t_video_recommend
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,<!-- 主键 -->
+			video_id,<!-- 视频id -->
+			url,<!-- 展示视频地址 -->
+			start_time,<!-- 展示时间开始 -->
+			end_time,<!-- 展示时间结束 -->
+			status,<!-- 状态 -->
+			create_time,<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},<!-- 主键 -->
+			#{video.id},<!-- 视频id -->
+			#{url},<!-- 展示视频地址 -->
+			#{startTime},<!-- 展示时间开始 -->
+			#{endTime},<!-- 展示时间结束 -->
+			#{status.value},<!-- 状态 -->
+			#{createTime},<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者id -->
+		</trim>
+	</insert>
+
+	<!-- 根据ID更新t_video_recommend -->
+	<update id="updateById" parameterType="com.webside.video.model.VideoRecommendEntity" flushCache="true">
+		update t_video_recommend
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="video != null and video.id != null">video_id=#{video.id},</if><!-- 视频id -->
+			<if test="url != null">url=#{url},</if><!-- 展示视频地址 -->
+			start_time=#{startTime},<!-- 展示时间开始 -->
+			end_time=#{endTime},<!-- 展示时间结束 -->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where id = #{id}
+	</update>
+
+	<!-- 根据视频ids批量清空首页推荐视频的视频关联 -->
+	<update id="resetVideoIdBatchByVideoId" parameterType="map" flushCache="true">
+		update t_video_recommend
+		<trim prefix="SET" suffixOverrides=",">
+			video_id = null,<!-- 视频id -->
+			status=#{statusValue},<!-- 状态 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+			<if test="updateUserId != null">update_id=#{updateUserId},</if><!-- 修改者 -->
+		</trim>
+		<![CDATA[  
+       		where id in 
+    	]]>
+		<foreach collection="videoIds" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+
+	<!-- 根据ID删除t_video_recommend -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_video_recommend
+		where id = #{id}
+	</delete>
+
+	<!-- 根据entity删除t_video_recommend -->
+	<delete id="deleteByEntity" parameterType="com.webside.video.model.VideoRecommendEntity" flushCache="true">
+		delete from t_video_recommend
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="video != null and video.id != null and video.id != ''">
+				AND video_id=#{video.id}
+			</if>
+		</trim>
+	</delete>
+</mapper>

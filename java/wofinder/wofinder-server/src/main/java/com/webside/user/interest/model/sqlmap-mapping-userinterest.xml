@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.user.interest.mapper.IUserInterestMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.user.interest.model.UserInterest">
+		<id column="id" property="id"/> <!-- 主键-->
+		<result column="user_id" property="userId"/> <!-- 用户-->
+		<result column="interest" property="interest"/> <!-- 兴趣-->
+		<result column="status" property="status"/> <!-- 状态-->
+		<result column="create_id" property="createId"/> <!-- 创建者-->
+		<result column="create_time" property="createTime"/> <!-- 创建时间-->
+		<result column="update_id" property="updateId"/> <!-- 修改者-->
+		<result column="update_time" property="updateTime"/> <!-- 修改时间-->
+	</resultMap>
+	
+	<!-- t_user_interest字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 主键-->
+			user_id, <!-- 用户-->
+			interest, <!-- 兴趣-->
+			status, <!-- 状态-->
+			create_id, <!-- 创建者-->
+			create_time, <!-- 创建时间-->
+			update_id, <!-- 修改者-->
+			update_time, <!-- 修改时间-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_user_interest分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_interest 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="interest != null and interest != ''">
+				AND interest=#{interest}
+			</if>
+			<if test="status != null and status != ''">
+				AND status=#{status}
+			</if>
+			<if test="createId != null and createId != ''">
+				AND create_id=#{createId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+			<if test="updateId != null and updateId != ''">
+				AND update_id=#{updateId}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND update_time=#{updateTime}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_user_interest -->
+	<insert id="insert" 
+			useGeneratedKeys="true" 
+			keyProperty="id"
+			parameterType="com.webside.user.interest.model.UserInterest">
+		insert into t_user_interest
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="userId != null">user_id,</if><!-- 用户-->
+		<if test="interest != null">interest,</if><!-- 兴趣-->
+		<if test="status != null">status,</if><!-- 状态-->
+		<if test="createId != null">create_id,</if><!-- 创建者-->
+		<if test="createTime != null">create_time,</if><!-- 创建时间-->
+		<if test="updateId != null">update_id,</if><!-- 修改者-->
+		<if test="updateTime != null">update_time,</if><!-- 修改时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="userId != null">#{userId},</if><!-- 用户-->
+		<if test="interest != null">#{interest},</if><!-- 兴趣-->
+		<if test="status != null">#{status},</if><!-- 状态-->
+		<if test="createId != null">#{createId},</if><!-- 创建者-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		<if test="updateId != null">#{updateId},</if><!-- 修改者-->
+		<if test="updateTime != null">#{updateTime},</if><!-- 修改时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_user_interest -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_interest 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_user_interest -->
+	<update id="updateById" parameterType="com.webside.user.interest.model.UserInterest" flushCache="true">
+		update t_user_interest
+		<set>
+			<trim suffixOverrides=",">
+				<if test="userId != null">user_id=#{userId},</if><!-- 用户-->
+				<if test="interest != null">interest=#{interest},</if><!-- 兴趣-->
+				<if test="status != null">status=#{status},</if><!-- 状态-->
+				<if test="createId != null">create_id=#{createId},</if><!-- 创建者-->
+				<if test="createTime != null">create_time=#{createTime},</if><!-- 创建时间-->
+				<if test="updateId != null">update_id=#{updateId},</if><!-- 修改者-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 修改时间-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_user_interest -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_user_interest  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_user_interest -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_user_interest 
+		where id = #{id}
+	</delete>
+</mapper>

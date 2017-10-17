@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.integral.mapper.IUserIntegralMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.integral.model.UserIntegral">
+		<id column="id" property="id"/> <!-- 主键-->
+		<result column="user_id" property="userId"/> <!-- 用户-->
+		<result column="integral" property="integral"/> <!-- 积分-->
+		<result column="integral_source" property="integralSource"/> <!-- -->
+		<result column="status" property="status"/> <!-- 状态-->
+		<result column="create_id" property="createId"/> <!-- 创建者-->
+		<result column="create_time" property="createTime"/> <!-- 创建时间-->
+	</resultMap>
+	
+	<!-- t_user_integral字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 主键-->
+			user_id, <!-- 用户-->
+			integral, <!-- 积分-->
+			integral_source, <!-- -->
+			status, <!-- 状态-->
+			create_id, <!-- 创建者-->
+			create_time, <!-- 创建时间-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_user_integral分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_integral 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="integral != null and integral != ''">
+				AND integral=#{integral}
+			</if>
+			<if test="integralSource != null and integralSource != ''">
+				AND integral_source=#{integralSource}
+			</if>
+			<if test="status != null and status != ''">
+				AND status=#{status}
+			</if>
+			<if test="createId != null and createId != ''">
+				AND create_id=#{createId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_user_integral -->
+	<insert id="insert" 
+			parameterType="com.webside.integral.model.UserIntegral">
+		insert into t_user_integral
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="userId != null">user_id,</if><!-- 用户-->
+		<if test="integral != null">integral,</if><!-- 积分-->
+		<if test="integralSource != null">integral_source,</if><!-- -->
+		<if test="status != null">status,</if><!-- 状态-->
+		<if test="createId != null">create_id,</if><!-- 创建者-->
+		<if test="createTime != null">create_time,</if><!-- 创建时间-->
+		<if test="type != null">type,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="userId != null">#{userId},</if><!-- 用户-->
+		<if test="integral != null">#{integral},</if><!-- 积分-->
+		<if test="integralSource != null">#{integralSource},</if><!-- -->
+		<if test="status != null">#{status},</if><!-- 状态-->
+		<if test="createId != null">#{createId},</if><!-- 创建者-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		<if test="type != null">#{type},</if>
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_user_integral -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_integral 
+		where id = #{id}
+	</select>
+	
+	<select id ="findByUserIdAndType" parameterType="Map" resultMap="resultMap">
+		select  
+			<include refid="columnList"/>
+		from t_user_integral 
+		where user_id = #{userId} and type = #{integralType} and status = 1
+		<if test="time != null"> and create_time >= #{time}</if>
+		order by create_time desc
+	</select>
+	<!-- 更新t_user_integral -->
+	<update id="updateById" parameterType="com.webside.integral.model.UserIntegral" flushCache="true">
+		update t_user_integral
+		<set>
+			<trim suffixOverrides=",">
+				<if test="userId != null">user_id=#{userId},</if><!-- 用户-->
+				<if test="integral != null">integral=#{integral},</if><!-- 积分-->
+				<if test="integralSource != null">integral_source=#{integralSource},</if><!-- -->
+				<if test="status != null">status=#{status},</if><!-- 状态-->
+				<if test="createId != null">create_id=#{createId},</if><!-- 创建者-->
+				<if test="createTime != null">create_time=#{createTime},</if><!-- 创建时间-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_user_integral -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_user_integral  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_user_integral -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_user_integral 
+		where id = #{id}
+	</delete>
+</mapper>

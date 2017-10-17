@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.up.mapper.IUpPhotoMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.up.model.UpPhoto">
+		<id column="id" property="id"/> <!-- 主键-->
+		<result column="up_id" property="upId"/> <!-- 人物id-->
+		<result column="up_second_id" property="upSecondId"/> <!-- 人物二级id-->
+		<result column="photo_name" property="photoName"/> <!-- 相册名称-->
+		<result column="photo" property="photo"/> <!-- 图片地址-->
+		<result column="is_main" property="isMain"/> <!-- 是否是主图，默认0   0：非主图  1：主图-->
+		<result column="status" property="status"/> <!-- 状态-->
+		<result column="create_id" property="createId"/> <!-- 创建者-->
+		<result column="create_time" property="createTime"/> <!-- 创建时间-->
+		<result column="update_id" property="updateId"/> <!-- 修改者-->
+		<result column="update_time" property="updateTime"/> <!-- 修改时间-->
+	</resultMap>
+	
+	<!-- t_up_photo字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 主键-->
+			up_id, <!-- 人物id-->
+			up_second_id, <!-- 人物二级id-->
+			photo_name, <!-- 相册名称-->
+			photo, <!-- 图片地址-->
+			is_main, <!-- 是否是主图，默认0   0：非主图  1：主图-->
+			status, <!-- 状态-->
+			create_id, <!-- 创建者-->
+			create_time, <!-- 创建时间-->
+			update_id, <!-- 修改者-->
+			update_time, <!-- 修改时间-->
+		</trim>
+	</sql>
+	<select id="queryPhotoByUpIdAndSecondUpId" parameterType="Map" resultType="com.webside.up.model.UpPhoto" flushCache="true" useCache="false">
+		select 
+			p.id as id,
+			p.up_id as upId,
+			p.up_second_id as upSecondId,
+			p.photo_name as photoName,
+			p.photo as photo,
+			p.is_main as isMain
+		from t_up_photo p
+		where p.up_id =#{upId}
+		and p.status = 1
+		<if test="upSecondId != null and upSecondId != ''">
+		and p.up_second_id = #{upSecondId}
+		</if>
+		<if test="upSecondId == null or upSecondId == ''">
+		and p.up_second_id =''
+		</if>
+		order by p.is_main desc
+	</select>
+	<!-- 查询t_up_photo分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_up_photo 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="upId != null and upId != ''">
+				AND up_id=#{upId}
+			</if>
+			<if test="upSecondId != null and upSecondId != ''">
+				AND up_second_id=#{upSecondId}
+			</if>
+			<if test="photoName != null and photoName != ''">
+				AND photo_name=#{photoName}
+			</if>
+			<if test="photo != null and photo != ''">
+				AND photo=#{photo}
+			</if>
+			<if test="isMain != null and isMain != ''">
+				AND is_main=#{isMain}
+			</if>
+			<if test="status != null and status != ''">
+				AND status=#{status}
+			</if>
+			<if test="createId != null and createId != ''">
+				AND create_id=#{createId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+			<if test="updateId != null and updateId != ''">
+				AND update_id=#{updateId}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND update_time=#{updateTime}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_up_photo -->
+	<insert id="insert" 
+			parameterType="com.webside.up.model.UpPhoto">
+		insert into t_up_photo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="upId != null">up_id,</if><!-- 人物id-->
+		<if test="upSecondId != null">up_second_id,</if><!-- 人物二级id-->
+		<if test="photoName != null">photo_name,</if><!-- 相册名称-->
+		<if test="photo != null">photo,</if><!-- 图片地址-->
+		<if test="isMain != null">is_main,</if><!-- 是否是主图，默认0   0：非主图  1：主图-->
+		<if test="status != null">status,</if><!-- 状态-->
+		<if test="createId != null">create_id,</if><!-- 创建者-->
+		<if test="createTime != null">create_time,</if><!-- 创建时间-->
+		<if test="updateId != null">update_id,</if><!-- 修改者-->
+		<if test="updateTime != null">update_time,</if><!-- 修改时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="upId != null">#{upId},</if><!-- 人物id-->
+		<if test="upSecondId != null">#{upSecondId},</if><!-- 人物二级id-->
+		<if test="photoName != null">#{photoName},</if><!-- 相册名称-->
+		<if test="photo != null">#{photo},</if><!-- 图片地址-->
+		<if test="isMain != null">#{isMain},</if><!-- 是否是主图，默认0   0：非主图  1：主图-->
+		<if test="status != null">#{status},</if><!-- 状态-->
+		<if test="createId != null">#{createId},</if><!-- 创建者-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		<if test="updateId != null">#{updateId},</if><!-- 修改者-->
+		<if test="updateTime != null">#{updateTime},</if><!-- 修改时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_up_photo -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_up_photo 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_up_photo -->
+	<update id="updateById" parameterType="com.webside.up.model.UpPhoto" flushCache="true">
+		update t_up_photo
+		<set>
+			<trim suffixOverrides=",">
+				<if test="upId != null">up_id=#{upId},</if><!-- 人物id-->
+				<if test="upSecondId != null">up_second_id=#{upSecondId},</if><!-- 人物二级id-->
+				<if test="photoName != null">photo_name=#{photoName},</if><!-- 相册名称-->
+				<if test="photo != null">photo=#{photo},</if><!-- 图片地址-->
+				<if test="isMain != null">is_main=#{isMain},</if><!-- 是否是主图，默认0   0：非主图  1：主图-->
+				<if test="status != null">status=#{status},</if><!-- 状态-->
+				<if test="updateId != null">update_id=#{updateId},</if><!-- 修改者-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 修改时间-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_up_photo -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_up_photo  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_up_photo -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_up_photo 
+		where id = #{id}
+	</delete>
+</mapper>

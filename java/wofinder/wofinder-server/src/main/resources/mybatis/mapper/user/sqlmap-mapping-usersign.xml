@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.user.sign.mapper.IUserSignMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.user.sign.entities.UserSign">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="user_id" property="userId"/> <!-- 用户ID-->
+		<result column="add_time" property="addTime"/> <!-- 签到日期-->
+		<result column="integral" property="integral"/> <!-- 赠送G币量-->
+	</resultMap>
+	
+	<!-- t_user_sign字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 唯一标识-->
+			user_id, <!-- 用户ID-->
+			add_time, <!-- 签到日期-->
+			integral, <!-- 赠送G币量-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_user_sign分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_sign 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="addTime != null and addTime != ''">
+				AND add_time=#{addTime}
+			</if>
+			<if test="integral != null and integral != ''">
+				AND integral=#{integral}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_user_sign -->
+	<insert id="insert" 
+			parameterType="com.webside.user.sign.entities.UserSign">
+		insert into t_user_sign
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="userId != null">user_id,</if><!-- 用户ID-->
+		<if test="addTime != null">add_time,</if><!-- 签到日期-->
+		<if test="integral != null">integral,</if><!-- 赠送G币量-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="userId != null">#{userId},</if><!-- 用户ID-->
+		<if test="addTime != null">#{addTime},</if><!-- 签到日期-->
+		<if test="integral != null">#{integral},</if><!-- 赠送G币量-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_user_sign -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_sign 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_user_sign -->
+	<update id="update" parameterType="com.webside.user.sign.entities.UserSign" flushCache="true">
+		update t_user_sign
+		<set>
+			<trim suffixOverrides=",">
+				<if test="userId != null">user_id=#{userId},</if><!-- 用户ID-->
+				<if test="addTime != null">add_time=#{addTime},</if><!-- 签到日期-->
+				<if test="integral != null">integral=#{integral},</if><!-- 赠送G币量-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_user_sign -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_user_sign  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_user_sign -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_user_sign 
+		where id = #{id}
+	</delete>
+	
+	<select id="querySignInToday" parameterType="Map" resultMap="resultMap">
+		select <include refid="columnList"/>
+		from t_user_sign
+		where user_id = #{userId} and add_time >= #{addTime}
+	</select>
+</mapper>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webside.config.mapper.ConfigMapper">
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.config.model.Config">
+		<id column="id" property="id"/> <!-- 唯一标识-->
+		<result column="config_key" property="configKey"/> <!-- 配置键-->
+		<result column="config_value" property="configValue"/> <!-- 配置值-->
+		<result column="create_time" property="createTime"/> <!-- 创建时间-->
+		<result column="create_operator_id" property="createOperatorId"/> <!-- 创建人-->
+		<result column="update_time" property="updateTime"/> <!-- 修改时间-->
+		<result column="update_operator_id" property="updateOperatorId"/> <!-- 修改人-->
+	</resultMap>
+	
+	<!-- t_sys_config字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 唯一标识-->
+			config_group,
+			config_key, <!-- 配置键-->
+			config_value, <!-- 配置值-->
+			create_time, <!-- 创建时间-->
+			create_operator_id, <!-- 创建人-->
+			update_time, <!-- 修改时间-->
+			update_operator_id, <!-- 修改人-->
+		</trim>
+	</sql>
+	
+	<select id="findConfigValueByKey" parameterType="String" resultType="String">
+		select config_value from t_config where config_key = #{key}
+	</select>
+	
+	<update id="updateByKeyValue" parameterType="map">
+		update t_config
+		<set>
+			config_value = #{value},
+			update_time = #{date}
+		</set>
+		where config_key = #{key}
+	</update>
+	
+	
+	
+	<!-- 查询t_sys_config分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap">
+		select  
+			<include refid="columnList"/>
+		from t_config 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="configGroup != null and configGroup != ''">
+				AND config_group like concat('%',#{configGroup},'%')
+			</if>
+			<if test="configKey != null and configKey != ''">
+				AND config_key like concat('%',#{configKey},'%')
+			</if>
+			<if test="configValue != null and configValue != ''">
+				AND config_value=#{configValue}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+			<if test="createOperatorId != null and createOperatorId != ''">
+				AND create_operator_id=#{createOperatorId}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND update_time=#{updateTime}
+			</if>
+			<if test="updateOperatorId != null and updateOperatorId != ''">
+				AND update_operator_id=#{updateOperatorId}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_sys_config -->
+	<insert id="insert"  parameterType="com.webside.config.model.Config">
+		insert into t_config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="configGroup != null">config_group,</if>
+		<if test="configKey != null">config_key,</if><!-- 配置键-->
+		<if test="configValue != null">config_value,</if><!-- 配置值-->
+		<if test="createTime != null">create_time,</if><!-- 创建时间-->
+		<if test="createOperatorId != null">create_operator_id,</if><!-- 创建人-->
+		<if test="updateTime != null">update_time,</if><!-- 修改时间-->
+		<if test="updateOperatorId != null">update_operator_id,</if><!-- 修改人-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="configGroup != null">#{configGroup},</if>
+		<if test="configKey != null">#{configKey},</if><!-- 配置键-->
+		<if test="configValue != null">#{configValue},</if><!-- 配置值-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		<if test="createOperatorId != null">#{createOperatorId},</if><!-- 创建人-->
+		<if test="updateTime != null">#{updateTime},</if><!-- 修改时间-->
+		<if test="updateOperatorId != null">#{updateOperatorId},</if><!-- 修改人-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_sys_config -->
+	<select id="findById" resultMap="resultMap" parameterType="String">
+		select  
+			<include refid="columnList"/>
+		from t_config 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_sys_config -->
+	<update id="updateById" parameterType="com.webside.config.model.Config">
+		update t_sys_config
+		<set>
+			<trim suffixOverrides=",">
+				<if test="configGroup != null">config_key=#{configGroup},</if>
+				<if test="configKey != null">config_key=#{configKey},</if><!-- 配置键-->
+				<if test="configValue != null">config_value=#{configValue},</if><!-- 配置值-->
+				<if test="createTime != null">create_time=#{createTime},</if><!-- 创建时间-->
+				<if test="createOperatorId != null">create_operator_id=#{createOperatorId},</if><!-- 创建人-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 修改时间-->
+				<if test="updateOperatorId != null">update_operator_id=#{updateOperatorId},</if><!-- 修改人-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_sys_config -->
+	<delete id="deleteBatchById" parameterType="list">
+		delete from t_config  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_sys_config -->
+	<delete id="deleteById" parameterType="String" >
+		delete from t_config 
+		where id = #{id}
+	</delete>
+</mapper>

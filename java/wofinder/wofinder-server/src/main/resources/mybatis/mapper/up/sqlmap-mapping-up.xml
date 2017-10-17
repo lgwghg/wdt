@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.up.mapper.UpMapper">
+
+	<!-- t_up字段列表 -->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 主键 -->
+			name AS "name", <!-- 名称 -->
+			introduction AS "introduction", <!-- 简介 -->
+			avatar AS "avatar", <!-- 头像 -->
+			game_id AS "game.id", <!-- 所属游戏 -->
+			popularity_index AS "popularityIndex", <!-- 人气指数 -->
+			rank as "rank",
+			is_search as "isSearch.value",<!-- 是否可以搜索 -->
+			status AS "status.value", <!-- 状态 -->
+			create_id AS "createUser.id", <!-- 创建者id -->
+			create_time AS "createTime", <!-- 创建时间 -->
+			update_id AS "updateUser.id", <!-- 修改者id -->
+			update_time AS "updateTime", <!-- 修改时间 -->
+		</trim>
+	</sql>
+	<sql id="columnDetail">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 主键 -->
+			name AS "name", <!-- 名称 -->
+			introduction AS "introduction", <!-- 简介 -->
+			avatar AS "avatar", <!-- 头像 -->
+			game_id AS "game.id", <!-- 所属游戏 -->
+			popularity_index AS "popularityIndex", <!-- 人气指数 -->
+			rank as "rank",
+			
+		</trim>
+	</sql>
+	
+	<resultMap type="com.webside.up.model.UpVo" id="upVoResultMap">
+		<result column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="introduction" property="introduction"/>
+		<result column="avatar" property="avatar"/>
+		<result column="game_id" property="game.id"/>
+		<result column="popularity_index" property="popularityIndex"/>
+		<result column="rank" property="rank"/>
+	</resultMap>
+	<select id="findUpDetailById" resultMap="upVoResultMap" parameterType="String">
+		select
+			up.id AS "id", <!-- 主键 -->
+			up.name AS "name", <!-- 名称 -->
+			up.introduction AS "introduction", <!-- 简介 -->
+			up.avatar AS "avatar", <!-- 头像 -->
+			up.game_id AS "game.id", <!-- 所属游戏 -->
+			up.popularity_index AS "popularityIndex", <!-- 人气指数 -->
+			up.rank as "rank"
+		from t_up up
+		where up.id = #{id}
+		and up.status = 1
+	</select>
+	<!-- 查询t_up分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.up.model.UpEntity">
+		select
+		<include refid="columnList" />
+		from t_up
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">
+				AND lower(name) like concat('%',lower(#{name}),'%')
+			</if>
+			<if test="isSearchValue != null and isSearchValue != ''">
+				AND is_search=#{isSearchValue}
+			</if>
+			<if test="gameId != null and gameId != ''">
+				AND game_id=#{gameId}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据ID查询t_up -->
+	<select id="findById" resultType="com.webside.up.model.UpEntity" parameterType="String">
+		select
+		<include refid="columnList" />
+		from t_up
+		where id = #{id}
+	</select>
+	
+	<!-- 根据ID批量查询t_up -->
+	<select id="queryListBatchById" resultType="com.webside.up.model.UpEntity" parameterType="list">
+		select
+		<include refid="columnList" />
+		from t_up
+		where id in  
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</select>
+
+	<!-- 新增t_up -->
+	<insert id="insert" parameterType="com.webside.up.model.UpEntity">
+		insert into t_up
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,<!-- 主键 -->
+			name,<!-- 名称 -->
+			<if test="introduction != null">introduction,</if><!-- 简介 -->
+			<if test="avatar != null">avatar,</if><!-- 头像 -->
+			<if test="game != null and game.id != null">game_id,</if><!-- 所属游戏 -->
+			<if test="popularityIndex != null">popularity_index,</if><!-- 人气指数 -->
+			is_search,<!-- 是否可以搜索 -->
+			status,<!-- 状态 -->
+			create_time,<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},<!-- 主键 -->
+			#{name},<!-- 名称 -->
+			<if test="introduction != null">#{introduction},</if><!-- 简介 -->
+			<if test="avatar != null">#{avatar},</if><!-- 头像 -->
+			<if test="game != null and game.id != null">#{game.id},</if><!-- 所属游戏 -->
+			<if test="popularityIndex != null">#{popularityIndex},</if><!-- 人气指数 -->
+			#{isSearch},<!-- 是否可以搜索 -->
+			#{status.value},<!-- 状态 -->
+			#{createTime},<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者id -->
+		</trim>
+	</insert>
+
+	<!-- 根据ID更新t_up -->
+	<update id="updateById" parameterType="com.webside.up.model.UpEntity">
+		update t_up
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="name != null and name != ''">name=#{name},</if><!-- 名称 -->
+			introduction=#{introduction},<!-- 简介 -->
+			<if test="avatar != null">avatar=#{avatar},</if><!-- 头像 -->
+			<if test="game != null and game.id != null">game_id=#{game.id},</if><!-- 所属游戏 -->
+			<if test="popularityIndex != null">popularity_index=#{popularityIndex},</if><!-- 人气指数 -->
+			<if test="isSearch != null">is_search=#{isSearch.value},</if><!-- 是否可以搜索 -->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where id = #{id}
+	</update>
+
+	<!-- 批量修改视频作者状态 -->
+	<update id="updateStatusBatchById" parameterType="map">
+		update t_up
+		<trim prefix="SET" suffixOverrides=",">
+			status=#{statusValue},<!-- 状态 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+			<if test="updateUserId != null">update_id=#{updateUserId},</if><!-- 修改者 -->
+		</trim>
+		where id in
+		<foreach collection="upIds" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+
+	<!-- 重置符合要求的视频作者游戏字段 -->
+	<update id="resetGameIdByGameId" parameterType="map">
+		update t_up
+		<trim prefix="SET" suffixOverrides=",">
+			game_id = null,<!-- 所属游戏 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+			<if test="updateUserId != null">update_id=#{updateUserId},</if><!-- 修改者 -->
+		</trim>
+		where game_id = #{gameId}
+	</update>
+
+	<!-- 根据ID删除t_up -->
+	<delete id="deleteById" parameterType="String">
+		delete from t_up
+		where id = #{id}
+	</delete>
+
+	<!-- 根据ID删除t_up -->
+	<delete id="deleteBatchById" parameterType="list">
+		<![CDATA[  
+       delete from t_up where id in  
+    	]]>
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.video.mapper.IVideoValueLogMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<!-- <cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.video.model.VideoValueLog">
+		<id column="id" property="id"/> <!-- 主键-->
+		<result column="video_value_id" property="videoValueId"/> <!-- 视频id-->
+		<result column="operate_type" property="operateType"/> <!-- 操作类型：0:添加  1:点赞 4:删除-->
+		<result column="status" property="status"/> <!-- 状态  1有效  0无效-->
+		<result column="inform_status" property="informStatus"/> <!-- 举报状态 ：0：正常  1：已举报  2：已处理-->
+		<result column="create_id" property="createId"/> <!-- 创建者-->
+		<result column="create_time" property="createTime"/> <!-- 创建时间-->
+		<result column="update_id" property="updateId"/> <!-- 修改者-->
+		<result column="update_time" property="updateTime"/> <!-- 修改时间-->
+		<result column="value_id" property="valueId"/>
+		<result column="inform_status" property="informStatus"/>
+	</resultMap>
+	
+	<!-- t_video_value_log字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 主键-->
+			video_value_id, <!-- 视频id-->
+			operate_type, <!-- 操作类型：0:添加  1:点赞 4:删除-->
+			status, <!-- 状态  1有效  0无效-->
+			create_id, <!-- 创建者-->
+			create_time, <!-- 创建时间-->
+			update_id, <!-- 修改者-->
+			update_time, <!-- 修改时间-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_video_value_log分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_video_value_log 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="videoValueId != null and videoValueId != ''">
+				AND video_value_id=#{videoValueId}
+			</if>
+			<if test="operateType != null and operateType != ''">
+				AND operate_type=#{operateType}
+			</if>
+			<if test="status != null and status != ''">
+				AND status=#{status}
+			</if>
+			<if test="createId != null and createId != ''">
+				AND create_id=#{createId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+			<if test="updateId != null and updateId != ''">
+				AND update_id=#{updateId}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND update_time=#{updateTime}
+			</if>
+		</trim>
+	</select>
+	
+	<select id="queryUserUpVideoLastest" parameterType="Map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_video_value_log 
+		where video_value_id = #{videoValueId} 
+		and operate_type in (1,2)
+		and create_id = #{userId}
+		order by create_time desc
+		limit 1
+	</select>
+	
+	<select id="queryVideoValueLog" parameterType="String" resultMap="resultMap">
+		select  l.id, <!-- 主键-->
+				l.video_value_id, <!-- 视频id-->
+				l.operate_type, <!-- 操作类型：0:添加  1:点赞 2:取消点赞 4:删除-->
+				l.status, <!-- 状态  1有效  0无效-->
+				l.create_id, <!-- 创建者-->
+				l.create_time, <!-- 创建时间-->
+				l.update_id, <!-- 修改者-->
+				l.update_time, <!-- 修改时间-->
+				vv.value_id,
+				vv.inform_status
+		from t_video_value_log l 
+			inner join t_video_value vv 
+			on l.video_value_id = vv.id 
+			and vv.video_id = #{videoId}
+		where l.operate_type in (0,4) and l.status = 1
+		order by l.create_time desc
+	</select>
+	<!-- 新增t_video_value_log -->
+	<insert id="insert" 
+			useGeneratedKeys="true" 
+			keyProperty="id"
+			parameterType="com.webside.video.model.VideoValueLog">
+		insert into t_video_value_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="videoValueId != null">video_value_id,</if><!-- 视频id-->
+		<if test="operateType != null">operate_type,</if><!-- 操作类型：0:添加  1:点赞 4:删除-->
+		<if test="status != null">status,</if><!-- 状态  1有效  0无效-->
+		<if test="createId != null">create_id,</if><!-- 创建者-->
+		<if test="createTime != null">create_time,</if><!-- 创建时间-->
+		<if test="updateId != null">update_id,</if><!-- 修改者-->
+		<if test="updateTime != null">update_time,</if><!-- 修改时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="videoValueId != null">#{videoValueId},</if><!-- 视频id-->
+		<if test="operateType != null">#{operateType},</if><!-- 操作类型：0:添加  1:点赞 4:删除-->
+		<if test="status != null">#{status},</if><!-- 状态  1有效  0无效-->
+		<if test="createId != null">#{createId},</if><!-- 创建者-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		<if test="updateId != null">#{updateId},</if><!-- 修改者-->
+		<if test="updateTime != null">#{updateTime},</if><!-- 修改时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_video_value_log -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_video_value_log 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_video_value_log -->
+	<update id="updateById" parameterType="com.webside.video.model.VideoValueLog" flushCache="true">
+		update t_video_value_log
+		<set>
+			<trim suffixOverrides=",">
+				<if test="videoValueId != null">video_value_id=#{videoValueId},</if><!-- 视频id-->
+				<if test="operateType != null">operate_type=#{operateType},</if><!-- 操作类型：0:添加  1:点赞 4:删除-->
+				<if test="status != null">status=#{status},</if><!-- 状态  1有效  0无效-->
+				<if test="informStatus != null">inform_status=#{informStatus},</if><!-- 举报状态 ：0：正常  1：已举报  2：已处理-->
+				<if test="createId != null">create_id=#{createId},</if><!-- 创建者-->
+				<if test="createTime != null">create_time=#{createTime},</if><!-- 创建时间-->
+				<if test="updateId != null">update_id=#{updateId},</if><!-- 修改者-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 修改时间-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_video_value_log -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_video_value_log  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_video_value_log -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_video_value_log 
+		where id = #{id}
+	</delete>
+</mapper>

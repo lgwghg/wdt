@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webside.rights.mapper.RoleMapper">
+
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- tb_role字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			r.id AS "id", <!-- 主键-->
+			r.name AS "name", <!-- 名称-->
+			r.key AS "key", <!-- key-->
+			r.type AS "type.value", <!-- 角色类型，0：网站官方组  1：普通用户组-->
+			r.description AS "description", <!-- 描述-->
+			r.status AS "status.value", <!-- 状态-->
+			r.create_id AS "createUser.id", <!-- 创建者id-->
+			r.create_time AS "createTime", <!-- 创建时间-->
+			r.update_id AS "updateUser.id", <!-- 修改者id-->
+			r.update_time AS "updateTime", <!-- 修改时间-->
+		</trim>
+	</sql>
+	
+	<!-- 查询tb_role分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.rights.model.RoleEntity" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from tb_role r 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">
+				AND lower(r.name) like concat('%',lower(#{name}),'%')
+			</if>
+			<if test="key != null and key != ''">
+				AND r.key=#{key}
+			</if>
+			<if test="typeValue != null and typeValue != ''">
+				AND r.type=#{typeValue}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND r.status=#{statusValue}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 根据name查询tb_role -->
+	<select id="findByName" parameterType="String" resultType="com.webside.rights.model.RoleEntity" flushCache="false" useCache="true">
+		SELECT 
+			<include refid="columnList"/>
+		FROM tb_role r 
+		where r.name = #{name}
+	</select>
+	
+	<!-- 新增tb_role -->
+	<insert id="insert" 
+			parameterType="com.webside.rights.model.RoleEntity" flushCache="true">
+		insert into tb_role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 主键-->
+		<if test="name != null">name,</if><!-- 名称-->
+		<if test="key != null">key,</if><!-- key-->
+		<if test="type != null and type.value != null">type,</if><!-- 角色类型，0：网站官方组  1：普通用户组-->
+		<if test="description != null">description,</if><!-- 描述-->
+		<if test="status != null and status.value != null">status,</if><!-- 状态-->
+		<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id-->
+		<if test="createTime != null">create_time,</if><!-- 创建时间-->
+		<if test="updateUser != null and updateUser.id != null">update_id,</if><!-- 修改者id-->
+		<if test="updateTime != null">update_time,</if><!-- 修改时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 主键-->
+		<if test="name != null">#{name},</if><!-- 名称-->
+		<if test="key != null">#{key},</if><!-- key-->
+		<if test="type != null and type.value != null">#{type.value},</if><!-- 角色类型，0：网站官方组  1：普通用户组-->
+		<if test="description != null">#{description},</if><!-- 描述-->
+		<if test="status != null and status.value != null">#{status.value},</if><!-- 状态-->
+		<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		<if test="updateUser != null and updateUser.id != null">#{updateUser.id},</if><!-- 修改者-->
+		<if test="updateTime != null">#{updateTime},</if><!-- 更新时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询tb_role -->
+	<select id="findById" resultType="com.webside.rights.model.RoleEntity" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from tb_role r
+		where r.id = #{id}
+	</select>
+	
+	<!-- 更新tb_role -->
+	<update id="updateById" parameterType="com.webside.rights.model.RoleEntity" flushCache="true">
+		update tb_role
+		<trim prefix="SET" suffixOverrides=",">  
+			<if test="name != null">name=#{name},</if><!-- 名称-->
+			<if test="key != null">key=#{key},</if><!-- key-->
+			<if test="type != null and type.value != null">type=#{type.value},</if><!-- 角色类型，0：网站官方组  1：普通用户组-->
+			<if test="description != null">description=#{description},</if><!-- 描述-->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态-->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者-->
+			<if test="updateTime != null">update_time=#{updateTime},</if><!-- 更新时间-->
+		</trim>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID删除tb_role -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from tb_role 
+		where id = #{id}
+	</delete>
+</mapper>

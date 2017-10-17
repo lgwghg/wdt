@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.user.mapper.UserIncrementMapper">
+
+	<!-- t_user_increment字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 主键-->
+			user_id AS "user.id", <!-- 用户ID-->
+			status AS "status.value", <!-- 状态-->
+			create_id AS "createUser.id", <!-- 创建者id-->
+			create_time AS "createTime", <!-- 创建时间-->
+			update_id AS "updateUser.id", <!-- 修改者id-->
+			update_time AS "updateTime", <!-- 修改时间-->
+			integral as integral,
+			sex,
+			birthday,
+		</trim>
+	</sql>
+	
+	<!-- 查询t_user_increment分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.user.model.UserIncrementEntity">
+		select  
+			<include refid="columnList"/>
+		from t_user_increment 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+			<if test="createUserId != null and createUserId != ''">
+				AND create_id=#{createUserId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+			<if test="updateUserId != null and updateUserId != ''">
+				AND update_id=#{updateUser.id}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND update_time=#{updateTime}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_user_increment -->
+	<insert id="insert" 
+			parameterType="com.webside.user.model.UserIncrementEntity">
+		insert into t_user_increment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 主键-->
+		<if test="user != null and user.id != null">user_id,</if><!-- 用户ID-->
+		<if test="status != null and status.value != null">status,</if><!-- 状态-->
+		<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id-->
+		<if test="createTime != null">create_time,</if><!-- 创建时间-->
+		<if test="updateUser != null and updateUser.id != null">update_id,</if><!-- 修改者id-->
+		<if test="updateTime != null">update_time,</if><!-- 修改时间-->
+		<if test="integral != null">integral,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 主键-->
+		<if test="user != null and user.id != null">#{user.id},</if><!-- 用户ID-->
+		<if test="status != null and status.value != null">#{status.value},</if><!-- 状态-->
+		<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者id-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		<if test="updateUser != null and updateUser.id != null">#{updateUser.id},</if><!-- 修改者id-->
+		<if test="updateTime != null">#{updateTime},</if><!-- 修改时间-->
+		<if test="integral != null">#{integral},</if>
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_user_increment -->
+	<select id="findById" resultType="com.webside.user.model.UserIncrementEntity" parameterType="String">
+		select  
+			<include refid="columnList"/>
+		from t_user_increment 
+		where id = #{id}
+	</select>
+	
+	<!-- 根据entity查询t_user_increment -->
+	<select id="findByEntity" resultType="com.webside.user.model.UserIncrementEntity" parameterType="com.webside.user.model.UserIncrementEntity">
+		select  
+			<include refid="columnList"/>
+		from t_user_increment 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="user != null and user.id != null and user.id != ''">
+				AND user_id=#{user.id}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 更新t_user_increment -->
+	<update id="updateById" parameterType="com.webside.user.model.UserIncrementEntity">
+		update t_user_increment
+		<trim prefix="SET" suffixOverrides=",">  
+			<if test="integral != null">integral = #{integral} + integral,</if>
+			<if test="sex != null">sex = #{sex},</if>
+			<if test="birthday != null">birthday = #{birthday},</if>
+			<!--<if test="user != null and user.id != null">user_id=#{user.id},</if> 用户ID-->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态-->
+			<if test="createUser != null and createUser.id != null">create_id=#{createUser.id},</if><!-- 创建者-->
+			<if test="createTime != null">create_time=#{createTime},</if><!-- 创建时间-->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者-->
+			<if test="updateTime != null">update_time=#{updateTime},</if><!-- 修改时间-->
+		</trim>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID删除t_user_increment -->
+	<delete id="deleteById" parameterType="String">
+		delete from t_user_increment 
+		where id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.user.photo.mapper.IUserPhotoMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.user.photo.model.UserPhoto">
+		<id column="id" property="id"/> <!-- -->
+		<result column="user_id" property="userId"/> <!-- 用户-->
+		<result column="photo" property="photo"/> <!-- 头像-->
+		<result column="is_current" property="isCurrent"/> <!-- -->
+		<result column="status" property="status"/>
+		<result column="create_time" property="createTime"/> <!-- 上传时间-->
+		<result column="update_time" property="updateTime"/> <!-- 更新时间-->
+	</resultMap>
+	
+	<!-- t_user_photo字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- -->
+			user_id, <!-- 用户-->
+			photo, <!-- 头像-->
+			status,
+			is_current, <!-- -->
+			create_time, <!-- 上传时间-->
+			update_time, <!-- 更新时间-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_user_photo分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_photo 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="photo != null and photo != ''">
+				AND photo=#{photo}
+			</if>
+			<if test="isCurrent != null and isCurrent != ''">
+				AND is_current=#{isCurrent}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND update_time=#{updateTime}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_user_photo -->
+	<insert id="insert" 
+			parameterType="com.webside.user.photo.model.UserPhoto">
+		insert into t_user_photo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="userId != null">user_id,</if><!-- 用户-->
+		<if test="photo != null">photo,</if><!-- 头像-->
+		<if test="status != null">status,</if>
+		<if test="isCurrent != null">is_current,</if><!-- -->
+		<if test="createTime != null">create_time,</if><!-- 上传时间-->
+		<if test="updateTime != null">update_time,</if><!-- 更新时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="userId != null">#{userId},</if><!-- 用户-->
+		<if test="photo != null">#{photo},</if><!-- 头像-->
+		<if test="status != null">#{status},</if>
+		<if test="isCurrent != null">#{isCurrent},</if><!-- -->
+		<if test="createTime != null">#{createTime},</if><!-- 上传时间-->
+		<if test="updateTime != null">#{updateTime},</if><!-- 更新时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_user_photo -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_photo 
+		where id = #{id}
+	</select>
+	
+	<select id="queryUserHistoryPhoto" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_photo 
+		where user_id = #{userId} and status = 1
+		order by is_current desc, create_time desc
+		limit 3
+	</select>
+	<!-- 更新t_user_photo -->
+	<update id="updateById" parameterType="com.webside.user.photo.model.UserPhoto" flushCache="true">
+		update t_user_photo
+		<set>
+			<trim suffixOverrides=",">
+				<if test="userId != null">user_id=#{userId},</if><!-- 用户-->
+				<if test="photo != null">photo=#{photo},</if><!-- 头像-->
+				<if test="status != null">status=#{status},</if>
+				<if test="isCurrent != null">is_current=#{isCurrent},</if><!-- -->
+				<if test="createTime != null">create_time=#{createTime},</if><!-- 上传时间-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 更新时间-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	<update id="updateCurrentPhotoByUserId" parameterType="String" flushCache="true">
+		update t_user_photo
+		set is_current=0
+		where user_id = #{userId} and is_current = 1 and status = 1
+	</update>
+	<!-- 根据ID列表删除t_user_photo -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		update t_user_photo
+		set status = 0
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_user_photo -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_user_photo 
+		where id = #{id}
+	</delete>
+</mapper>

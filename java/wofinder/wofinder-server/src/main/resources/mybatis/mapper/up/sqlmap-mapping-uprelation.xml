@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.up.mapper.IUpRelationMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.up.model.UpRelation">
+		<id column="id" property="id"/> <!-- -->
+		<result column="up_id" property="upId"/> <!-- 人物id-->
+		<result column="relation_up_id" property="relationUpId"/> <!-- 相关人物id-->
+		<result column="relation_desc" property="relationDesc"/> <!-- 关系描述-->
+		<result column="status" property="status"/> <!-- 状态-->
+		<result column="create_id" property="createId"/> <!-- 创建者-->
+		<result column="create_time" property="createTime"/> <!-- 创建时间-->
+		<result column="update_id" property="updateId"/> <!-- 修改者-->
+		<result column="update_time" property="updateTime"/> <!-- 修改时间-->
+	</resultMap>
+	
+	<!-- t_up_relation字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			r.id, <!-- -->
+			r.up_id, <!-- 人物id-->
+			r.relation_up_id, <!-- 相关人物id-->
+			r.relation_desc, <!-- 关系描述-->
+			r.status, <!-- 状态-->
+			r.create_id, <!-- 创建者-->
+			r.create_time, <!-- 创建时间-->
+			r.update_id, <!-- 修改者-->
+			r.update_time, <!-- 修改时间-->
+		</trim>
+	</sql>
+	
+	<select id="queryRelationListByUpId" parameterType="String" resultType="com.webside.up.model.UpRelation">
+		select r.id as id,
+			r.up_id as upId,
+			r.relation_up_id as relationUpId,
+			r.relation_desc as relationDesc,
+			u.id as "relationUp.id",
+			u.name as "relationUp.name",
+			u.avatar AS "relationUp.avatar"
+		from t_up_relation r inner join t_up u on r.relation_up_id = u.id and u.status = 1
+		where r.up_id=#{upId}
+		<if test="relationUpId != null and relationUpId != ''">
+			AND r.relation_up_id=#{relationUpId}
+		</if>
+		and r.status = 1
+	</select>
+	
+	<!-- 查询t_up_relation分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			u.id as "relationUp.id",
+			u.name as "relationUp.name",
+			u.avatar AS "relationUp.avatar",
+			<include refid="columnList"/>
+		from t_up_relation r inner join t_up u on r.relation_up_id = u.id and u.status = 1
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="upId != null and upId != ''">
+				AND r.up_id=#{upId}
+			</if>
+			<if test="relationUpId != null and relationUpId != ''">
+				AND r.relation_up_id=#{relationUpId}
+			</if>
+			<if test="relationDesc != null and relationDesc != ''">
+				AND r.relation_desc=#{relationDesc}
+			</if>
+			<if test="status != null and status != ''">
+				AND r.status=#{status}
+			</if>
+			<if test="createId != null and createId != ''">
+				AND r.create_id=#{createId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND r.create_time=#{createTime}
+			</if>
+			<if test="updateId != null and updateId != ''">
+				AND r.update_id=#{updateId}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND r.update_time=#{updateTime}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_up_relation -->
+	<insert id="insert" parameterType="com.webside.up.model.UpRelation">
+		insert into t_up_relation
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="upId != null">up_id,</if><!-- 人物id-->
+		<if test="relationUpId != null">relation_up_id,</if><!-- 相关人物id-->
+		<if test="relationDesc != null">relation_desc,</if><!-- 关系描述-->
+		<if test="status != null">status,</if><!-- 状态-->
+		<if test="createId != null">create_id,</if><!-- 创建者-->
+		<if test="createTime != null">create_time,</if><!-- 创建时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="upId != null">#{upId},</if><!-- 人物id-->
+		<if test="relationUpId != null">#{relationUpId},</if><!-- 相关人物id-->
+		<if test="relationDesc != null">#{relationDesc},</if><!-- 关系描述-->
+		<if test="status != null">#{status},</if><!-- 状态-->
+		<if test="createId != null">#{createId},</if><!-- 创建者-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_up_relation -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_up_relation r
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_up_relation -->
+	<update id="updateById" parameterType="com.webside.up.model.UpRelation" flushCache="true">
+		update t_up_relation
+		<set>
+			<trim suffixOverrides=",">
+				<if test="upId != null">up_id=#{upId},</if><!-- 人物id-->
+				<if test="relationUpId != null">relation_up_id=#{relationUpId},</if><!-- 相关人物id-->
+				<if test="relationDesc != null">relation_desc=#{relationDesc},</if><!-- 关系描述-->
+				<if test="status != null">status=#{status},</if><!-- 状态-->
+				<if test="updateId != null">update_id=#{updateId},</if><!-- 修改者-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 修改时间-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_up_relation -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_up_relation  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_up_relation -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_up_relation 
+		where id = #{id}
+	</delete>
+</mapper>

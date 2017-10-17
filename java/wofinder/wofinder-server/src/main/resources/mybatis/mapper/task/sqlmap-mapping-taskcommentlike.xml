@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.task.mapper.TaskCommentLikeMapper">
+
+	<!-- t_task_comment_like字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 主键-->
+			user_id AS "createUser.id", <!-- 点赞人id-->
+			comment_id AS "comment.id", <!-- 评论id-->
+			create_time AS "createTime", <!-- 创建时间-->
+			status AS "status.value", <!-- 状态-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_task_comment_like分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.task.model.TaskCommentLikeEntity">
+		select  
+			<include refid="columnList"/>
+		from t_task_comment_like 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="commentId != null and commentId != ''">
+				AND comment_id=#{commentId}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_task_comment_like -->
+	<insert id="insert" 
+			parameterType="com.webside.task.model.TaskCommentLikeEntity">
+		insert into t_task_comment_like
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		id,<!-- 主键-->
+		user_id,<!-- 点赞人id-->
+		comment_id,<!-- 评论id-->
+		create_time,<!-- 创建时间-->
+		status,<!-- 状态-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		#{id},<!-- 主键-->
+		#{createUser.id},<!-- 点赞人id-->
+		#{comment.id},<!-- 评论id-->
+		#{createTime},<!-- 创建时间-->
+		#{status.value},<!-- 状态 -->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_task_comment_like -->
+	<select id="findById" resultType="com.webside.task.model.TaskCommentLikeEntity" parameterType="String">
+		select  
+			<include refid="columnList"/>
+		from t_task_comment_like 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_task_comment_like -->
+	<update id="updateById" parameterType="com.webside.task.model.TaskCommentLikeEntity">
+		update t_task_comment_like
+		<trim prefix="SET" suffixOverrides=",">  
+			status=#{status.value},<!-- 状态-->
+		</trim>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID删除t_task_comment_like -->
+	<delete id="deleteById" parameterType="String">
+		delete from t_task_comment_like 
+		where id = #{id}
+	</delete>
+	
+	<!-- 根据entity删除t_task_comment_like -->
+	<delete id="deleteByEntity" parameterType="com.webside.task.model.TaskCommentLikeEntity">
+		delete from t_task_comment_like
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="comment != null and comment.id != null and comment.id != ''">
+				AND comment_id=#{comment.id}
+			</if>
+		</trim>
+	</delete>
+</mapper>

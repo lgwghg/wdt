@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.video.mapper.VideoStationMapper">
+
+	<!-- t_video_station字段列表 -->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			t.id AS "id", <!-- 主键 -->
+			t.video_id AS "video.id", <!-- 视频id -->
+			t.v_id AS "vid", <!-- 视频源id -->
+			t.v_url AS "url", <!-- 视频源url -->
+			t.v_flash_url AS "flashUrl", <!-- 视频播放url -->
+			t.v_title AS "title", <!-- 视频标题 -->
+			t.v_introduction AS "introduction", <!-- 视频简介 -->
+			t.v_cover AS "cover", <!-- 视频封面 -->
+			t.v_duration AS "duration", <!-- 视频时长 -->
+			t.v_category AS "category", <!-- 视频类别 -->
+			t.v_published AS "published", <!-- 视频发布时间 -->
+			t.v_view_count AS "viewCount", <!-- 视频播放量 -->
+			t.v_comment_count AS "commentCount", <!-- 视频评论量 -->
+			t.v_down_count AS "downCount", <!-- 视频下载量 -->
+			t.v_favorite_count AS "favoriteCount", <!-- 视频收藏量 -->
+			t.up_id AS "up.id", <!-- 视频作者id -->
+			t.station AS "station.value", <!-- 所属站点 -->
+			t.status AS "status.value", <!-- 状态 -->
+			t.create_id AS "createUser.id", <!-- 创建者id -->
+			t.create_time AS "createTime", <!-- 创建时间 -->
+			t.update_id AS "updateUser.id", <!-- 修改者id -->
+			t.update_time AS "updateTime", <!-- 修改时间 -->
+		</trim>
+	</sql>
+
+	<!-- 查询t_video_station分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.video.model.VideoStationEntity">
+		select
+		<include refid="columnList" />
+		from t_video_station t
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="title != null and title != ''">
+				AND lower(v_title) like concat('%',lower(#{title}),'%')
+			</if>
+			<if test="videoId != null and videoId != ''">
+				AND video_id=#{videoId}
+			</if>
+			<if test="vid != null and vid != ''">
+				AND v_id=#{vid}
+			</if>
+			<if test="url != null and url != ''">
+				AND v_url like concat('%',lower(#{url}),'%')
+			</if>
+			<if test="upId != null and upId != ''">
+				AND up_id=#{upId}
+			</if>
+			<if test="stationValue != null and stationValue != ''">
+				AND station=#{stationValue}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 根据entity查询t_video_station -->
+	<select id="queryListByEntity" resultType="com.webside.video.model.VideoStationEntity" parameterType="com.webside.video.model.VideoStationEntity">
+		select
+		<include refid="columnList" />
+		from t_video_station t
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+		        AND status = 1 
+			<if test="video != null and video.Id != null and video.Id != ''">
+				AND video_id=#{video.id}
+			</if>
+			<if test="station != null and station.value != null and station.value != ''">
+				AND station=#{station.value}
+			</if>
+			<if test="id != null and id != ''">
+				AND id != #{id}
+			</if>
+			<if test="vid != null and vid != ''">
+				AND v_id = #{vid}
+			</if>
+			<if test="title != null and title != ''">
+				AND v_title = #{title}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 根据ID查询t_video_station -->
+	<select id="findById" resultType="com.webside.video.model.VideoStationEntity" parameterType="String">
+		select
+		<include refid="columnList" />
+		from t_video_station t
+		where id = #{id}
+	</select>
+	
+	<!-- 根据ID查询t_up_station -->
+	<select id="queryCountByStationValue" resultType="java.lang.Long" parameterType="map">
+		select count(1) from t_video_station 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="category != null and category != ''">
+				AND v_category = #{category}
+			</if>
+			<if test="status != null and status != ''">
+				AND status = #{status}
+			</if>
+			<if test="station != null and station != ''">
+				AND station = #{station}
+			</if>
+		</trim>
+	</select>
+	
+	<select id="queryTotalViewCountByUpId" resultType="java.lang.Long" parameterType="String">
+		select sum(v_view_count) from t_video_station where up_id = #{upId}
+	</select>
+	
+	<!-- 通过视频ID 查询播放量 -->
+	<select id="queryTotalViewCountByVideoId" resultType="java.lang.Long" parameterType="String">
+		select sum(v_view_count) from t_video_station where video_id = #{videoId}
+	</select>
+
+	<!-- 根据videoIds查询t_video_station -->
+	<select id="queryListByVideoIds" resultType="com.webside.video.model.VideoStationEntity" parameterType="map">
+		select
+		<include refid="columnList" />
+		from t_video_station t
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="stationValue != null and stationValue != ''">
+				AND station=#{stationValue}
+			</if>
+			AND video_id in
+			<foreach collection="videoIds" item="id" open="(" separator="," close=")">
+				#{id}
+			</foreach>
+		</trim>
+	</select>
+
+	<!-- 新增t_video_station -->
+	<insert id="insert" parameterType="com.webside.video.model.VideoStationEntity">
+		insert into t_video_station
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,<!-- 主键 -->
+			video_id,<!-- 视频id -->
+			<if test="vid != null">v_id,</if><!-- 视频源id -->
+			<if test="url != null">v_url,</if><!-- 视频源url -->
+			<if test="flashUrl != null">v_flash_url,</if><!-- 视频播放url -->
+			<if test="title != null">v_title,</if><!-- 视频标题 -->
+			<if test="introduction != null">v_introduction,</if><!-- 视频简介 -->
+			<if test="cover != null">v_cover,</if><!-- 视频封面 -->
+			<if test="duration != null">v_duration,</if><!-- 视频时长 -->
+			<if test="category != null">v_category,</if><!-- 视频类别 -->
+			<if test="published != null">v_published,</if><!-- 视频发布时间 -->
+			<if test="viewCount != null">v_view_count,</if><!-- 视频播放量 -->
+			<if test="commentCount != null">v_comment_count,</if><!-- 视频评论量 -->
+			<if test="downCount != null">v_down_count,</if><!-- 视频下载量 -->
+			<if test="favoriteCount != null">v_favorite_count,</if><!-- 视频收藏量 -->
+			<if test="up != null and up.id != null">up_id,</if><!-- 视频作者id -->
+			station,<!-- 所属站点 -->
+			status,<!-- 状态 -->
+			create_time,<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},<!-- 主键 -->
+			#{video.id},<!-- 视频id -->
+			<if test="vid != null">#{vid},</if><!-- 视频源id -->
+			<if test="url != null">#{url},</if><!-- 视频源url -->
+			<if test="flashUrl != null">#{flashUrl},</if><!-- 视频播放url -->
+			<if test="title != null">#{title},</if><!-- 视频标题 -->
+			<if test="introduction != null">#{introduction},</if><!-- 视频简介 -->
+			<if test="cover != null">#{cover},</if><!-- 视频封面 -->
+			<if test="duration != null">#{duration},</if><!-- 视频时长 -->
+			<if test="category != null">#{category},</if><!-- 视频类别 -->
+			<if test="published != null">#{published},</if><!-- 视频发布时间 -->
+			<if test="viewCount != null">#{viewCount},</if><!-- 视频播放量 -->
+			<if test="commentCount != null">#{commentCount},</if><!-- 视频评论量 -->
+			<if test="downCount != null">#{downCount},</if><!-- 视频下载量 -->
+			<if test="favoriteCount != null">#{favoriteCount},</if><!-- 视频收藏量 -->
+			<if test="up != null and up.id != null">#{up.id},</if><!-- 视频作者id -->
+			#{station.value},<!-- 所属站点 -->
+			#{status.value},<!-- 状态 -->
+			#{createTime},<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者id -->
+		</trim>
+	</insert>
+
+	<!-- 根据ID更新t_video_station -->
+	<update id="updateById" parameterType="com.webside.video.model.VideoStationEntity">
+		update t_video_station
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="video != null and video.id != null">video_id=#{video.id},</if><!-- 视频id -->
+			<if test="vid != null and vid != ''">v_id=#{vid},</if><!-- 视频源id -->
+			<if test="url != null and url != ''">v_url=#{url},</if><!-- 视频源url -->
+			<if test="flashUrl != null and flashUrl != ''">v_flash_url=#{flashUrl},</if><!-- 视频播放url -->
+			<if test="title != null and title != ''">v_title=#{title},</if><!-- 视频标题 -->
+			v_introduction=#{introduction},<!-- 视频简介 -->
+			<if test="cover != null">v_cover=#{cover},</if><!-- 视频封面 -->
+			<if test="duration != null">v_duration=#{duration},</if><!-- 视频时长 -->
+			v_category=#{category},<!-- 视频类别 -->
+			v_published=#{published},<!-- 视频发布时间 -->
+			<if test="viewCount != null">v_view_count=#{viewCount},</if><!-- 视频播放量 -->
+			<if test="commentCount != null">v_comment_count=#{commentCount},</if><!-- 视频评论量 -->
+			<if test="downCount != null">v_down_count=#{downCount},</if><!-- 视频下载量 -->
+			<if test="favoriteCount != null">v_favorite_count=#{favoriteCount},</if><!-- 视频收藏量 -->
+			<if test="up != null and up.id != null">up_id=#{up.id},</if><!-- 视频作者id -->
+			<if test="station != null and station.value != null">station=#{station.value},</if><!-- 所属站点 -->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where id = #{id}
+	</update>
+
+	<!-- 批量修改视频站点状态 -->
+	<update id="updateStatusBatchById" parameterType="map">
+		update t_video_station
+		<trim prefix="SET" suffixOverrides=",">
+			status=#{statusValue},<!-- 状态 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+			<if test="updateUserId != null">update_id=#{updateUserId},</if><!-- 修改者 -->
+		</trim>
+		<![CDATA[  
+       		where id in 
+    	]]>
+		<foreach collection="ids" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+
+	<!-- 重置符合要求的视频站点视频作者字段 -->
+	<update id="resetUpIdByUpId" parameterType="map">
+	update t_video_station
+		<trim prefix="SET" suffixOverrides=",">
+			up_id = null,<!-- 视频作者id -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+			<if test="updateUserId != null">update_id=#{updateUserId},</if><!-- 修改者 -->
+		</trim>
+		where up_id = #{upId}
+	</update>
+
+	<!-- 根据视频作者ids批量修改视频站点的所属作者 -->
+	<update id="updateUpIdBatchByUpId" parameterType="map">
+		update t_video_station
+		<trim prefix="SET" suffixOverrides=",">
+			up_id=#{upId},<!-- 视频作者id -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+			<if test="updateUserId != null">update_id=#{updateUserId},</if><!-- 修改者 -->
+		</trim>
+		<![CDATA[  
+       	where up_id in  
+    	]]>
+		<foreach collection="upIds" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+
+	<!-- 批量修改视频作者站点的视频作者 -->
+	<update id="updateVideoIdBatchById" parameterType="map">
+		update t_video_station
+		<trim prefix="SET" suffixOverrides=",">
+			video_id = #{videoId},<!-- 视频id -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+			<if test="updateUserId != null">update_id=#{updateUserId},</if><!-- 修改者 -->
+		</trim>
+		<![CDATA[  
+       		where id in 
+    	]]>
+		<foreach collection="ids" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+
+	<!-- 根据ID删除t_video_station -->
+	<delete id="deleteById" parameterType="String">
+		delete from t_video_station
+		where id = #{id}
+	</delete>
+
+	<!-- 根据entity删除t_video_station -->
+	<delete id="deleteByEntity" parameterType="com.webside.video.model.VideoStationEntity">
+		delete from t_video_station
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="video != null and video.id != null and video.id != ''">
+				AND video_id=#{video.id}
+			</if>
+		</trim>
+	</delete>
+	
+	<!-- 根据videoIds查询t_video_station -->
+	<select id="queryListByIdForRelated" resultType="com.webside.video.vo.VideoStationVo" parameterType="map">
+		SELECT v.id AS "videoId",v.short_id AS "shortId",v.cover,v.title AS "introduction",	v.duration,	v.score FROM t_video v
+		<choose>
+			<when test="valueIdList != null and valueIdList.size > 0">
+				JOIN (SELECT tvv.video_id FROM t_video_value tvv where tvv.value_id in
+				<foreach collection="valueIdList" item="id" open="(" separator="," close=")">
+					#{id}
+				</foreach>
+				GROUP BY tvv.video_id
+				<if test="startCount != null and pageSize != null">
+					limit #{startCount},#{pageSize}
+				</if>
+				) tvs ON tvs.video_id = v.id
+			</when>
+			<otherwise>
+				<if test="startCount != null and pageSize != null">
+					limit #{startCount},#{pageSize}
+				</if>
+			</otherwise>
+		</choose>
+	</select>
+</mapper>

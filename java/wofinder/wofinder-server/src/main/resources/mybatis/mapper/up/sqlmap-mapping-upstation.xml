@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.up.mapper.UpStationMapper">
+
+	<!-- t_up_station字段列表 -->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 主键 -->
+			up_id AS "up.id", <!-- 视频作者id -->
+			home_id AS "homeId", <!-- 个人主页地址 -->
+			home_url AS "homeUrl", <!-- 个人主页地址 -->
+			name AS "name", <!-- 名称 -->
+			up_introduction AS "upIntroduction", <!-- 简介 -->
+			up_avatar AS "upAvatar", <!-- 头像 -->
+			up_video_count AS "upVideoCount", <!-- 视频数量 -->
+			up_fans_count AS "upFansCount", <!-- 粉丝数量 -->
+			up_friend_count AS "upFriendCount", <!-- 关注数量 -->
+			up_play_count AS "upPlayCount", <!-- 播放数量 -->
+			station AS "station.value", <!-- 所属站点 -->
+			third_party AS "thirdParty.value", <!-- 所属第三方 -->
+			status AS "status.value", <!-- 状态 -->
+			create_id AS "createUser.id", <!-- 创建者id -->
+			create_time AS "createTime", <!-- 创建时间 -->
+			update_id AS "updateUser.id", <!-- 修改者id -->
+			update_time AS "updateTime", <!-- 修改时间 -->
+		</trim>
+	</sql>
+
+	<!-- 查询t_up_station分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.up.model.UpStationEntity">
+		select
+		<include refid="columnList" />
+		from t_up_station
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">
+				AND lower(name) like concat('%',lower(#{name}),'%')
+			</if>
+			<if test="upId != null and upId != ''">
+				AND up_id=#{upId}
+			</if>
+			<if test="homeId != null and homeId != ''">
+				AND home_id=#{homeId}
+			</if>
+			<if test="stationValue != null and stationValue != ''">
+				AND station=#{stationValue}
+			</if>
+			<if test="thirdPartyValue != null and thirdPartyValue != ''">
+				AND third_party=#{thirdPartyValue}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据entity查询t_up_station -->
+	<select id="queryListByEntity" resultType="com.webside.up.model.UpStationEntity" parameterType="com.webside.up.model.UpStationEntity">
+		select
+		<include refid="columnList" />
+		from t_up_station
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+				AND status = 1 
+			<if test="up != null and up.Id != null and up.Id != ''">
+				AND up_id=#{up.id}
+			</if>
+			<if test="homeId != null and homeId != ''">
+				AND home_id=#{homeId}
+			</if>
+			<if test="station != null and station.value != null and station.value != ''">
+				AND station=#{station.value}
+			</if>
+			<if test="thirdParty != null and thirdParty.value != null and thirdParty.value != ''">
+				AND third_party=#{thirdParty.value}
+			</if>
+			<if test="id != null and id != ''">
+				AND id != #{id}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据ID查询t_up_station -->
+	<select id="findById" resultType="com.webside.up.model.UpStationEntity" parameterType="String">
+		select
+		<include refid="columnList" />
+		from t_up_station
+		where id = #{id}
+	</select>
+
+	<!-- 根据upIds查询t_up_station -->
+	<select id="findByUpIds" resultType="com.webside.up.model.UpStationEntity" parameterType="map">
+		select
+		<include refid="columnList" />
+		from t_up_station
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="stationValue != null and stationValue != ''">
+				AND station=#{stationValue}
+			</if>
+			<if test="thirdPartyValue != null and thirdPartyValue != ''">
+				AND third_party=#{thirdPartyValue}
+			</if>
+			AND up_id in
+			<foreach collection="upIds" item="id" open="(" separator="," close=")">
+				#{id}
+			</foreach>
+		</trim>
+	</select>
+
+	<!-- 新增t_up_station -->
+	<insert id="insert" parameterType="com.webside.up.model.UpStationEntity">
+		insert into t_up_station
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,<!-- 主键 -->
+			up_id,<!-- 视频作者id -->
+			<if test="homeId != null">home_id,</if><!-- 个人主页地址 -->
+			<if test="homeUrl != null">home_url,</if><!-- 个人主页地址 -->
+			<if test="name != null">name,</if><!-- 名称 -->
+			<if test="upIntroduction != null">up_introduction,</if><!-- 简介 -->
+			<if test="upAvatar != null">up_avatar,</if><!-- 头像 -->
+			<if test="upVideoCount != null">up_video_count,</if><!-- 视频数量 -->
+			<if test="upFansCount != null">up_fans_count,</if><!-- 粉丝数量 -->
+			<if test="upFriendCount != null">up_friend_count,</if><!-- 关注数量 -->
+			<if test="upPlayCount != null">up_play_count,</if><!-- 播放数量 -->
+			<if test="station != null and station.value != null">station,</if><!-- 所属站点 -->
+			<if test="thirdParty != null and thirdParty.value != null">third_party,</if><!-- 所属第三方 -->
+			status,<!-- 状态 -->
+			create_time,<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},<!-- 主键 -->
+			#{up.id},<!-- 视频作者id -->
+			<if test="homeId != null">#{homeId},</if><!-- 个人主页地址 -->
+			<if test="homeUrl != null">#{homeUrl},</if><!-- 个人主页地址 -->
+			<if test="name != null">#{name},</if><!-- 名称 -->
+			<if test="upIntroduction != null">#{upIntroduction},</if><!-- 简介 -->
+			<if test="upAvatar != null">#{upAvatar},</if><!-- 头像 -->
+			<if test="upVideoCount != null">#{upVideoCount},</if><!-- 视频数量 -->
+			<if test="upFansCount != null">#{upFansCount},</if><!-- 粉丝数量 -->
+			<if test="upFriendCount != null">#{upFriendCount},</if><!-- 关注数量 -->
+			<if test="upPlayCount != null">#{upPlayCount},</if><!-- 播放数量 -->
+			<if test="station != null and station.value != null">#{station.value},</if><!-- 所属站点 -->
+			<if test="thirdParty != null and thirdParty.value != null">#{thirdParty.value},</if><!-- 所属第三方 -->
+			#{status.value},<!-- 状态 -->
+			#{createTime},<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者id -->
+		</trim>
+	</insert>
+
+	<!-- 根据ID更新t_up_station -->
+	<update id="updateById" parameterType="com.webside.up.model.UpStationEntity">
+		update t_up_station
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="up != null and up.id != null">up_id=#{up.id},</if><!-- 视频作者id -->
+			<if test="homeId != null">home_id=#{homeId},</if><!-- 个人主页地址 -->
+			<if test="homeUrl != null">home_url=#{homeUrl},</if><!-- 个人主页地址 -->
+			<if test="name != null and name != ''">name=#{name},</if><!-- 名称 -->
+			<if test="upIntroduction != null">up_introduction=#{upIntroduction},</if><!-- 简介 -->
+			<if test="upAvatar != null">up_avatar=#{upAvatar},</if><!-- 头像 -->
+			<if test="upVideoCount != null">up_video_count=#{upVideoCount},</if><!-- 视频数量 -->
+			<if test="upFansCount != null">up_fans_count=#{upFansCount},</if><!-- 粉丝数量 -->
+			<if test="upFriendCount != null">up_friend_count=#{upFriendCount},</if><!-- 关注数量 -->
+			<if test="upPlayCount != null">up_play_count=#{upPlayCount},</if><!-- 播放数量 -->
+			<if test="station != null and station.value != null">station=#{station.value},</if><!-- 所属站点 -->
+			<if test="thirdParty != null and thirdParty.value != null">third_party=#{thirdParty.value},</if><!-- 所属第三方 -->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where id = #{id}
+	</update>
+
+	<!-- 批量修改视频作者站点的状态 -->
+	<update id="updateStatusBatchById" parameterType="map">
+		update t_up_station
+		<trim prefix="SET" suffixOverrides=",">
+			status=#{statusValue},<!-- 状态 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+		</trim>
+		<![CDATA[  
+       		where id in 
+    	]]>
+		<foreach collection="ids" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+
+	<!-- 批量修改视频作者站点的视频作者 -->
+	<update id="updateUpIdBatchById" parameterType="map">
+		update t_up_station
+		<trim prefix="SET" suffixOverrides=",">
+			up_id = #{upId},<!-- 视频作者id -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+		</trim>
+		<![CDATA[  
+       		where id in 
+    	]]>
+		<foreach collection="ids" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+
+	<!-- 根据ID删除t_up_station -->
+	<delete id="deleteById" parameterType="String">
+		delete from t_up_station
+		where id = #{id}
+	</delete>
+
+	<!-- 根据ID批量删除t_up_station -->
+	<delete id="deleteBatchById" parameterType="list">
+		<![CDATA[  
+       delete from t_up_station where id in  
+    	]]>
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 根据entity删除t_up_station -->
+	<delete id="deleteByEntity" parameterType="com.webside.up.model.UpStationEntity">
+		delete from t_up_station
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="up != null and up.Id != null and up.Id != ''">
+				AND up_id=#{up.id}
+			</if>
+		</trim>
+	</delete>
+</mapper>

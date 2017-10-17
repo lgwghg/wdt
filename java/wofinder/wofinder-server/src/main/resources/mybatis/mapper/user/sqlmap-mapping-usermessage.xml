@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.user.message.mapper.UserMessageMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- t_user_message字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 唯一标识-->
+			user_id AS "userId", <!-- 用户ID-->
+			business_type AS "businessType", <!-- 业务类型 1:评论-->
+			business_id AS "businessId", <!-- 业务ID-->
+			content AS "content", <!-- 消息描述-->
+			state AS "state", <!-- 阅读状态 1：已读，0：未读-->
+			is_deleted AS "isDeleted", <!-- 默认0     1：已删除   0：正常-->
+			create_time AS "createTime", <!-- 消息创建时间-->
+			update_time AS "updateTime", <!-- 更新已读状态时，更新时间-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_user_message分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.user.message.model.UserMessageEntity" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_message 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="businessType != null and businessType != ''">
+				AND business_type=#{businessType}
+			</if>
+			<if test="businessId != null and businessId != ''">
+				AND business_id=#{businessId}
+			</if>
+			<if test="content != null and content != ''">
+				AND content=#{content}
+			</if>
+			<if test="state != null and state != ''">
+				AND state=#{state}
+			</if>
+			<if test="isDeleted != null and isDeleted != ''">
+				AND is_deleted=#{isDeleted}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND update_time=#{updateTime}
+			</if>
+		</trim>
+	</select>
+	<sql id="sql_queryUserMessageListByPg" >
+		select null videoCover,null videoId, null id,h.ID businessId,h.title CONTENT,0 count, 0 type 
+		from t_sys_help h left join t_user_message m on h.id=m.business_id and m.user_id = #{userId}
+		where m.id is null and h.type=3 and h.add_time >= #{createTime}
+		
+		union
+		select null videoCover,null videoId,m.id id, m.business_id businessId,m.CONTENT,0 count, 1 type 
+		from t_user_message m 
+		where m.BUSINESS_TYPE=2 and m.state = 0
+		and m.user_id = #{userId}
+		and m.create_time >= #{createTime}
+		
+		UNION
+		select v.cover videoCover,v.short_id videoId,null id,null businessId,'' CONTENT,COUNT(v.id) count, 2 type
+		from t_user_message t 
+		JOIN t_video_comment vc on vc.id = t.BUSINESS_ID
+		JOIN t_video v on v.id = vc.video_id
+		where 1=1 AND t.USER_ID = #{userId} and t.STATE = 0
+		GROUP BY v.id,v.cover
+	</sql>
+	<select id="queryUserMessageListByPg" parameterType="Map" resultType="com.webside.user.message.model.MessageVo">
+		<include refid="sql_queryUserMessageListByPg"></include>
+	</select>
+	
+	<select id="queryUserMessageListByPgCount" parameterType="Map" resultType="Integer">
+		select count(*) from (
+			<include refid="sql_queryUserMessageListByPg"></include> 
+		) a
+	</select>
+	<!-- 新增t_user_message -->
+	<insert id="insert" 
+			parameterType="com.webside.user.message.model.UserMessageEntity" flushCache="true">
+		insert into t_user_message
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 唯一标识-->
+		<if test="userId != null">user_id,</if><!-- 用户ID-->
+		<if test="businessType != null">business_type,</if><!-- 业务类型 1:评论-->
+		<if test="businessId != null">business_id,</if><!-- 业务ID-->
+		<if test="content != null">content,</if><!-- 消息描述-->
+		<if test="state != null">state,</if><!-- 阅读状态 1：已读，0：未读-->
+		<if test="isDeleted != null">is_deleted,</if><!-- 默认0     1：已删除   0：正常-->
+		<if test="createTime != null">create_time,</if><!-- 消息创建时间-->
+		<if test="updateTime != null">update_time,</if><!-- 更新已读状态时，更新时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 唯一标识-->
+		<if test="userId != null">#{userId},</if><!-- 用户ID-->
+		<if test="businessType != null">#{businessType},</if><!-- 业务类型 1:评论-->
+		<if test="businessId != null">#{businessId},</if><!-- 业务ID-->
+		<if test="content != null">#{content},</if><!-- 消息描述-->
+		<if test="state != null">#{state},</if><!-- 阅读状态 1：已读，0：未读-->
+		<if test="isDeleted != null">#{isDeleted},</if><!-- 默认0     1：已删除   0：正常-->
+		<if test="createTime != null">#{createTime},</if><!-- 消息创建时间-->
+		<if test="updateTime != null">#{updateTime},</if><!-- 更新已读状态时，更新时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_user_message -->
+	<select id="findById" resultType="com.webside.user.message.model.UserMessageEntity" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_message 
+		where id = #{id}
+	</select>
+	
+	<!-- 根据ID更新t_user_message -->
+	<update id="updateById" parameterType="com.webside.user.message.model.UserMessageEntity" flushCache="true">
+		update t_user_message
+		<trim prefix="SET" suffixOverrides=",">  
+			<if test="userId != null">user_id=#{userId},</if><!-- 用户ID-->
+			<if test="businessType != null">business_type=#{businessType},</if><!-- 业务类型 1:评论-->
+			<if test="businessId != null">business_id=#{businessId},</if><!-- 业务ID-->
+			<if test="content != null">content=#{content},</if><!-- 消息描述-->
+			<if test="state != null">state=#{state},</if><!-- 阅读状态 1：已读，0：未读-->
+			<if test="isDeleted != null">is_deleted=#{isDeleted},</if><!-- 默认0     1：已删除   0：正常-->
+			<if test="createTime != null">create_time=#{createTime},</if><!-- 消息创建时间-->
+			<if test="updateTime != null">update_time=#{updateTime},</if><!-- 更新已读状态时，更新时间-->
+		</trim>
+		where id = #{id}
+	</update>
+	<select id="queryMessageIdListByVidAndUId" parameterType="Map" resultType="String">
+		select t.id
+		from t_user_message t 
+		LEFT JOIN t_video_comment vc on vc.id = t.BUSINESS_ID
+		LEFT JOIN t_video v on v.id = vc.video_id
+		where 1=1 AND t.USER_ID = #{userId} and t.STATE = 0 and v.short_id =#{videoId}
+	</select>
+	<update id="updateMessageStateByBusinessId" parameterType="Map">
+		update t_user_message
+		set state = 1,update_time=#{updateTime}
+		where id in 
+		<foreach collection="idList" open="(" close=")" item="id" separator="," >
+			#{id}
+		</foreach>
+	</update>
+	<!-- 根据ID删除t_user_message -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_user_message 
+		where id = #{id}
+	</delete>
+</mapper>

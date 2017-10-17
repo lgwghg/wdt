@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.video.mapper.VideoCommentLikeMapper">
+
+	<!-- t_video_comment_like字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 点赞-->
+			user_id AS "userId", <!-- 点赞人-->
+			comment_id AS "commentId", <!-- 评论 t_video_comment-->
+			create_time AS "createTime", <!-- 创建时间-->
+			status AS "status", <!-- 状态，1有效，0无效-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_video_comment_like分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.video.model.VideoCommentLikeEntity">
+		select  
+			<include refid="columnList"/>
+		from t_video_comment_like 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="commentId != null and commentId != ''">
+				AND comment_id=#{commentId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+			<if test="status != null and status != ''">
+				AND status=#{status}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_video_comment_like -->
+	<insert id="insert" 
+			parameterType="com.webside.video.model.VideoCommentLikeEntity">
+		insert into t_video_comment_like
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 点赞-->
+		<if test="userId != null">user_id,</if><!-- 点赞人-->
+		<if test="commentId != null">comment_id,</if><!-- 评论 t_video_comment-->
+		<if test="createTime != null">create_time,</if><!-- 创建时间-->
+		<if test="status != null">status,</if><!-- 状态，1有效，0无效-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 点赞-->
+		<if test="userId != null">#{userId},</if><!-- 点赞人-->
+		<if test="commentId != null">#{commentId},</if><!-- 评论 t_video_comment-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		<if test="status != null">#{status},</if><!-- 状态，1有效，0无效-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_video_comment_like -->
+	<select id="findById" resultType="com.webside.video.model.VideoCommentLikeEntity" parameterType="String">
+		select  
+			<include refid="columnList"/>
+		from t_video_comment_like 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_video_comment_like -->
+	<update id="updateById" parameterType="com.webside.video.model.VideoCommentLikeEntity">
+		update t_video_comment_like
+		<trim prefix="SET" suffixOverrides=",">  
+			<if test="userId != null">user_id=#{userId},</if><!-- 点赞人-->
+			<if test="commentId != null">comment_id=#{commentId},</if><!-- 评论 t_video_comment-->
+			<if test="createTime != null">create_time=#{createTime},</if><!-- 创建时间-->
+			<if test="status != null">status=#{status},</if><!-- 状态，1有效，0无效-->
+		</trim>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID删除t_video_comment_like -->
+	<delete id="deleteById" parameterType="String">
+		delete from t_video_comment_like 
+		where id = #{id}
+	</delete>
+</mapper>

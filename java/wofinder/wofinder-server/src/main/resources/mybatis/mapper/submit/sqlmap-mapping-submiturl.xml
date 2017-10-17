@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.submit.mapper.SubmitUrlMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- t_submit_url字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 主键-->
+			sk_id AS "submitKeyword.id", <!-- 提交搜索关键字id-->
+			url AS "url", <!-- url-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_submit_url分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.submit.model.SubmitUrlEntity" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_submit_url 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="skId != null and skId != ''">
+				AND sk_id=#{skId}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_submit_url -->
+	<insert id="insert" 
+			parameterType="com.webside.submit.model.SubmitUrlEntity" flushCache="true">
+		insert into t_submit_url
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		id,<!-- 主键-->
+		sk_id,<!-- 提交搜索关键字id-->
+		url,<!-- url-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		#{id},<!-- 主键-->
+		#{submitKeyword.id},<!-- 提交搜索关键字id-->
+		#{url},<!-- url-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_submit_url -->
+	<select id="findById" resultType="com.webside.submit.model.SubmitUrlEntity" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_submit_url 
+		where id = #{id}
+	</select>
+	
+	<!-- 根据ID更新t_submit_url -->
+	<update id="updateById" parameterType="com.webside.submit.model.SubmitUrlEntity" flushCache="true">
+		update t_submit_url
+		<trim prefix="SET" suffixOverrides=",">  
+			<if test="submitKeyword != null and submitKeyword.value != null">sk_id=#{submitKeyword.id},</if><!-- 提交搜索关键字id-->
+			<if test="url != null">url=#{url},</if><!-- url-->
+		</trim>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID删除t_submit_url -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_submit_url 
+		where id = #{id}
+	</delete>
+</mapper>

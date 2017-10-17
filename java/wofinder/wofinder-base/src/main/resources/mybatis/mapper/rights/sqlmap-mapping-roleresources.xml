@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.rights.mapper.RoleResourceMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- tb_role_resources字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- -->
+			s_id AS "sId", <!-- 资源id-->
+			r_id AS "rId", <!-- 角色id-->
+			t_create_time AS "tCreateTime", <!-- 创建时间-->
+		</trim>
+	</sql>
+	
+	<!-- 新增tb_role_resources -->
+	<insert id="insert" 
+			parameterType="com.webside.rights.model.RoleResourceEntity" flushCache="true">
+		insert into tb_role_resources
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- -->
+		<if test="resourceId != null">s_id,</if><!-- 资源id-->
+		<if test="roleId != null">r_id,</if><!-- 角色id-->
+		<if test="createTime != null">t_create_time,</if><!-- 创建时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- -->
+		<if test="resourceId != null">#{resourceId},</if><!-- 资源id-->
+		<if test="roleId != null">#{roleId},</if><!-- 角色id-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询tb_role_resources -->
+	<select id="findById" resultType="com.webside.rights.model.RoleResourceEntity" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from tb_role_resources 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新tb_role_resources -->
+	<update id="updateById" parameterType="com.webside.rights.model.RoleResourceEntity" flushCache="true">
+		update tb_role_resources
+		<trim prefix="SET" suffixOverrides=",">  
+			<if test="resourceId != null">s_id=#{resourceId},</if><!-- 资源id-->
+			<if test="roleId != null">r_id=#{roleId},</if><!-- 角色id-->
+			<if test="createTime != null">t_create_time=#{createTime},</if><!-- 创建时间-->
+		</trim>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID删除tb_role_resources -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from tb_role_resources 
+		where id = #{id}
+	</delete>
+	
+	<!-- 根据roleId删除tb_role_resources -->
+	<delete id="deleteByRoleId" parameterType="String" flushCache="true">
+       delete from tb_role_resources where r_id = #{roleId}   
+	</delete>
+	
+	<!-- 根据resourceId删除tb_role_resources -->
+	<delete id="deleteByResourceId" parameterType="String" flushCache="true">
+       delete from tb_role_resources where s_id = #{resourceId}
+	</delete>
+	
+	<!-- 根据roleId获取tb_role_resources数量 -->
+	<select id="findCountByRoleId" parameterType="String" resultType="int" >
+		SELECT count(*)
+		FROM tb_role_resources
+		where r_id = #{roleId}
+	</select>
+	
+	<!-- 批量新增tb_role_resources -->
+	<insert id="insertByBatch" parameterType="com.webside.rights.model.RoleResourceEntity" >
+		insert into tb_role_resources (
+			id,
+			s_id,
+			r_id,
+			t_create_time
+		)   
+		values 
+		<foreach collection="list" item="list" index="index" separator=";">
+			(
+				#{list.id},
+				#{list.resourceId},
+				#{list.roleId},
+				now()
+			)
+		</foreach>
+	</insert>
+</mapper>

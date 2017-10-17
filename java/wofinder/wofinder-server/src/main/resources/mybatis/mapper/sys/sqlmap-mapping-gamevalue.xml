@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.sys.mapper.GameValueMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache" />
+
+	<!-- t_sys_game_value字段列表 -->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			t.id AS "id", <!-- 主键 -->
+			t.game_id AS "game.id", <!-- 游戏id -->
+			g.name AS "game.name", <!-- 关联：游戏名称 -->
+			t.value_id AS "value.id", <!-- 属性值id -->
+			v.name AS "value.name", <!-- 关联：属性值名称 -->
+			t.status AS "status.value", <!-- 状态 -->
+			t.create_id AS "createUser.id", <!-- 创建者id -->
+			t.create_time AS "createTime", <!-- 创建时间 -->
+			t.update_id AS "updateUser.id", <!-- 修改者id -->
+			t.update_time AS "updateTime", <!-- 修改时间 -->
+		</trim>
+	</sql>
+
+	<sql id="tableJoins">
+		LEFT JOIN t_sys_game g ON g.id = t.game_id
+		LEFT JOIN t_sys_value v ON v.id = t.value_id
+	</sql>
+
+	<!-- 查询t_sys_game_value分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.sys.model.GameValueEntity" flushCache="false" useCache="true">
+		select
+		<include refid="columnList" />
+		from t_sys_game_value t
+		<include refid="tableJoins" />
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="gameId != null and gameId != ''">
+				AND t.game_id=#{gameId}
+			</if>
+			<if test="valueId != null and valueId != ''">
+				AND t.value_id=#{valueId}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND t.status=#{statusValue}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据entity查询t_sys_game_value -->
+	<select id="queryListByEntity" resultType="com.webside.sys.model.GameValueEntity" parameterType="com.webside.sys.model.GameValueEntity" flushCache="false" useCache="true">
+		select
+		<include refid="columnList" />
+		from t_sys_game_value t
+		<include refid="tableJoins" />
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="game != null and game.id != null and game.id != ''">
+				AND t.game_id = #{game.id}
+			</if>
+			<if test="value != null and value.id != null and value.id != ''">
+				AND t.value_id = #{value.id}
+			</if>
+			<if test="id != null and id != ''">
+				AND t.id != #{id}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据ID查询t_sys_game_value -->
+	<select id="findById" resultType="com.webside.sys.model.GameValueEntity" parameterType="String" flushCache="false" useCache="true">
+		select
+		<include refid="columnList" />
+		from t_sys_game_value t
+		<include refid="tableJoins" />
+		where t.id = #{id}
+	</select>
+
+	<!-- 新增t_sys_game_value -->
+	<insert id="insert" parameterType="com.webside.sys.model.GameValueEntity" flushCache="true">
+		insert into t_sys_game_value
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,<!-- 主键 -->
+			game_id,<!-- 游戏id -->
+			value_id,<!-- 属性值id -->
+			status,<!-- 状态 -->
+			create_time,<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},<!-- 主键 -->
+			#{game.id},<!-- 游戏id -->
+			#{value.id},<!-- 属性值id -->
+			#{status.value},<!-- 状态 -->
+			#{createTime},<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者id -->
+		</trim>
+	</insert>
+
+	<!-- 根据ID更新t_sys_game_value -->
+	<update id="updateById" parameterType="com.webside.sys.model.GameValueEntity" flushCache="true">
+		update t_sys_game_value
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="game != null and game.id != null">game_id=#{game.id},</if><!-- 游戏id -->
+			<if test="value != null and value.id != null">value_id=#{value.id},</if><!-- 属性值id -->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where id = #{id}
+	</update>
+
+	<!-- 根据ID删除t_sys_game_value -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_sys_game_value
+		where id = #{id}
+	</delete>
+
+	<!-- 根据entity删除t_sys_game_value -->
+	<delete id="deleteByEntity" parameterType="com.webside.sys.model.GameValueEntity" flushCache="true">
+		delete from t_sys_game_value
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="game != null and game.id != null and game.id != ''">
+				AND game_id=#{game.id}
+			</if>
+			<if test="value != null and value.id != null and value.id != ''">
+				AND value_id=#{value.id}
+			</if>
+		</trim>
+	</delete>
+</mapper>

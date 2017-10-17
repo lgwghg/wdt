@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.video.mapper.VideoMapper">
+
+	<!-- t_video字段列表 -->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			t.id AS "id", <!-- 主键 -->
+			t.short_id AS "shortId", <!-- 主键 -->
+			t.title AS "title", <!-- 视频标题 -->
+			t.cover AS "cover", <!-- 视频封面 -->
+			t.duration AS "duration", <!-- 视频时长 -->
+			t.score AS "score", <!-- 评分 -->
+			t.game_id AS "game.id", <!-- 所属游戏 -->
+			t.album_id AS "album.id", <!-- 专辑id -->
+			t.album_index AS "albumIndex", <!-- 当前集数 -->
+			t.status AS "status.value", <!-- 状态 -->
+			t.create_id AS "createUser.id", <!-- 创建者id -->
+			t.create_time AS "createTime", <!-- 创建时间 -->
+			t.update_id AS "updateUser.id", <!-- 修改者id -->
+			t.update_time AS "updateTime", <!-- 修改时间 -->
+		</trim>
+	</sql>
+
+	<!-- 查询t_video分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.video.model.VideoEntity">
+		select
+		<include refid="columnList" />
+		from t_video t
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="title != null and title != ''">
+				AND lower(trim(title)) = lower(trim(#{title}))
+			</if>
+			<if test="shortId != null and shortId != ''">
+				AND short_id=#{shortId}
+			</if>
+			<if test="gameId != null and gameId != ''">
+				AND game_id=#{gameId}
+			</if>
+			<if test="albumId != null and albumId != ''">
+				AND album_id=#{albumId}
+			</if>
+			<if test="albumIndex != null and albumIndex != ''">
+				AND album_index=#{albumIndex}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+			<if test="emptyShort != null and emptyShort != ''">
+				AND short_id is null
+			</if>
+			<if test="noSearch != null and noSearch != ''">
+				AND 1 = 2
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据entity查询t_video -->
+	<select id="queryListByEntity" resultType="com.webside.video.model.VideoEntity" parameterType="com.webside.video.model.VideoEntity">
+		select
+		<include refid="columnList" />
+		from t_video t
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+				AND status = 1 
+			<if test="album != null and album.id != null and album.id != ''">
+				AND album_id=#{album.id}
+			</if>
+			<if test="albumIndex != null and albumIndex != ''">
+				AND album_index=#{albumIndex}
+			</if>
+			<if test="id != null and id != ''">
+				AND id != #{id}
+			</if>
+			<if test="title != null and title != ''">
+				AND title = #{title}
+			</if>
+		</trim>
+	</select>
+	<select id="queryUpRelateVideoPgByUp" parameterType="Map" resultType="com.webside.video.model.VideoEntity">
+		select
+			DISTINCT t.id AS "id", <!-- 主键 -->
+			t.short_id AS "shortId", <!-- 短id -->
+			t.title AS "title", <!-- 视频标题 -->
+			t.cover AS "cover", <!-- 视频封面 -->
+			t.duration AS "duration", <!-- 视频时长 -->
+			t.score AS "score"<!-- 评分 -->
+		from t_video t inner join t_video_station s on t.id=s.video_id
+		where (<!-- instr(t.title,#{title})> 0 or 数据量大，太耗时--> s.up_id=#{upId})
+		and t.status = 1
+		order by t.score desc
+	</select>
+	<!-- 查询热门视频数条 -->
+	<select id="queryHotVideo" parameterType="Integer" resultType="com.webside.video.model.VideoEntity">
+		select
+		<include refid="columnList" />
+		from t_video t
+		where t.status = 1
+		order by t.score desc
+		limit #{count}
+	</select>
+	<!-- 根据ID查询t_video -->
+	<select id="findById" resultType="com.webside.video.model.VideoEntity" parameterType="String">
+		select
+		<include refid="columnList" />
+		from t_video t
+		where id = #{id}
+	</select>
+	
+	<!-- 根据ID批量查询t_video -->
+	<select id="queryListBatchById" resultType="com.webside.video.model.VideoEntity" parameterType="list">
+		select
+		<include refid="columnList" />
+		from t_video t
+		where id in  
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</select>
+	
+	<!-- 新增t_video -->
+	<insert id="insert" parameterType="com.webside.video.model.VideoEntity">
+		insert into t_video
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,<!-- 主键 -->
+			<if test="shortId != null">short_id,</if><!-- 视频封面 -->
+			title,<!-- 视频标题 -->
+			<if test="cover != null">cover,</if><!-- 视频封面 -->
+			<if test="duration != null">duration,</if><!-- 视频时长 -->
+			<if test="score != null">score,</if><!-- 评分 -->
+			<if test="game != null and game.id != null">game_id,</if><!-- 所属游戏 -->
+			<if test="album != null and album.id != null">album_id,</if><!-- 专辑id -->
+			<if test="albumIndex != null">album_index,</if><!-- 当前集数 -->
+			status,<!-- 状态 -->
+			create_time,<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},<!-- 主键 -->
+			<if test="shortId != null">#{shortId},</if><!-- 视频时长 -->
+			#{title},<!-- 视频标题 -->
+			<if test="cover != null">#{cover},</if><!-- 视频封面 -->
+			<if test="duration != null">#{duration},</if><!-- 视频时长 -->
+			<if test="score != null">#{score},</if><!-- 评分 -->
+			<if test="game != null and game.id != null">#{game.id},</if><!-- 所属游戏 -->
+			<if test="album != null and album.id != null">#{album.id},</if><!-- 专辑id -->
+			<if test="albumIndex != null">#{albumIndex},</if><!-- 当前集数 -->
+			#{status.value},<!-- 状态 -->
+			#{createTime},<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者id -->
+		</trim>
+	</insert>
+
+	<!-- 根据ID更新t_video -->
+	<update id="updateById" parameterType="com.webside.video.model.VideoEntity">
+		update t_video
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="shortId != null and shortId != ''">short_id=#{shortId},</if><!-- 短视频ID -->
+			<if test="title != null and title != ''">title=#{title},</if><!-- 视频标题 -->
+			<if test="cover != null">cover=#{cover},</if><!-- 视频封面 -->
+			<if test="duration != null">duration=#{duration},</if><!-- 视频时长 -->
+			<if test="score != null">score=#{score},</if><!-- 评分 -->
+			<if test="game != null and game.id != null">game_id=#{game.id},</if><!-- 所属游戏 -->
+			<if test="album != null and album.id != null">album_id=#{album.id},</if><!-- 专辑id -->
+			<if test="albumIndex != null">album_index=#{albumIndex},</if><!-- 当前集数 -->
+			<if test="status != null and status.value != null and status.value != ''">status=#{status.value},</if><!-- 状态 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where id = #{id}
+	</update>
+
+	<!-- 批量更新更新t_video -->
+	<update id="updateStatusBatchById" parameterType="map">
+		update t_video
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="statusValue != null">status=#{statusValue},</if><!-- 状态 -->
+			<if test="updateUserId != null">update_id=#{updateUserId},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where id in
+		<foreach collection="ids" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+
+	<!-- 重置符合要求的视频游戏字段 -->
+	<update id="resetGameIdByGameId" parameterType="com.webside.video.model.VideoEntity">
+		update t_video
+		<trim prefix="SET" suffixOverrides=",">
+			game_id = null,<!-- 所属游戏 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where game_id = #{game.id}
+	</update>
+
+	<!-- 重置符合要求的视频专辑字段 -->
+	<update id="resetAlbumIdByAlbumId" parameterType="String">
+		update t_video
+		<trim prefix="SET" suffixOverrides=",">
+			album_id = null,<!-- 专辑id -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where album_id = #{albumId}
+	</update>
+
+	<!-- 根据视频id修改视频的所属专辑以及集数 -->
+	<update id="updateAlbumById" parameterType="com.webside.video.model.VideoEntity">
+		update t_video
+		<trim prefix="SET" suffixOverrides=",">
+			album_id = #{album.id},<!-- 专辑id -->
+			album_index = #{albumIndex},<!-- 当前集数 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where id = #{id}
+	</update>
+
+	<!-- 根据ID删除t_video -->
+	<delete id="deleteById" parameterType="String">
+		delete from t_video
+		where id = #{id}
+	</delete>
+	
+	<update id="updateScoreById" parameterType="map">
+		UPDATE t_video t,
+		(SELECT FORMAT((IFNULL(sum(vg.score),0)+3000*#{score})/(IFNULL(COUNT(vg.id),0)+3000),1) score FROM t_video_grade vg
+		WHERE vg.video_id=#{id}) tt
+		SET t.score=tt.score
+		where id = #{id}
+	</update>
+</mapper>

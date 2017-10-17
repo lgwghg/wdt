@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.video.mapper.VideoCommentMapper">
+
+	<!-- t_video_comment字段列表 -->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			t.id AS "id", <!-- 主键 -->
+			t.video_id AS "video.id", <!-- 视频id -->
+			t.c_id AS "commentId", <!-- 评论id -->
+			t.c_content AS "commentContent", <!-- 评论内容 -->
+			t.c_createtime AS "commentCreatetime", <!-- 评论时间 -->
+			t.c_user_id AS "commentUserId", <!-- 评论者id -->
+			t.c_user_name AS "commentUserName", <!-- 评论者昵称 -->
+			t.c_parent_id AS "commentParent.commentId", <!-- 父级评论id -->
+			t.station AS "station.value", <!-- 所属站点 -->
+			t.status AS "status.value", <!-- 状态 -->
+			t.create_id AS "createUser.id", <!-- 创建者id -->
+			t.create_time AS "createTime", <!-- 创建时间 -->
+			t.update_id AS "updateUser.id", <!-- 修改者id -->
+			t.update_time AS "updateTime", <!-- 修改时间 -->
+			t.like_num AS "likeNum",
+		</trim>
+	</sql>
+
+	<!-- 查询t_video_comment分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.video.model.VideoCommentEntity">
+		select
+		<include refid="columnList" />
+		from t_video_comment t
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="videoId != null and videoId != ''">
+				AND video_id=#{videoId}
+			</if>
+			<if test="stationValue != null and stationValue != ''">
+				AND station=#{stationValue}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据entity查询t_video_comment -->
+	<select id="queryListByEntity" resultType="com.webside.video.model.VideoCommentEntity" parameterType="com.webside.video.model.VideoCommentEntity">
+		select
+		<include refid="columnList" />
+		from t_video_comment t
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+				AND status = 1 
+			<if test="video != null and video.id != null and video.id != ''">
+				AND video_id=#{video.id}
+			</if>
+			<if test="station != null and station.value != null and station.value != ''">
+				AND station=#{station.value}
+			</if>
+			<if test="status != null and status.value!=null and status.value != ''">
+				AND status=#{status.value}
+			</if>
+			<if test="commentParent != null and commentParent.commentId != null">
+				AND c_id = #{commentParent.commentId}
+			</if>
+			<if test="commentId != null and commentId != ''">
+				AND c_id = #{commentId}
+			</if>
+			<if test="id != null and id != ''">
+				AND id != #{id}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据ID查询t_video_comment -->
+	<select id="findById" resultType="com.webside.video.model.VideoCommentEntity" parameterType="String">
+		select
+		<include refid="columnList" />
+		from t_video_comment t
+		where id = #{id}
+	</select>
+	
+	<select id="queryCountByStationVid" resultType="java.lang.Long" parameterType="map">
+		select count(c_id) from t_video_comment 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="vid != null and vid != ''">
+				AND video_id = #{vid}
+			</if>
+			<if test="station != null and station != ''">
+				AND station = #{station}
+			</if>
+			<if test='isempty != null and isempty != "" and isempty == "yes"'>
+				AND c_parent_id = '0'
+			</if>
+			<if test="pid != null and pid != '' ">
+				AND c_parent_id = #{pid}
+			</if>
+			<if test="status != null and status != ''">
+				AND status = #{status}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 根据entity查询t_video_comment数量 -->
+	<select id="countByEntity" resultType="long" parameterType="com.webside.video.model.VideoCommentEntity">
+		select count(1)
+		from t_video_comment
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="video != null and video.id != null and video.id != ''">
+				AND video_id=#{video.id}
+			</if>
+		</trim>
+	</select>
+	<select id="queryUserTodayCommentNumByUserId" parameterType="Map" resultType="Integer">
+		select count(1) from t_video_comment 
+		where c_user_id = #{userId} 
+		and create_time > #{time} 
+		and status = 1
+	</select>
+	<!-- 新增t_video_comment -->
+	<insert id="insert" parameterType="com.webside.video.model.VideoCommentEntity">
+		insert into t_video_comment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,<!-- 主键 -->
+			video_id,<!-- 视频id -->
+			<if test="commentId != null">c_id,</if><!-- 评论id -->
+			<if test="commentContent != null">c_content,</if><!-- 评论内容 -->
+			<if test="commentCreatetime != null">c_createtime,</if><!-- 评论时间 -->
+			<if test="commentUserId != null">c_user_id,</if><!-- 评论者id -->
+			<if test="commentUserName != null">c_user_name,</if><!-- 评论者昵称 -->
+			<if test="commentParent != null and commentParent.commentId != null">c_parent_id,</if><!-- 父级评论id -->
+			station,<!-- 所属站点 -->
+			status,<!-- 状态 -->
+			create_time,<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},<!-- 主键 -->
+			#{video.id},<!-- 视频id -->
+			<if test="commentId != null">#{commentId},</if><!-- 评论id -->
+			<if test="commentContent != null">#{commentContent},</if><!-- 评论内容 -->
+			<if test="commentCreatetime != null">#{commentCreatetime},</if><!-- 评论时间 -->
+			<if test="commentUserId != null">#{commentUserId},</if><!-- 评论者id -->
+			<if test="commentUserName != null">#{commentUserName},</if><!-- 评论者昵称 -->
+			<if test="commentParent != null and commentParent.commentId != null">#{commentParent.commentId},</if><!-- 父级评论id -->
+			#{station.value},<!-- 所属站点 -->
+			#{status.value},<!-- 状态 -->
+			#{createTime},<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者id -->
+		</trim>
+	</insert>
+
+	<!-- 根据ID更新t_video_comment -->
+	<update id="updateById" parameterType="com.webside.video.model.VideoCommentEntity">
+		update t_video_comment
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="video != null and video.id != null">video_id=#{video.id},</if><!-- 视频id -->
+			c_id=#{commentId},<!-- 评论id -->
+			c_content=#{commentContent},<!-- 评论内容 -->
+			c_createtime=#{commentCreatetime},<!-- 评论时间 -->
+			c_user_id=#{commentUserId},<!-- 评论者id -->
+			c_user_name=#{commentUserName},<!-- 评论者昵称 -->
+			c_parent_id=#{commentParent.commentId},<!-- 父级评论id -->
+			<if test="station != null and station.value != null">station=#{station.value},</if><!-- 所属站点 -->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			like_num = #{likeNum},
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where id = #{id}
+	</update>
+
+	<!-- 批量修改视频评论的视频 -->
+	<update id="updateVideoIdByIds" parameterType="map">
+		update t_video_comment
+		<trim prefix="SET" suffixOverrides=",">
+			video_id = #{videoId},<!-- 视频id -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+			<if test="updateUserId != null">update_id=#{updateUserId},</if><!-- 修改者 -->
+		</trim>
+		<![CDATA[  
+       		where id in 
+    	]]>
+		<foreach collection="ids" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+	<!-- 批量将视频评论移动到另外个视频下 -->
+	<update id="updateVideoIdByVid" parameterType="map">
+		update t_video_comment
+		<trim prefix="SET" suffixOverrides=",">
+			video_id = #{videoId},<!-- 视频id -->
+			update_time=#{updateTime} <!-- 修改时间 -->
+			<if test="updateUserId != null">update_id=#{updateUserId},</if><!-- 修改者 -->
+		</trim>
+		where video_id = #{oldVideoId} 
+		
+	</update>
+	
+
+	<!-- 根据ID删除t_video_comment -->
+	<delete id="deleteById" parameterType="String">
+		delete from t_video_comment
+		where id = #{id}
+	</delete>
+
+	<!-- 根据ID批量删除t_video_comment -->
+	<delete id="deleteBatchById" parameterType="list">
+		<![CDATA[  
+       delete from t_video_comment where id in  
+    	]]>
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<!-- 根据entity删除t_video_comment -->
+	<delete id="deleteByEntity" parameterType="com.webside.video.model.VideoCommentEntity">
+		delete from t_video_comment
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="video != null and video.id != null and video.id != ''">
+				AND video_id=#{video.id}
+			</if>
+		</trim>
+	</delete>
+	
+	
+	<select id="queryListForLike" parameterType="map" resultType="com.webside.video.model.VideoCommentEntity">
+		select
+		<include refid="columnList" />,vcl.status as "likeStatus"
+		from t_video_comment t
+		LEFT JOIN t_video_comment_like vcl on vcl.comment_id = t.id AND vcl.user_id=#{userId}
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="videoId != null and videoId != ''">
+				AND t.video_id=#{videoId}
+			</if>
+			<if test="stationValue != null and stationValue != ''">
+				AND t.station=#{stationValue}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND t.status=#{statusValue}
+			</if>
+		</trim>
+	</select>
+	
+</mapper>

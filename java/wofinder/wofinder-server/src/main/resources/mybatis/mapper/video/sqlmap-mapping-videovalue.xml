@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.video.mapper.VideoValueMapper">
+
+	<!-- t_video_value字段列表 -->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 主键 -->
+			video_id AS "video.id", <!-- 视频id -->
+			value_id AS "value.id", <!-- 属性值id -->
+			status AS "status.value", <!-- 状态 -->
+			create_id AS "createUser.id", <!-- 创建者id -->
+			create_time AS "createTime", <!-- 创建时间 -->
+			update_id AS "updateUser.id", <!-- 修改者id -->
+			update_time AS "updateTime", <!-- 修改时间 -->
+			up_num as "upNum",
+			inform_status as "informStatus",
+		</trim>
+	</sql>
+
+	<!-- 查询t_video_value分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.video.model.VideoValueEntity">
+		select
+		<include refid="columnList" />
+		from t_video_value
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="videoId != null and videoId != ''">
+				AND video_id=#{videoId}
+			</if>
+			<if test="valueId != null and valueId != ''">
+				AND value_id=#{valueId}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+			<if test="informStatus != null and informStatus != ''">
+				AND inform_status=#{informStatus}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据entity查询t_video_value -->
+	<select id="queryListByEntity" resultType="com.webside.video.model.VideoValueEntity" parameterType="com.webside.video.model.VideoValueEntity">
+		select
+		<include refid="columnList" />
+		from t_video_value
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+				AND status = 1 
+			<if test="video != null and video.Id != null and video.Id != ''">
+				AND video_id=#{video.id}
+			</if>
+			<if test="value != null and value.id != null and value.id != ''">
+				AND value_id=#{value.id}
+			</if>
+			<if test="id != null and id != ''">
+				AND id != #{id}
+			</if>
+			<if test="informStatus != null and informStatus != ''">
+				AND inform_status=#{informStatus}
+			</if>
+		</trim>
+		order by up_num desc
+	</select>
+
+	<!-- 根据ID查询t_video_value -->
+	<select id="findById" resultType="com.webside.video.model.VideoValueEntity" parameterType="String">
+		select
+		<include refid="columnList" />
+		from t_video_value
+		where id = #{id} and status = 1
+	</select>
+	
+	<select id="findAllStatusById" resultType="com.webside.video.model.VideoValueEntity" parameterType="String">
+		select
+		<include refid="columnList" />
+		from t_video_value
+		where id = #{id}
+	</select>
+	
+	<!-- 查询videoId 和 targetId 之间的差异 -->
+	<select id="findIdByVideoForDif" resultType="java.lang.String" parameterType="map">
+		select t1.id from t_video_value t1  WHERE NOT EXISTS(
+			select 1 from t_video_value t2 WHERE t2.video_id = #{videoId} AND t1.value_id = t2.value_id
+		)
+		AND t1.video_id = #{targetId}
+		AND t1.`status`=1
+	</select>
+
+	<!-- 新增t_video_value -->
+	<insert id="insert" parameterType="com.webside.video.model.VideoValueEntity">
+		insert into t_video_value
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,<!-- 主键 -->
+			video_id,<!-- 视频id -->
+			value_id,<!-- 属性值id -->
+			status,<!-- 状态 -->
+			create_time,<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},<!-- 主键 -->
+			#{video.id},<!-- 视频id -->
+			#{value.id},<!-- 属性值id -->
+			#{status.value},<!-- 状态 -->
+			#{createTime},<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者id -->
+		</trim>
+	</insert>
+
+	<!-- 根据ID更新t_video_value -->
+	<update id="updateById" parameterType="com.webside.video.model.VideoValueEntity">
+		update t_video_value
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="video != null and video.id != null">video_id=#{video.id},</if><!-- 视频id -->
+			<if test="value != null and value.id != null">value_id=#{value.id},</if><!-- 属性值id -->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态 -->
+			<if test="informStatus != null and informStatus != null">inform_status=#{informStatus},</if><!-- 举报状态 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			<if test="upNum != null">up_num=#{upNum},</if>
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where id = #{id}
+	</update>
+
+	<!-- 批量修改视频属性值关联的视频 -->
+	<update id="updateVideoIdBatchById" parameterType="map">
+		update t_video_value
+		<trim prefix="SET" suffixOverrides=",">
+			video_id = #{videoId},<!-- 视频id -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+			<if test="updateUserId != null">update_id=#{updateUserId},</if><!-- 修改者 -->
+		</trim>
+		<![CDATA[  
+       		where id in 
+    	]]>
+		<foreach collection="ids" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+
+	<!-- 根据ID删除t_video_value -->
+	<delete id="deleteById" parameterType="String">
+		delete from t_video_value
+		where id = #{id}
+	</delete>
+
+	<!-- 根据ID批量删除t_video_value -->
+	<delete id="deleteBatchById" parameterType="list">
+		<![CDATA[  
+       delete from t_video_value where id in  
+    	]]>
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<!-- 根据entity删除t_video_value -->
+	<delete id="deleteByEntity" parameterType="com.webside.video.model.VideoValueEntity">
+		delete from t_video_value
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="video != null and video.Id != null and video.Id != ''">
+				AND video_id=#{video.id}
+			</if>
+			<if test="value != null and value.id != null and value.id != ''">
+				AND value_id=#{value.id}
+			</if>
+		</trim>
+	</delete>
+</mapper>

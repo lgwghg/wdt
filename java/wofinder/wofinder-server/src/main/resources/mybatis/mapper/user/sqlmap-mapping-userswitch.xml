@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.user.uswitch.mapper.IUserSwitchMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.user.uswitch.model.UserSwitch">
+		<id column="id" property="id"/> <!-- -->
+		<result column="user_id" property="userId"/> <!-- -->
+		<result column="switch_type" property="switchType"/> <!-- -->
+		<result column="value" property="value"/> <!-- -->
+		<result column="create_time" property="createTime"/> <!-- -->
+		<result column="update_time" property="updateTime"/> <!-- -->
+	</resultMap>
+	
+	<!-- t_user_switch字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- -->
+			user_id, <!-- -->
+			switch_type, <!-- -->
+			value, <!-- -->
+			create_time, <!-- -->
+			update_time, <!-- -->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_user_switch分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_switch 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="switchType != null and switchType != ''">
+				AND switch_type=#{switchType}
+			</if>
+			<if test="value != null and value != ''">
+				AND value=#{value}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND update_time=#{updateTime}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_user_switch -->
+	<insert id="insert" 
+			useGeneratedKeys="true" 
+			keyProperty="id"
+			parameterType="com.webside.user.uswitch.model.UserSwitch">
+		insert into t_user_switch
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="userId != null">user_id,</if><!-- -->
+		<if test="switchType != null">switch_type,</if><!-- -->
+		<if test="value != null">value,</if><!-- -->
+		<if test="createTime != null">create_time,</if><!-- -->
+		<if test="updateTime != null">update_time,</if><!-- -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="userId != null">#{userId},</if><!-- -->
+		<if test="switchType != null">#{switchType},</if><!-- -->
+		<if test="value != null">#{value},</if><!-- -->
+		<if test="createTime != null">#{createTime},</if><!-- -->
+		<if test="updateTime != null">#{updateTime},</if><!-- -->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_user_switch -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_switch 
+		where id = #{id}
+	</select>
+	<select id="queryUserSwitchByUserId" parameterType="String" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_switch 
+		where user_id = #{useId}
+	</select>
+	<!-- 更新t_user_switch -->
+	<update id="updateById" parameterType="com.webside.user.uswitch.model.UserSwitch" flushCache="true">
+		update t_user_switch
+		<set>
+			<trim suffixOverrides=",">
+				<if test="userId != null">user_id=#{userId},</if><!-- -->
+				<if test="switchType != null">switch_type=#{switchType},</if><!-- -->
+				<if test="value != null">value=#{value},</if><!-- -->
+				<if test="createTime != null">create_time=#{createTime},</if><!-- -->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- -->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_user_switch -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_user_switch  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_user_switch -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_user_switch 
+		where id = #{id}
+	</delete>
+</mapper>

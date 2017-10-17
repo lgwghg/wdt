@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.video.mapper.VideoAlbumMapper">
+
+	<!-- t_video_album字段列表 -->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 主键 -->
+			home_id AS "homeId",<!-- ID（非本站ID） -->
+			home_url AS "homeUrl",<!-- 地址 -->
+			parent_id AS "parentAlbum.id", <!-- 父级id -->
+			name AS "name", <!-- 专辑名称 -->
+			inde AS "inde", <!-- 排序集数 -->
+			cover AS "cover", <!-- 合集封面 -->
+			author AS "author", <!-- 作者名称 -->
+			update_remarks AS "updateRemarks", <!-- 更新时间备注 -->
+			introduction AS "introduction", <!-- 专辑简介 -->
+			score AS "score", <!-- 评分 -->
+			status AS "status.value", <!-- 状态 -->
+			create_id AS "createUser.id", <!-- 创建者id -->
+			create_time AS "createTime", <!-- 创建时间 -->
+			update_id AS "updateUser.id", <!-- 修改者id -->
+			update_time AS "updateTime", <!-- 修改时间 -->
+		</trim>
+	</sql>
+
+	<!-- 查询t_video_album分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.video.model.VideoAlbumEntity">
+		select
+		<include refid="columnList" />
+		from t_video_album
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">
+				AND lower(name) like concat('%',lower(#{name}),'%')
+			</if>
+			<if test="inde != null and inde != ''">
+				AND inde=#{inde}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+			<if test="parentId != null and parentId != ''">
+				AND parent_id=#{parentId}
+			</if>
+			<if test="homeId != null and homeId != ''">
+				AND home_id=#{homeId}
+			</if>
+			<if test="homeUrl != null and homeUrl != ''">
+				AND home_url=#{homeUrl}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据ID查询t_video_album -->
+	<select id="findById" resultType="com.webside.video.model.VideoAlbumEntity" parameterType="String">
+		select
+		<include refid="columnList" />
+		from t_video_album
+		where id = #{id}
+	</select>
+
+	<!-- 根据ID批量查询t_video_album -->
+	<select id="queryListBatchById" resultType="com.webside.video.model.VideoAlbumEntity" parameterType="list">
+		select
+		<include refid="columnList" />
+		from t_video_album
+		where id in
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</select>
+
+	<!-- 根据父级id查询t_video_album -->
+	<select id="queryListByParentId" resultType="com.webside.video.model.VideoAlbumEntity" parameterType="String">
+		select
+		<include refid="columnList" />
+		from t_video_album
+		where parent_id = #{parentId} order by inde desc
+	</select>
+
+	<!-- 新增t_video_album -->
+	<insert id="insert" parameterType="com.webside.video.model.VideoAlbumEntity">
+		insert into t_video_album
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,<!-- 主键 -->
+			name,<!-- 专辑名称 -->
+			<if test="parentAlbum != null and parentAlbum.id != null">parent_id,</if><!-- 父级id -->
+			<if test="inde != null">inde,</if><!-- 排序集数 -->
+			<if test="cover != null">cover,</if><!-- 合集封面 -->
+			<if test="author != null">author,</if><!-- 作者名称 -->
+			<if test="updateRemarks != null">update_remarks,</if><!-- 更新时间备注-->
+			<if test="homeId != null">home_id,</if><!-- ID（非本站ID）-->
+			<if test="homeUrl != null">home_url,</if><!-- 地址 -->
+			<if test="introduction != null">introduction,</if><!-- 专辑简介 -->
+			<if test="score != null">score,</if><!-- 评分 -->
+			status,<!-- 状态 -->
+			create_time,<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},<!-- 主键 -->
+			#{name},<!-- 专辑名称 -->
+			<if test="parentAlbum != null and parentAlbum.id != null">#{parentAlbum.id},</if><!-- 父级id -->
+			<if test="inde != null">#{inde},</if><!-- 排序集数 -->
+			<if test="cover != null">#{cover},</if><!-- 合集封面 -->
+			<if test="author != null">#{author},</if><!-- 作者名称 -->
+			<if test="updateRemarks != null">#{updateRemarks},</if><!-- 更新时间备注-->
+			<if test="homeId != null">#{homeId},</if><!-- ID（非本站ID）-->
+			<if test="homeUrl != null">#{homeUrl},</if><!-- 地址 -->
+			<if test="introduction != null">#{introduction},</if><!-- 专辑简介 -->
+			<if test="score != null">#{score},</if><!-- 评分 -->
+			#{status.value},<!-- 状态 -->
+			#{createTime},<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者id -->
+		</trim>
+	</insert>
+
+	<!-- 根据ID更新t_video_album -->
+	<update id="updateById" parameterType="com.webside.video.model.VideoAlbumEntity">
+		update t_video_album
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="name != null and name != ''">name=#{name},</if><!-- 专辑名称 -->
+			<if test="parentAlbum != null and parentAlbum.id != null">parent_id=#{parentAlbum.id},</if><!-- 父级id -->
+			<if test="inde != null">inde=#{inde},</if><!-- 排序集数 -->
+			<if test="cover != null and cover != ''">cover=#{cover},</if><!-- 合集封面 -->
+			<if test="author != null and author != ''">author=#{author},</if><!-- 作者名称 -->
+			<if test="updateRemarks != null and updateRemarks != ''">update_remarks=#{updateRemarks},</if><!-- 更新时间备注 -->
+			<if test="homeId != null and homeId != ''">home_id=#{homeId},</if><!-- ID（非本站ID）-->
+			<if test="homeUrl != null and homeUrl != ''">home_url=#{homeUrl},</if><!-- 地址 -->
+			introduction=#{introduction},<!-- 专辑简介 -->
+			<if test="score != null">score=#{score},</if><!-- 评分 -->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where id = #{id}
+	</update>
+
+	<!-- 根据ID删除t_video_album -->
+	<delete id="deleteById" parameterType="String">
+		delete from t_video_album
+		where id = #{id}
+	</delete>
+</mapper>

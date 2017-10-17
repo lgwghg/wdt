@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:solr="http://www.springframework.org/schema/data/solr"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    					   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    					   http://www.springframework.org/schema/data/solr 
+    					   http://www.springframework.org/schema/data/solr/spring-solr-2.0.xsd
+    					   http://www.springframework.org/schema/context  
+           				   http://www.springframework.org/schema/context/spring-context-4.1.xsd "
+	   default-lazy-init="true">
+
+  	<context:property-placeholder location="classpath:solr.properties" ignore-resource-not-found="true" />
+    
+ 	<!-- video -->
+  	<solr:solr-client id="videoSolrServer" url="${video.solr.host}" />
+
+  	<bean id="videoSolrTemplate" class="org.springframework.data.solr.core.SolrTemplate" scope="singleton">
+    	<constructor-arg ref="videoSolrServer" />
+  	</bean>
+  	
+  	<bean id="videoSolrSerivce" class="com.webside.data.solr.video.service.impl.VideoSolrServiceImpl">
+		<constructor-arg ref="videoSolrTemplate" />
+  	</bean>
+  	
+  	<!-- videoSuggest -->
+  	<solr:solr-client id="videoSuggestSolrServer" url="${video_suggest.solr.host}" />
+  	
+  	<bean id="videoSuggestSolrTemplate" class="org.springframework.data.solr.core.SolrTemplate" scope="singleton">
+    	<constructor-arg ref="videoSuggestSolrServer" />
+  	</bean>
+  	
+  	<bean id="videoSuggestSolrRepository" class="com.webside.data.solr.video.service.impl.VideoSuggestSolrSerivceImpl">
+		<constructor-arg ref="videoSuggestSolrTemplate" />
+  	</bean>
+  	
+  	<!-- videoAlbum -->
+  	<solr:solr-client id="videoAlbumSolrServer" url="${video_album.solr.host}" />
+  	
+  	<bean id="videoAlbumSolrTemplate" class="org.springframework.data.solr.core.SolrTemplate" scope="singleton">
+    	<constructor-arg ref="videoAlbumSolrServer" />
+  	</bean>
+  	
+  	<bean id="videoAlbumSolrRepository" class="com.webside.data.solr.video.service.impl.VideoAlbumSolrSerivceImpl">
+		<constructor-arg ref="videoAlbumSolrTemplate" />
+  	</bean>
+  	
+  	<!-- upName -->
+  	<solr:solr-client id="upNameSolrServer" url="${up_name.solr.host}" />
+  	
+  	<bean id="upNameSolrTemplate" class="org.springframework.data.solr.core.SolrTemplate" scope="singleton">
+    	<constructor-arg ref="upNameSolrServer" />
+  	</bean>
+  	
+  	<bean id="upNameSolrRepository" class="com.webside.data.solr.up.service.impl.UpNameSolrSerivceImpl">
+		<constructor-arg ref="upNameSolrTemplate" />
+  	</bean>
+  	
+</beans>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  	<display-name>wodota</display-name>
+  	
+	<!-- 默认页面 -->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	
+	
+	<!-- Shiro配置 -->
+	<!-- 配置Shiro过滤器,先让Shiro过滤系统接收到的请求 -->
+	<!-- 这里filter-name必须对应applicationContext.xml中定义的<bean id="shiroFilter"/> -->
+	<!-- 使用[/*]匹配所有请求,保证所有的可控请求都经过Shiro的过滤 -->
+	<!-- 通常会将此filter-mapping放置到最前面(即其他filter-mapping前面),以保证它是过滤器链中第一个起作用的 -->
+	<filter>
+		<filter-name>shiroFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<!-- 该值缺省为false,表示生命周期由SpringApplicationContext管理,设置为true则表示由ServletContainer管理 -->
+			<param-name>targetFilterLifecycle</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>shiroFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+    		<dispatcher>FORWARD</dispatcher>
+    		<dispatcher>INCLUDE</dispatcher>
+    		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+
+
+	<!-- 配置druid监控 -->
+	<filter>
+		<filter-name>DruidWebStatFilter</filter-name>
+		<filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
+		<init-param>
+			<param-name>exclusions</param-name>
+			<param-value>*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*</param-value>
+		</init-param>
+
+		<init-param>
+			<param-name>principalCookieName</param-name>
+			<param-value>webside.cookieid</param-value>
+		</init-param>
+
+		<!-- 设置session的名称，因为和shiro的logout有冲突，暂时注掉 <init-param> <param-name>principalSessionName</param-name> 
+			<param-value>accountName</param-value> </init-param> -->
+		<init-param>
+			<param-name>sessionStatMaxCount</param-name>
+			<param-value>1000</param-value>
+		</init-param>
+		<init-param>
+			<param-name>sessionStatEnable</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>profileEnable</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>DruidWebStatFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>DruidStatView</servlet-name>
+		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+		<init-param>
+			<param-name>resetEnable</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>loginUsername</param-name>
+			<param-value>druid</param-value>
+		</init-param>
+		<init-param>
+			<param-name>loginPassword</param-name>
+			<param-value>druid</param-value>
+		</init-param>
+		<init-param>
+			<param-name>allow</param-name>
+			<param-value>127.0.0.1/24,127.0.0.1</param-value>
+		</init-param>
+		<init-param>
+			<param-name>deny</param-name>
+			<param-value>172.101.106.13</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DruidStatView</servlet-name>
+		<url-pattern>/druid/*</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 极速验证码 -->
+	<servlet>
+		<servlet-name>gtcaptcha</servlet-name>
+		<servlet-class>com.webside.geetest.StartCaptchaServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+    	<servlet-name>gtcaptcha</servlet-name>
+    	<url-pattern>/gtcaptcha</url-pattern>
+    </servlet-mapping>
+  
+  	<servlet>
+		<servlet-name>gtvalidate</servlet-name>
+		<servlet-class>com.webside.geetest.VerifyLoginServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+    	<servlet-name>gtvalidate</servlet-name>
+    	<url-pattern>/gtvalidate</url-pattern>
+    </servlet-mapping>
+    <!-- 极速验证码end -->
+	<!-- path in the application default is /sirona -->
+	<context-param>
+		<param-name>org.apache.sirona.reporting.mapping</param-name>
+		<param-value>/sirona</param-value>
+	</context-param>
+	<!-- activated per default -->
+	<context-param>
+		<param-name>org.apache.sirona.reporting.activated</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<!-- 系统根目录变量 -->
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>webside.root</param-value>
+	</context-param>
+
+	<!-- 处理静态资源的访问 ,这种方式效率最高,但是无法访问classpath下的资源文件 -->
+	<servlet-mapping>
+		<!-- 不同的servlet容器/应用服务器,处理静态资源的servlet名字不太一样， Tomcat、Jetty、JBoss、GlassFish：默认Servlet名字为"default" 
+			Googe App Engine：默认Servlet名字为"_ah_default" Resin：默认Servlet名字为"resin-file" 
+			Weblogic：默认Servlet名字为"FileServlet" WebSphere：默认Servlet名字为"SimpleFileServlet" -->
+		<servlet-name>default</servlet-name>
+		<url-pattern>/resources/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- 配置spring -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring/spring-ioc-*.xml</param-value>
+	</context-param>
+	
+	<!-- 配置log4j -->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>classpath:log4j.properties</param-value>
+	</context-param>
+	<context-param>
+		<param-name>log4jRefreshInterval</param-name>
+		<param-value>6000</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	
+	
+
+	<!-- 配置springmvc -->
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring/spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<!-- / 表示所有的请求都要经过此serlvet -->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!-- 配置字符编码过滤 -->
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- 防止spring内存溢出监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+
+	<!-- 自定义启动监听 -->
+	<listener>
+		<listener-class>com.webside.context.ContextListener</listener-class>
+	</listener>
+	<!-- 未捕获异常的处理 -->
+	<error-page>
+		<error-code>400</error-code>
+		<location>/WEB-INF/view/error/400.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>401</error-code>
+		<location>/WEB-INF/view/error/401.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/WEB-INF/view/error/403.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/wofinder/developing.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>405</error-code>
+		<location>/WEB-INF/view/error/405.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/view/error/500.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>503</error-code>
+		<location>/WEB-INF/view/error/503.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/WEB-INF/view/error/500.jsp</location>
+	</error-page>
+
+	<!-- 配置jstl标签库为本地加载 -->
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/c.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jsp/jstl/fmt</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/fmt.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jsp/jstl/fn</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/fn.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<!-- 
+	配置应用使用 SSL:目前通过shiro实现，如果不想通过shiro来做(参照shiroAuth.props)，可使用如下方式，注意：两种方式使用一种即可
+	将 URL 映射设为 /* ，这样你的整个应用都要求是 HTTPS 访问，而 transport-guarantee 标签设置为 CONFIDENTIAL 以便使应用支持 SSL。
+	如果你希望关闭 SSL ，只需要将 CONFIDENTIAL 改为 NONE 即可
+	-->
+	<security-constraint>
+	    <web-resource-collection>
+	        <web-resource-name>webside</web-resource-name>
+	        <url-pattern>/*</url-pattern>
+	    </web-resource-collection>
+	    <user-data-constraint>
+	    	<!-- <transport-guarantee>CONFIDENTIAL</transport-guarantee> -->
+	        <transport-guarantee>NONE</transport-guarantee>
+	    </user-data-constraint>
+	</security-constraint>
+
+</web-app>

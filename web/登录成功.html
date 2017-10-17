@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="edge"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>wofinder-退出登录后</title>
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_7f82nhukauqpk3xr.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap-material-design.css" type="text/css">
+    <link rel="stylesheet" href="css/ripples.min.css" type="text/css">
+    <link rel="stylesheet" href="css/mCustomScrollbar.css" type="text/css">
+    <link rel="stylesheet" href="css/homepage.css" type="text/css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="css/common.css" type="text/css">
+    <link rel="stylesheet" href="css/search-result.css" type="text/css">
+    <link rel="stylesheet" href="css/log-out.css" type="text/css">
+    <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/material.js" type="text/javascript"></script>
+    <script src="js/ripples.min.js" type="text/javascript"></script>
+    <script src="js/mCustomScrollbar.concat.min.js" type="text/javascript"></script>
+    <script src="js/common.js" type="text/javascript"></script>
+</head>
+<body>
+<!--顶部-->
+<ul class="homepage-top search-result-top">
+    <!--LOGO-->
+    <h2 class="homepage-main-search-logo-outside">
+        <a href="首页.html" class="homepage-main-search-logo">
+            <img src="images/w-b.png" class="one">
+            <img src="images/w-b-b.png" class="two">
+        </a>
+    </h2>
+    <!--搜索框-->
+    <li class="homepage-top-li homepage-main-search-kz" title="点击搜索">
+        <i class="iconfont icon-wf_sousuo iconfont-x" title="菜单"></i>
+    </li>
+    <li class="homepage-top-li homepage-main-search">
+        <div class="form-group label-floating">
+            <input type="text" class="form-control text_input" placeholder="请输入UP主名称或视频关键词">
+            <div class="search-record">
+                <p>
+                    <span class="search-content">WoDotA</span>
+                    <span class="search-label">热</span>
+                </p>
+                <p>
+                    <span class="search-content">WoDotA</span>
+                    <span class="search-content-other">官网</span>
+                    <span class="search-label">荐</span>
+                </p>
+                <p>
+                    <span class="search-content">WoDotA</span>
+                    <span class="search-content-other">优酷空间</span>
+                </p>
+                <p>
+                    <span class="search-content">WoDotA</span>
+                    <span class="search-content-other">背景音乐</span>
+                </p>
+                <p>
+                    <span class="search-content">WoDotA</span>
+                    <span class="search-content-other">&nbsp;dota2</span>
+                </p>
+            </div>
+        </div>
+        <div class="btn-outside">
+            <div class="btn btn-primary btn-raised">找一下</div>
+        </div>
+    </li>
+    <li class="homepage-top-li homepage-top-li-four dropdown">
+        <i class="iconfont icon-wf_menu iconfont-x dropdown-button" title="菜单"></i>
+        <div class="dropdown-triangle-bd"></div>
+        <div class="dropdown-triangle"></div>
+        <div class="load-schedule">
+            <div class="one"></div>
+        </div>
+        <ul class="dropdown-x menu-content none">
+            <li>
+                <i class="iconfont icon-wf_tijiaojilu"></i>
+                <p>提交记录</p>
+            </li>
+            <li class="menu-content-new">
+                <i class="iconfont icon-wf_bianjicitiao"></i>
+                <p>编辑词条</p>
+            </li>
+            <li>
+                <i class="iconfont icon-wf_paihang"></i>
+                <p>排行榜</p>
+            </li>
+        </ul>
+    </li>
+    <li class="homepage-top-li homepage-top-li-three dropdown">
+        <i class="iconfont icon-wf_touxiang iconfont-x dropdown-button" title="个人中心"></i>
+        <span class="new-message">1.4K</span>
+        <div class="dropdown-triangle-bd"></div>
+        <div class="dropdown-triangle"></div>
+        <div class="load-schedule">
+            <div class="one"></div>
+        </div>
+        <div class="dropdown-x grzx none">
+            <ul class="grzx-content">
+                <li class="grzx-message checked">
+                    <span class="view1">消息</span>
+                    <span class="view2">14</span>
+                </li>
+                <li class="grzx-setting">
+                    <span class="view1">我</span>
+                    <span class="view2">14</span>
+                </li>
+            </ul>
+            <ul class="grzx-x grzx-message-content">
+                <li class="no-see">
+                    <strong>
+                        <a href="javascript:;">
+                            <i class="iconfont icon-wf_shezhi-copy"></i>
+                            <p class="view1">你成功完成了个人资料你成功完成了个人资料</p>
+                            <div class="view2"></div>
+                        </a>
+                    </strong>
+                </li>
+                <li class="no-see">
+                    <strong>
+                        <a href="javascript:;">
+                            <i class="iconfont icon-wf_shezhi-copy"></i>
+                            <p class="view1">你成功完成了个人资料你成功完成了个人资料</p>
+                            <div class="view2"></div>
+                        </a>
+                    </strong>
+                </li>
+                <li class="no-see">
+                    <strong>
+                        <a href="javascript:;">
+                            <i class="iconfont icon-wf_shezhi-copy"></i>
+                            <p class="view1">你成功完成了个人资料你成功完成了个人资料</p>
+                            <div class="view2"></div>
+                        </a>
+                    </strong>
+                </li>
+                <li class="no-see">
+                    <strong>
+                        <a href="javascript:;">
+                            <i class="iconfont icon-wf_pinglun1"></i>
+                            <p class="view1"><span class="mb"></span><img src="images/message.png"><span>有8条回复</span></p>
+                            <div class="view2"></div>
+                        </a>
+                    </strong>
+                </li>
+                <li>
+                    <strong>
+                        <a href="javascript:;">
+                            <i class="iconfont icon-wf_pinglun1"></i>
+                            <p class="view1"><span class="mb"></span><img src="images/message.png"><span>有8条回复</span></p>
+                            <div class="view2"></div>
+                        </a>
+                    </strong>
+                </li>
+                <li>
+                    <strong>
+                        <a href="javascript:;">
+                            <i class="iconfont icon-wf_shezhi-copy"></i>
+                            <p class="view1">你成功完成了个人资料你成功完成了个人资料</p>
+                            <div class="view2"></div>
+                        </a>
+                    </strong>
+                </li>
+                <li>
+                    <strong>
+                        <a href="javascript:;">
+                            <i class="iconfont icon-wf_pinglun1"></i>
+                            <p class="view1"><span class="mb"></span><img src="images/message.png"><span>有10W条回复</span></p>
+                            <div class="view2"></div>
+                        </a>
+                    </strong>
+                </li>
+                <li>
+                    <strong>
+                        <a href="javascript:;">
+                            <i class="iconfont icon-wf_pinglun1"></i>
+                            <p class="view1"><span class="mb"></span><img src="images/message.png"><span>有1.5K条回复</span></p>
+                            <div class="view2"></div>
+                        </a>
+                    </strong>
+                </li>
+                <li>
+                    <strong>
+                        <a href="javascript:;">
+                            <i class="iconfont icon-wf_shezhi-copy"></i>
+                            <p class="view1">你成功完成了个人资料你成功完成了个人资料</p>
+                            <div class="view2"></div>
+                        </a>
+                    </strong>
+                </li>
+                <li>
+                    <strong>
+                        <a href="javascript:;">
+                            <i class="iconfont icon-wf_pinglun1"></i>
+                            <p class="view1"><span class="mb"></span><img src="images/message.png"><span>有999条回复</span></p>
+                            <div class="view2"></div>
+                        </a>
+                    </strong>
+                </li>
+                <p class="load-more">
+                    <strong>
+                        <a href="javascript:;">
+                            更多
+                        </a>
+                    </strong>
+                </p>
+            </ul>
+            <div class="grzx-x grzx-setting-content none">
+                <div class="grzx-view1">
+                    <div class="images-x images-x-content grzx-view1-header">
+                        <img src="images/header2.jpg">
+                    </div>
+                    <div class="grzx-view1-ms">
+                        <p class="one">
+                            <span class="second">D6BEAVDD6BEAVDD6BEAVD</span>
+                            <i class="iconfont icon-wf_tuichu"></i>
+                            <i class="iconfont icon-wf_shezhi-copy"></i>
+                        </p>
+                        <p class="two">
+                            <i class="iconfont icon-wf_xunzhang"></i>
+                            <span class="first">Lv.1</span>
+                            <span class="thirdly">220</span>
+                            <span class="second">110/</span>
+                        </p>
+                        <p class="three">
+                            <span></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="grzx-view2">
+                    <div class="one">
+                        <p class="first">
+                            <i class="iconfont icon-wf_qiandao"></i>
+                            <span class="data">12</span>
+                            <span class="title">签到+5</span>
+                        </p>
+                        <p class="second">每日签到获得5经验值</p>
+                    </div>
+                    <button class="btn btn-primary btn-raised">签到</button>
+                </div>
+                <ul class="grzx-view3">
+                    <li>
+                        <span class="one">开启竞价广告</span>
+                        <div class="on-off open-x">
+                            <span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="one">开启系统提示</span>
+                        <div class="on-off close-x">
+                            <span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="one">开启信息弹幕</span>
+                        <div class="on-off close-x">
+                            <span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="one">开启评论提示</span>
+                        <div class="on-off close-x">
+                            <span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="one">开启我的评论高亮</span>
+                        <div class="on-off close-x">
+                            <span></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </li>
+    <li class="homepage-top-li homepage-top-li-two dropdown">
+        <i class="iconfont icon-wf_lishijilu iconfont-x dropdown-button" title="历史记录"></i>
+        <div class="dropdown-triangle-bd"></div>
+        <div class="dropdown-triangle"></div>
+        <div class="load-schedule">
+            <div class="one"></div>
+        </div>
+        <div class="dropdown-x history-content none">
+            <ul class="history-main has-history">
+                <li>
+                    <i class="iconfont icon-wf_bofang1"></i>
+                    <strong class="title"><a href="javascript:;">梁博个人干起来了...</a></strong>
+                    <span class="time">1分钟前</span>
+                </li>
+                <li>
+                    <i class="iconfont icon-wf_touxiang"></i>
+                    <strong class="title"><a href="javascript:;">鱼嘴滑舌39集</a></strong>
+                    <span class="time">10分钟前</span>
+                </li>
+                <li>
+                    <i class="iconfont icon-wf_bofang1"></i>
+                    <strong class="title"><a href="javascript:;">只是一个视频标题...</a></strong>
+                    <span class="time">20分钟前</span>
+                </li>
+                <li>
+                    <i class="iconfont icon-wf_bofang1"></i>
+                    <strong class="title"><a href="javascript:;">梁博个人干起来了...</a></strong>
+                    <span class="time">30分钟前</span>
+                </li>
+                <li>
+                    <i class="iconfont icon-wf_bofang1"></i>
+                    <strong class="title"><a href="javascript:;">鱼嘴滑舌39集</a></strong>
+                    <span class="time">40分钟前</span>
+                </li>
+                <li>
+                    <i class="iconfont icon-wf_bofang1"></i>
+                    <strong class="title"><a href="javascript:;">只是一个视频标题...</a></strong>
+                    <span class="time">50分钟前</span>
+                </li>
+                <li>
+                    <i class="iconfont icon-wf_bofang1"></i>
+                    <strong class="title"><a href="javascript:;">梁博个人干起来了...</a></strong>
+                    <span class="time">1小时前</span>
+                </li>
+                <li>
+                    <i class="iconfont icon-wf_touxiang"></i>
+                    <strong class="title"><a href="javascript:;">鱼嘴滑舌39集</a></strong>
+                    <span class="time">2小时前</span>
+                </li>
+            </ul>
+            <p class="delete-history">
+                            <span class="delete-history-btn">
+                                <i class="iconfont icon-lajixiang"></i>
+                                <span>清除记录</span>
+                            </span>
+            </p>
+        </div>
+    </li>
+</ul>
+<!--顶部之外-->
+<div class="main fix log-out-main">
+    <div class="view1">
+        <span class="one"></span>
+        <span class="two"><(｀^´)>你又来啦！</span>
+    </div>
+    <img src="images/dlcgh.png" class="view2">
+    <div class="view3">
+        <div><span>10</span>S后将您送达到首页</div>
+        <button class="btn view3">不等，直接去上一页！</button>
+    </div>
+</div>
+<div class="footer">
+    &copy; Copyright 2012-2017,WODOTA.COM,Inc.All Rights Reserved. 鄂ICP备13011259号-1
+</div>
+<canvas id="drawNext">测试</canvas>
+</body>
+<script>
+    $.material.init();
+</script>
+<script>
+    $(function() {
+        drawNext();
+        //个人中心切换tab
+        $(".grzx-content").on("click","li",function(){
+            $(".grzx-content li").removeClass("checked");
+            $(".grzx-x").addClass("none");
+            $("." + $(this).attr("class") + "-content").removeClass("none").css("opacity","0").animate({
+                "opacity":"1"
+            },400);
+            $(this).addClass("checked");
+        })
+        $(".log-out-main").on("click",".view3 button",function(){
+            window.location.href = "首页.html";
+        })
+        setInterval(function(){
+            var a = $(".log-out-main .view3 div span").html();
+            if(a!= 1){
+                $(".log-out-main .view3 div span").html(a-1);
+            }else{
+                $(".log-out-main .view3 div span").html(a-1);
+                window.location.href = "首页.html";
+            }
+        },1000)
+        //小尺寸时点击展开搜索
+        $(".search-result-top").on("click",".homepage-main-search-kz",function(){
+            if($(".homepage-top-li-two").hasClass("hide") == true){
+                $(".search-result-top .homepage-main-search").css("display","");
+            }
+            else{
+                $(".search-result-top .homepage-main-search").css({"display":"block","opacity":"0"}).animate({
+                    "opacity":"1"
+                },488);
+            }
+            $(".homepage-top-li-two,.homepage-top-li-three,.homepage-top-li-four").toggleClass("hide");
+        })
+    })
+</script>
+</html>

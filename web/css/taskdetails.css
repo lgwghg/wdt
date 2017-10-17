@@ -1,0 +1,1150 @@
+.main {
+    padding: 50px 0 0;
+    min-width: 1290px;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    flex-direction: row;
+    justify-content: center
+}
+
+.main .loadingwrap {
+    width: 1162px;
+    clear: both;
+    padding-bottom: 42px
+}
+
+.main .loadingwrap .loading, .main .loadingwrap .loadingside {
+    float: left
+}
+
+.main .loadingwrap .loading .loadingone, .main .loadingwrap .loading .loadingtwo, .main .loadingwrap .loading .loadingthree, .main .loadingwrap .loading .loadingfour, .main .loadingwrap .loading .loadingfive, .main .loadingwrap .loading .loadingsix, .main .loadingwrap .loadingside .loadingone, .main .loadingwrap .loadingside .loadingtwo, .main .loadingwrap .loadingside .loadingthree, .main .loadingwrap .loadingside .loadingfour, .main .loadingwrap .loadingside .loadingfive, .main .loadingwrap .loadingside .loadingsix {
+    width: 712px;
+    margin-bottom: 20px;
+    border: 1px solid #e6e6e6;
+    padding: 30px 20px;
+    background-color: #ffffff;
+    position: relative
+}
+
+.main .loadingwrap .loading .loadingone .lefttop, .main .loadingwrap .loading .loadingtwo .lefttop, .main .loadingwrap .loading .loadingthree .lefttop, .main .loadingwrap .loading .loadingfour .lefttop, .main .loadingwrap .loading .loadingfive .lefttop, .main .loadingwrap .loading .loadingsix .lefttop, .main .loadingwrap .loadingside .loadingone .lefttop, .main .loadingwrap .loadingside .loadingtwo .lefttop, .main .loadingwrap .loadingside .loadingthree .lefttop, .main .loadingwrap .loadingside .loadingfour .lefttop, .main .loadingwrap .loadingside .loadingfive .lefttop, .main .loadingwrap .loadingside .loadingsix .lefttop {
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #f0f1f4
+}
+
+.main .loadingwrap .loading .loadingone .righttop, .main .loadingwrap .loading .loadingtwo .righttop, .main .loadingwrap .loading .loadingthree .righttop, .main .loadingwrap .loading .loadingfour .righttop, .main .loadingwrap .loading .loadingfive .righttop, .main .loadingwrap .loading .loadingsix .righttop, .main .loadingwrap .loadingside .loadingone .righttop, .main .loadingwrap .loadingside .loadingtwo .righttop, .main .loadingwrap .loadingside .loadingthree .righttop, .main .loadingwrap .loadingside .loadingfour .righttop, .main .loadingwrap .loadingside .loadingfive .righttop, .main .loadingwrap .loadingside .loadingsix .righttop {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    background-color: #f0f1f4
+}
+
+.main .loadingwrap .loading .loadingone .titlewrap, .main .loadingwrap .loading .loadingtwo .titlewrap, .main .loadingwrap .loading .loadingthree .titlewrap, .main .loadingwrap .loading .loadingfour .titlewrap, .main .loadingwrap .loading .loadingfive .titlewrap, .main .loadingwrap .loading .loadingsix .titlewrap, .main .loadingwrap .loadingside .loadingone .titlewrap, .main .loadingwrap .loadingside .loadingtwo .titlewrap, .main .loadingwrap .loadingside .loadingthree .titlewrap, .main .loadingwrap .loadingside .loadingfour .titlewrap, .main .loadingwrap .loadingside .loadingfive .titlewrap, .main .loadingwrap .loadingside .loadingsix .titlewrap {
+    position: relative;
+    height: 10px;
+    margin-bottom: 26px
+}
+
+.main .loadingwrap .loading .loadingone .titlewrap span, .main .loadingwrap .loading .loadingtwo .titlewrap span, .main .loadingwrap .loading .loadingthree .titlewrap span, .main .loadingwrap .loading .loadingfour .titlewrap span, .main .loadingwrap .loading .loadingfive .titlewrap span, .main .loadingwrap .loading .loadingsix .titlewrap span, .main .loadingwrap .loadingside .loadingone .titlewrap span, .main .loadingwrap .loadingside .loadingtwo .titlewrap span, .main .loadingwrap .loadingside .loadingthree .titlewrap span, .main .loadingwrap .loadingside .loadingfour .titlewrap span, .main .loadingwrap .loadingside .loadingfive .titlewrap span, .main .loadingwrap .loadingside .loadingsix .titlewrap span {
+    display: inline-block;
+    background-color: #f0f1f4
+}
+
+.main .loadingwrap .loading .loadingone .titlewrap span:first-child, .main .loadingwrap .loading .loadingtwo .titlewrap span:first-child, .main .loadingwrap .loading .loadingthree .titlewrap span:first-child, .main .loadingwrap .loading .loadingfour .titlewrap span:first-child, .main .loadingwrap .loading .loadingfive .titlewrap span:first-child, .main .loadingwrap .loading .loadingsix .titlewrap span:first-child, .main .loadingwrap .loadingside .loadingone .titlewrap span:first-child, .main .loadingwrap .loadingside .loadingtwo .titlewrap span:first-child, .main .loadingwrap .loadingside .loadingthree .titlewrap span:first-child, .main .loadingwrap .loadingside .loadingfour .titlewrap span:first-child, .main .loadingwrap .loadingside .loadingfive .titlewrap span:first-child, .main .loadingwrap .loadingside .loadingsix .titlewrap span:first-child {
+    width: 8px;
+    height: 16px;
+    position: absolute;
+    top: 0;
+    left: -20px
+}
+
+.main .loadingwrap .loading .loadingone .titlewrap span:first-child + span, .main .loadingwrap .loading .loadingtwo .titlewrap span:first-child + span, .main .loadingwrap .loading .loadingthree .titlewrap span:first-child + span, .main .loadingwrap .loading .loadingfour .titlewrap span:first-child + span, .main .loadingwrap .loading .loadingfive .titlewrap span:first-child + span, .main .loadingwrap .loading .loadingsix .titlewrap span:first-child + span, .main .loadingwrap .loadingside .loadingone .titlewrap span:first-child + span, .main .loadingwrap .loadingside .loadingtwo .titlewrap span:first-child + span, .main .loadingwrap .loadingside .loadingthree .titlewrap span:first-child + span, .main .loadingwrap .loadingside .loadingfour .titlewrap span:first-child + span, .main .loadingwrap .loadingside .loadingfive .titlewrap span:first-child + span, .main .loadingwrap .loadingside .loadingsix .titlewrap span:first-child + span {
+    width: 132px;
+    height: 10px;
+    margin-bottom: 3px
+}
+
+.main .loadingwrap .loading .loadingone, .main .loadingwrap .loadingside .loadingone {
+    height: 304px
+}
+
+.main .loadingwrap .loading .loadingone .titlewrapF, .main .loadingwrap .loadingside .loadingone .titlewrapF {
+    width: 100%;
+    height: 10px;
+    font-size: 0;
+    margin-bottom: 26px
+}
+
+.main .loadingwrap .loading .loadingone .titlewrapF span, .main .loadingwrap .loadingside .loadingone .titlewrapF span {
+    display: inline-block;
+    background-color: #f0f1f4
+}
+
+.main .loadingwrap .loading .loadingone .titlewrapF span:first-child, .main .loadingwrap .loadingside .loadingone .titlewrapF span:first-child {
+    width: 132px;
+    height: 10px;
+    margin-right: 190px
+}
+
+.main .loadingwrap .loading .loadingone .titlewrapF span:first-child + span, .main .loadingwrap .loading .loadingone .titlewrapF span:last-child, .main .loadingwrap .loadingside .loadingone .titlewrapF span:first-child + span, .main .loadingwrap .loadingside .loadingone .titlewrapF span:last-child {
+    width: 146px;
+    height: 10px;
+    margin-left: 20px
+}
+
+.main .loadingwrap .loading .loadingone .content, .main .loadingwrap .loadingside .loadingone .content {
+    width: 100%;
+    height: 208px;
+    clear: both
+}
+
+.main .loadingwrap .loading .loadingone .content .contentL, .main .loadingwrap .loadingside .loadingone .content .contentL {
+    float: left;
+    width: 158px;
+    height: 208px;
+    background-color: #f0f1f4;
+    margin-right: 20px
+}
+
+.main .loadingwrap .loading .loadingone .content .contentR, .main .loadingwrap .loadingside .loadingone .content .contentR {
+    float: left;
+    width: 490px;
+    height: 208px
+}
+
+.main .loadingwrap .loading .loadingone .content .contentR div:first-child, .main .loadingwrap .loadingside .loadingone .content .contentR div:first-child {
+    margin-top: 10px;
+    width: 476px;
+    height: 10px;
+    background-color: #f0f1f4
+}
+
+.main .loadingwrap .loading .loadingone .content .contentR div:first-child + div, .main .loadingwrap .loadingside .loadingone .content .contentR div:first-child + div {
+    margin-top: 10px;
+    margin-bottom: 144px;
+    width: 326px;
+    height: 10px;
+    background-color: #f0f1f4
+}
+
+.main .loadingwrap .loading .loadingone .content .contentR span, .main .loadingwrap .loadingside .loadingone .content .contentR span {
+    display: inline-block;
+    height: 24px;
+    width: 90px;
+    background-color: #f0f1f4;
+    margin-right: 10px
+}
+
+.main .loadingwrap .loading .loadingtwo, .main .loadingwrap .loading .loadingsix, .main .loadingwrap .loadingside .loadingtwo, .main .loadingwrap .loadingside .loadingsix {
+    height: 196px
+}
+
+.main .loadingwrap .loading .loadingtwo .content .content-item, .main .loadingwrap .loading .loadingsix .content .content-item, .main .loadingwrap .loadingside .loadingtwo .content .content-item, .main .loadingwrap .loadingside .loadingsix .content .content-item {
+    float: left;
+    margin-right: 20px
+}
+
+.main .loadingwrap .loading .loadingtwo .content .content-item div, .main .loadingwrap .loading .loadingsix .content .content-item div, .main .loadingwrap .loadingside .loadingtwo .content .content-item div, .main .loadingwrap .loadingside .loadingsix .content .content-item div {
+    background-color: #f0f1f4
+}
+
+.main .loadingwrap .loading .loadingtwo .content .content-item .top, .main .loadingwrap .loading .loadingsix .content .content-item .top, .main .loadingwrap .loadingside .loadingtwo .content .content-item .top, .main .loadingwrap .loadingside .loadingsix .content .content-item .top {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%
+}
+
+.main .loadingwrap .loading .loadingtwo .content .content-item .bottom, .main .loadingwrap .loading .loadingsix .content .content-item .bottom, .main .loadingwrap .loadingside .loadingtwo .content .content-item .bottom, .main .loadingwrap .loadingside .loadingsix .content .content-item .bottom {
+    margin-top: 10px;
+    width: 76px;
+    height: 10px
+}
+
+.main .loadingwrap .loading .loadingtwo .content .content-item:last-child, .main .loadingwrap .loading .loadingsix .content .content-item:last-child, .main .loadingwrap .loadingside .loadingtwo .content .content-item:last-child, .main .loadingwrap .loadingside .loadingsix .content .content-item:last-child {
+    margin-right: 0
+}
+
+.main .loadingwrap .loading .loadingthree, .main .loadingwrap .loading .loadingfive, .main .loadingwrap .loadingside .loadingthree, .main .loadingwrap .loadingside .loadingfive {
+    height: 232px
+}
+
+.main .loadingwrap .loading .loadingthree .content div:first-child, .main .loadingwrap .loading .loadingfive .content div:first-child, .main .loadingwrap .loadingside .loadingthree .content div:first-child, .main .loadingwrap .loadingside .loadingfive .content div:first-child {
+    margin-top: 10px;
+    width: 476px;
+    height: 10px;
+    background-color: #f0f1f4
+}
+
+.main .loadingwrap .loading .loadingthree .content div:first-child + div, .main .loadingwrap .loading .loadingfive .content div:first-child + div, .main .loadingwrap .loadingside .loadingthree .content div:first-child + div, .main .loadingwrap .loadingside .loadingfive .content div:first-child + div {
+    margin-top: 10px;
+    margin-bottom: 144px;
+    width: 326px;
+    height: 10px;
+    background-color: #f0f1f4
+}
+
+.main .loadingwrap .loading .loadingfour, .main .loadingwrap .loadingside .loadingfour {
+    height: 326px
+}
+
+.main .loadingwrap .loading .loadingfour .content, .main .loadingwrap .loadingside .loadingfour .content {
+    width: 100%;
+    height: 208px;
+    clear: both
+}
+
+.main .loadingwrap .loading .loadingfour .content .contentL, .main .loadingwrap .loadingside .loadingfour .content .contentL {
+    float: left;
+    margin-right: 20px;
+    width: 490px;
+    height: 208px
+}
+
+.main .loadingwrap .loading .loadingfour .content .contentL div:first-child, .main .loadingwrap .loadingside .loadingfour .content .contentL div:first-child {
+    width: 476px;
+    height: 10px;
+    background-color: #f0f1f4
+}
+
+.main .loadingwrap .loading .loadingfour .content .contentL div:first-child + div, .main .loadingwrap .loadingside .loadingfour .content .contentL div:first-child + div {
+    margin-top: 10px;
+    margin-bottom: 144px;
+    width: 326px;
+    height: 10px;
+    background-color: #f0f1f4
+}
+
+.main .loadingwrap .loading .loadingfour .content .contentR, .main .loadingwrap .loadingside .loadingfour .content .contentR {
+    float: left;
+    width: 158px;
+    height: 208px;
+    background-color: #f0f1f4
+}
+
+.main .loadingwrap .loadingside {
+    margin-left: 40px
+}
+
+.main .loadingwrap .loadingside .loadingsix {
+    width: 410px
+}
+
+.main .wrap {
+    display: none;
+    width: 1162px
+}
+
+.main .search-content-left .gamestar, .main .wrap .side .gamestar {
+    padding: 24px 20px 30px 20px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    position: relative
+}
+.main .search-content-left .gamestar, .main .wrap .side .gamestar,
+.main .search-content-left .interrelatestar, .main .search-content-left .interrelatevideo, .main .wrap .side .interrelatestar, .main .wrap .side .interrelatevideo,.event,
+.main .search-content-left .personallife, .main .search-content-left .gameachievements, .main .search-content-left .honor, .main .wrap .side .personallife, .main .wrap .side .gameachievements, .main .wrap .side .honor,
+.main .search-content-left .personallife, .main .search-content-left .gameachievements, .main .search-content-left .honor, .main .wrap .side .personallife, .main .wrap .side .gameachievements, .main .wrap .side .honor,
+.main .search-content-left .personallife, .main .search-content-left .gameachievements, .main .search-content-left .honor, .main .wrap .side .personallife, .main .wrap .side .gameachievements, .main .wrap .side .honor{
+    webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+    -webkit-transition: all .3s cubic-bezier(.4,0,.2,1);
+    transition: all .3s cubic-bezier(.4,0,.2,1);
+}
+.main .search-content-left .gamestar:hover, .main .wrap .side .gamestar:hover,.event:hover,
+.main .search-content-left .interrelatestar:hover, .main .search-content-left .interrelatevideo:hover, .main .wrap .side .interrelatestar:hover, .main .wrap .side .interrelatevideo:hover,
+.main .search-content-left .personallife:hover, .main .search-content-left .gameachievements:hover, .main .search-content-left .honor:hover, .main .wrap .side .personallife:hover, .main .wrap .side .gameachievements, .main .wrap .side .honor:hover,
+.main .search-content-left .personallife:hover, .main .search-content-left .gameachievements:hover, .main .search-content-left .honor:hover, .main .wrap .side .personallife:hover, .main .wrap .side .gameachievements, .main .wrap .side .honor:hover,
+.main .search-content-left .personallife:hover, .main .search-content-left .gameachievements:hover, .main .search-content-left .honor:hover, .main .wrap .side .personallife:hover, .main .wrap .side .gameachievements, .main .wrap .side .honor:hover{
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
+    box-shadow: 0 0 10px rgba(0,0,0,.3);
+}
+.main .search-content-left .gamestar .icon-wf_renwutouxiang, .main .wrap .side .gamestar .icon-wf_renwutouxiang {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    color: #db4437;
+    font-size: 40px
+}
+
+.main .search-content-left .gamestar .icon-wf_bianji, .main .wrap .side .gamestar .icon-wf_bianji {
+    position: absolute;
+    top: 3px;
+    right: 20px;
+    color: #e6e6e6;
+    font-size: 16px
+}
+
+.main .search-content-left .gamestar .scorewrap, .main .wrap .side .gamestar .scorewrap {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    line-height: 30px;
+    width: 100%;
+    overflow: hidden
+}
+
+.main .search-content-left .gamestar .scorewrap h1, .main .wrap .side .gamestar .scorewrap h1 {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    height: 30px;
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    color: #757575;
+}
+
+.main .search-content-left .gamestar .scorewrap .pingfen, .main .wrap .side .gamestar .scorewrap .pingfen {
+    -webkit-flex: 0 0 380px;
+    -ms-flex: 0 0 380px;
+    flex: 0 0 380px;
+    text-align: right;
+    padding-right: 16px
+}
+
+.main .search-content-left .gamestar .scorewrap .pingfen .hotstar, .main .search-content-left .gamestar .scorewrap .pingfen .wolist, .main .wrap .side .gamestar .scorewrap .pingfen .hotstar, .main .wrap .side .gamestar .scorewrap .pingfen .wolist {
+    display: inline-block;
+    font-size: 14px;
+    color: #414141;
+    margin-left: 24px
+}
+
+.main .search-content-left .gamestar .scorewrap .pingfen .hotstar > i, .main .search-content-left .gamestar .scorewrap .pingfen .wolist > i, .main .wrap .side .gamestar .scorewrap .pingfen .hotstar > i, .main .wrap .side .gamestar .scorewrap .pingfen .wolist > i {
+    font-size: 16px;
+    color: #db4437;
+    margin-right: 8px
+}
+
+.main .search-content-left .gamestar .firstwrap, .main .wrap .side .gamestar .firstwrap {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    flex-direction: row
+}
+
+.main .search-content-left .gamestar .firstwrap .avatar, .main .wrap .side .gamestar .firstwrap .avatar {
+    -webkit-flex: 0 0 158px;
+    -ms-flex: 0 0 158px;
+    flex: 0 0 158px;
+    width: 158px;
+    margin-right: 20px;
+    height: 208px;
+    margin-top: 14px;
+    padding: 2px;
+    cursor: pointer;
+    background-color: #db4437;
+    box-sizing: border-box;
+    opacity: 0.9
+}
+
+.main .search-content-left .gamestar .firstwrap .avatar:hover, .main .wrap .side .gamestar .firstwrap .avatar:hover {
+    opacity: 1
+}
+
+.main .search-content-left .gamestar .firstwrap .avatar .imgwrap, .main .wrap .side .gamestar .firstwrap .avatar .imgwrap {
+    width: 154px;
+    height: 204px;
+    border: 2px solid #ffffff;
+    box-sizing: border-box
+}
+
+.main .search-content-left .gamestar .firstwrap .description, .main .wrap .side .gamestar .firstwrap .description {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding-right: 16px
+}
+
+.main .search-content-left .gamestar .firstwrap .description .textwrap, .main .wrap .side .gamestar .firstwrap .description .textwrap {
+    padding-top: 14px
+}
+
+.main .search-content-left .gamestar .firstwrap .description .textwrap p, .main .wrap .side .gamestar .firstwrap .description .textwrap p {
+    text-indent: 28px;
+    font-size: 14px;
+    margin-top: 12px;
+    color: #757575
+}
+
+.main .search-content-left .gamestar .firstwrap .description .pag, .main .wrap .side .gamestar .firstwrap .description .pag {
+    margin-top: 10px
+}
+
+.main .search-content-left .gamestar .firstwrap .description .pag ul li, .main .wrap .side .gamestar .firstwrap .description .pag ul li {
+    float: left;
+    margin: 0 6px 0 4px;
+    height: 24px;
+    font-size: 0;
+    overflow: hidden
+}
+
+.main .search-content-left .gamestar .firstwrap .description .pag ul li > i, .main .wrap .side .gamestar .firstwrap .description .pag ul li > i {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 24px;
+    color: #db4437;
+    position: relative;
+    top: -6px;
+    left: 1px
+}
+
+.main .search-content-left .gamestar .firstwrap .description .pag ul li > span, .main .wrap .side .gamestar .firstwrap .description .pag ul li > span {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 14px;
+    height: 24px;
+    line-height: 24px;
+    color: #fff;
+    padding-right: 10px;
+    background-color: #db4437
+}
+
+.main .search-content-left .interrelatestar, .main .search-content-left .interrelatevideo, .main .wrap .side .interrelatestar, .main .wrap .side .interrelatevideo {
+    padding: 28px 0px;
+    margin-bottom: 20px;
+    border: 1px solid #e6e6e6;
+    background-color: #ffffff;
+    overflow: hidden;
+    position: relative
+}
+
+.main .search-content-left .interrelatestar .icon-wf_bianji, .main .search-content-left .interrelatevideo .icon-wf_bianji, .main .wrap .side .interrelatestar .icon-wf_bianji, .main .wrap .side .interrelatevideo .icon-wf_bianji {
+    position: absolute;
+    top: 3px;
+    right: 20px;
+    color: #e6e6e6;
+    font-size: 16px
+}
+
+.main .search-content-left .interrelatestar .title, .main .search-content-left .interrelatevideo .title, .main .wrap .side .interrelatestar .title, .main .wrap .side .interrelatevideo .title {
+    height: 16px;
+    border-left: 5px solid #db4437;
+    clear: both;
+    margin-bottom: 20px
+}
+
+.main .search-content-left .interrelatestar .title h3, .main .search-content-left .interrelatevideo .title h3, .main .wrap .side .interrelatestar .title h3, .main .wrap .side .interrelatevideo .title h3 {
+    float: left;
+    padding-left: 15px;
+    font-size: 18px;
+    color: #757575;
+    position: relative;
+    top: -6px
+}
+
+.main .search-content-left .interrelatestar .content, .main .search-content-left .interrelatevideo .content, .main .wrap .side .interrelatestar .content, .main .wrap .side .interrelatevideo .content {
+    padding: 0 10px;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap
+}
+
+.main .search-content-left .interrelatestar .content .content-item, .main .search-content-left .interrelatevideo .content .content-item, .main .wrap .side .interrelatestar .content .content-item, .main .wrap .side .interrelatevideo .content .content-item {
+    -webkit-flex: 0 0 78px;
+    -ms-flex: 0 0 78px;
+    flex: 0 0 78px;
+    width: 78px;
+    margin: 0 10px 10px
+}
+
+.main .search-content-left .interrelatestar .content .content-item .imgwrap, .main .search-content-left .interrelatevideo .content .content-item .imgwrap, .main .wrap .side .interrelatestar .content .content-item .imgwrap, .main .wrap .side .interrelatevideo .content .content-item .imgwrap {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    opacity: 0.9;
+    overflow: hidden
+}
+
+.main .search-content-left .interrelatestar .content .content-item .imgwrap:hover, .main .search-content-left .interrelatevideo .content .content-item .imgwrap:hover, .main .wrap .side .interrelatestar .content .content-item .imgwrap:hover, .main .wrap .side .interrelatevideo .content .content-item .imgwrap:hover {
+    opacity: 1
+}
+
+.main .search-content-left .interrelatestar .content .content-item p, .main .search-content-left .interrelatevideo .content .content-item p, .main .wrap .side .interrelatestar .content .content-item p, .main .wrap .side .interrelatevideo .content .content-item p {
+    text-align: center;
+    height: 14px;
+    line-height: 14px;
+    margin-top: 10px
+}
+
+.main .search-content-left .interrelatestar .content .content-item p a, .main .search-content-left .interrelatevideo .content .content-item p a, .main .wrap .side .interrelatestar .content .content-item p a, .main .wrap .side .interrelatevideo .content .content-item p a {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 14px;
+    line-height: 14px;
+    color: #757575
+}
+
+.main .search-content-left .personallife, .main .search-content-left .gameachievements, .main .search-content-left .honor, .main .wrap .side .personallife, .main .wrap .side .gameachievements, .main .wrap .side .honor {
+    padding: 28px 0px;
+    margin-bottom: 20px;
+    border: 1px solid #e6e6e6;
+    background-color: #ffffff;
+    position: relative
+}
+
+.main .search-content-left .personallife .icon-wf_bianji, .main .search-content-left .gameachievements .icon-wf_bianji, .main .search-content-left .honor .icon-wf_bianji, .main .wrap .side .personallife .icon-wf_bianji, .main .wrap .side .gameachievements .icon-wf_bianji, .main .wrap .side .honor .icon-wf_bianji {
+    position: absolute;
+    top: 3px;
+    right: 20px;
+    color: #e6e6e6;
+    font-size: 16px
+}
+
+.main .search-content-left .personallife .title, .main .search-content-left .gameachievements .title, .main .search-content-left .honor .title, .main .wrap .side .personallife .title, .main .wrap .side .gameachievements .title, .main .wrap .side .honor .title {
+    height: 16px;
+    border-left: 5px solid #db4437;
+    clear: both;
+    margin-bottom: 20px
+}
+
+.main .search-content-left .personallife .title h3, .main .search-content-left .gameachievements .title h3, .main .search-content-left .honor .title h3, .main .wrap .side .personallife .title h3, .main .wrap .side .gameachievements .title h3, .main .wrap .side .honor .title h3 {
+    float: left;
+    padding-left: 15px;
+    font-size: 18px;
+    color: #757575;
+    position: relative;
+    top: -6px
+}
+
+.main .search-content-left .personallife .content, .main .search-content-left .gameachievements .content, .main .search-content-left .honor .content, .main .wrap .side .personallife .content, .main .wrap .side .gameachievements .content, .main .wrap .side .honor .content {
+    padding: 0 20px
+}
+
+.main .search-content-left .personallife .content li, .main .search-content-left .gameachievements .content li, .main .search-content-left .honor .content li, .main .wrap .side .personallife .content li, .main .wrap .side .gameachievements .content li, .main .wrap .side .honor .content li {
+    font-size: 14px;
+    margin-bottom: 2px;
+    color: #757575
+}
+
+.main .search-content-left .personallife .content li:last-child, .main .search-content-left .gameachievements .content li:last-child, .main .search-content-left .honor .content li:last-child, .main .wrap .side .personallife .content li:last-child, .main .wrap .side .gameachievements .content li:last-child, .main .wrap .side .honor .content li:last-child {
+    margin-bottom: 0
+}
+
+.main .search-content-left .personallife .content li b, .main .search-content-left .gameachievements .content li b, .main .search-content-left .honor .content li b, .main .wrap .side .personallife .content li b, .main .wrap .side .gameachievements .content li b, .main .wrap .side .honor .content li b {
+    color: #414141;
+    font-weight: 700
+}
+
+.main .search-content-left .gameachievements .content, .main .wrap .side .gameachievements .content {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    flex-direction: row
+}
+
+.main .search-content-left .gameachievements .content ul, .main .wrap .side .gameachievements .content ul {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1
+}
+
+.main .search-content-left .gameachievements .content .teamwrap, .main .wrap .side .gameachievements .content .teamwrap {
+    -webkit-flex: 0 0 158px;
+    -ms-flex: 0 0 158px;
+    flex: 0 0 158px;
+    width: 158px;
+    height: 208px;
+    margin-left: 26px;
+    padding: 2px;
+    cursor: pointer;
+    background-color: #e6e6e6;
+    box-sizing: border-box;
+    opacity: 0.9
+}
+
+.main .search-content-left .gameachievements .content .teamwrap:hover, .main .wrap .side .gameachievements .content .teamwrap:hover {
+    opacity: 1
+}
+
+.main .search-content-left .gameachievements .content .teamwrap .team, .main .wrap .side .gameachievements .content .teamwrap .team {
+    width: 154px;
+    height: 204px;
+    border: 2px solid #ffffff;
+    box-sizing: border-box
+}
+
+.main .wrap .side {
+    width: 410px;
+    margin-left: 40px
+}
+
+.main .wrap .side .interrelatevideo {
+    margin-bottom: 20px;
+    padding-bottom: 0
+}
+
+.main .wrap .side .interrelatevideo .videos {
+    padding: 0 10px 20px;
+    min-height: 128px
+}
+
+.main .wrap .side .interrelatevideo .videos .video-item {
+    width: 100%;
+    height: 108px;
+    margin-bottom: 20px;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    flex-direction: row
+}
+
+.main .wrap .side .interrelatevideo .videos .video-item:last-child {
+    margin-bottom: 0px
+}
+
+.main .wrap .side .interrelatevideo .videos .video-item .vimg-wrap {
+    width: 188px;
+    height: 104px;
+    margin: 0 10px;
+    background-color: #414141;
+    border-radius: 2px;
+    position: relative;
+    box-sizing: border-box
+}
+
+.main .wrap .side .interrelatevideo .videos .video-item .vimg-wrap img {
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+.main .wrap .side .interrelatevideo .videos .video-item .vimg-wrap .totaltime {
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+    font-size: 14px;
+    padding: 0 5px;
+    color: #ffffff;
+    background-color: #000000;
+    position: absolute;
+    right: 3px;
+    top: 3px
+}
+
+.main .wrap .side .interrelatevideo .videos .video-item .textwrap {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin: 0 10px;
+    position: relative
+}
+
+.main .wrap .side .interrelatevideo .videos .video-item .textwrap p {
+    color: #757575;
+    height: 65px;
+    overflow: hidden;
+    position: relative
+}
+
+.main .wrap .side .interrelatevideo .videos .video-item .textwrap p:after {
+    content: "";
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60px;
+    height: 18px;
+    background: linear-gradient(to right, rgba(221, 221, 221, 0), #fff 50%)
+}
+
+.main .wrap .side .interrelatevideo .videos .video-item .textwrap b {
+    color: #757575;
+    font-size: 14px;
+    font-weight: 400;
+    position: absolute;
+    left: 0px;
+    bottom: 0px
+}
+
+.main .wrap .side .interrelatevideo .more {
+    width: 100%;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    color: #757575;
+    cursor: pointer
+}
+
+.main .wrap .side .interrelatevideo .more:hover {
+    color: #db4437
+}
+
+.modal {
+    background-color: #000000
+}
+
+.modal .modal-dialog {
+    margin: 0;
+    width: 100%;
+    height: 100%
+}
+
+.modal .modal-dialog .modal-content {
+    height: 100%;
+    background-color: #000000
+}
+
+.modal .modal-dialog .modal-content .modal-header {
+    height: 10%
+}
+
+.modal .modal-dialog .modal-content .modal-header .icon-wf_cuowu {
+    color: #ffffff;
+    font-size: 20px
+}
+
+.modal .modal-dialog .modal-content .modal-body {
+    position: relative;
+    height: 90%
+}
+
+.modal .modal-dialog .modal-content .modal-body .gallery-left {
+    width: 71%;
+    height: 100%;
+    background-color: #181818
+}
+
+.modal .modal-dialog .modal-content .modal-body .gallery-left .swiper-wrapper .swiper-slide {
+    position: relative
+}
+
+.modal .modal-dialog .modal-content .modal-body .gallery-left .swiper-wrapper .swiper-slide img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.modal .modal-dialog .modal-content .modal-body .haha {
+    width: 100px;
+    padding: 36px 0;
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%)
+}
+
+.modal .modal-dialog .modal-content .modal-body .haha .gallery-thumbs {
+    width: 100px
+}
+
+.modal .modal-dialog .modal-content .modal-body .haha .gallery-thumbs .swiper-wrapper {
+    height: 430px;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    flex-direction: column
+}
+
+.modal .modal-dialog .modal-content .modal-body .haha .gallery-thumbs .swiper-wrapper .swiper-slide {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    box-sizing: border-box;
+    opacity: 0.4;
+    overflow: hidden
+}
+
+.modal .modal-dialog .modal-content .modal-body .haha .gallery-thumbs .swiper-wrapper .swiper-slide img {
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+.modal .modal-dialog .modal-content .modal-body .haha .gallery-thumbs .swiper-wrapper .swiper-slide:hover {
+    opacity: 1
+}
+
+.modal .modal-dialog .modal-content .modal-body .haha .gallery-thumbs .swiper-wrapper .swiper-slide-active {
+    border: 1px solid #db4437;
+    opacity: 1
+}
+
+.modal .modal-dialog .modal-content .modal-body .haha .button-bottom, .modal .modal-dialog .modal-content .modal-body .haha .button-top {
+    width: 100px;
+    height: 26px;
+    position: absolute;
+    left: 0;
+    background-color: #303030;
+    text-align: center;
+    cursor: pointer
+}
+
+.modal .modal-dialog .modal-content .modal-body .haha .button-bottom i, .modal .modal-dialog .modal-content .modal-body .haha .button-top i {
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #757575
+}
+
+.modal .modal-dialog .modal-content .modal-body .haha .button-bottom {
+    margin-top: 10px;
+    bottom: 0
+}
+
+.modal .modal-dialog .modal-content .modal-body .haha .button-top {
+    margin-bottom: 10px;
+    top: 0
+}
+
+.modal .modal-dialog .modal-content .modal-body .swiper-button-next, .modal .modal-dialog .modal-content .modal-body .swiper-button-prev {
+    background-image: none
+}
+
+.modal .modal-dialog .modal-content .modal-body .swiper-button-next i, .modal .modal-dialog .modal-content .modal-body .swiper-button-prev i {
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #757575
+}
+
+.modal .modal-dialog .modal-content .modal-body .swiper-button-next {
+    right: 12%
+}
+
+.modal .modal-dialog .modal-content .modal-body .swiper-button-prev {
+    left: 12%
+}
+
+.title-x .two{
+    max-width: 667px;
+}
+
+.event .title-x .two a {
+    display: block;
+    font-size: 18px;
+    color: #757575;
+}
+
+.event{
+    padding: 28px 0 18px 0;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.event-content{
+    margin-top: 8px;
+    padding: 0 20px;
+}
+
+.event-content li{
+    margin-bottom: 10px;
+}
+
+.event-content li .top{
+    height: 21px;
+    line-height: 21px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.event-content li .top .icon-wf_shijianshi{
+    color: #db4437;
+    font-size: 20px;
+    vertical-align: top;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+}
+
+.event-content li .top .icon-wf_shijianshi:before{
+    position: relative;
+    top: -4px;
+}
+
+.event-content li .top .one{
+    height: 20px;
+    line-height: 20px;
+    display: inline-block;
+    color: #414141;
+    margin-left: 8px;
+}
+
+.event-content li .top .two{
+    height: 20px;
+    line-height: 20px;
+    display: inline-block;
+    color: #757575;
+}
+
+.event-content li .bottom{
+    height: 20px;
+    line-height: 20px;
+    margin-top: 10px;
+}
+
+.event-content li .bottom .one,.event-content li .bottom .two{
+    float: left;
+    height: 20px;
+    line-height: 20px;
+}
+
+.event-content li .bottom .one{
+    margin-left: 32px;
+}
+
+.event-content li .bottom .two{
+    margin-left: 20px;
+}
+
+.event-content li .bottom .one .icon-zan{
+    color: #d8d8d8;
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+    line-height: 20px;
+    float: left;
+    cursor: pointer;
+}
+
+.event-content li .bottom .one .icon-zan.red{
+    color: #db4437;
+}
+
+.event-content li .bottom .one .num{
+    color: #414141;
+    height: 20px;
+    line-height: 20px;
+    display: block;
+    float: left;
+    margin-left: 12px;
+}
+
+.event-content li .bottom .two .first{
+    color: #414141;
+    height: 20px;
+    line-height: 20px;
+    display: block;
+    float: left;
+}
+
+.event-content li .bottom .two .num{
+    color: #ffffff;
+    height: 20px;
+    line-height: 20px;
+    background-color: #d8d8d8;
+    display: block;
+    float: left;
+    margin-left: 3px;
+    border-radius: 10px;
+    padding: 0 5px;
+}
+
+.event-content-a{
+    color: #db4437;
+    margin-left: 20px;
+}
+
+.event-content-a:hover,.event-content-a:focus{
+    color: #db4437;
+}
+
+.video-details-main{
+    margin-top: 0;
+}
+
+.taskdetails-top{
+    width: 1200px;
+    height: 135px;
+    padding: 0 26px 0 10px;
+    margin: 71px auto 0 auto;
+}
+.taskdetails-top .taskdetails-top-ul{
+    width: 1164px;
+    height: 135px;
+    webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+    -webkit-transition: all .3s cubic-bezier(.4,0,.2,1);
+    transition: all .3s cubic-bezier(.4,0,.2,1);
+    font-size: 0;
+    white-space: nowrap;
+    background-color: #fff;
+}
+
+.taskdetails-top .taskdetails-top-ul:hover{
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
+    box-shadow: 0 0 10px rgba(0,0,0,.3);
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li{
+    display: inline-block;
+    width: 100px;
+    height: 135px;
+    vertical-align: top;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li.team-two{
+    cursor: pointer;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li.team-two.checked .icon-wf_you_qiehuan{
+    display: none;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li.team-two.checked .num{
+    display: block;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li:nth-child(5n+1){
+    background-color: #fdb87d;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li:nth-child(5n+2){
+    background-color: #7dcde8;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li:nth-child(5n+3){
+    background-color: #fca3aa;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li:nth-child(5n+4){
+    background-color: #fabb9b;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li:nth-child(5n+5){
+    background-color: #b9cf90;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li .platform{
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 20px 25px 0 25px;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li .platform img{
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li .platform .iconfont{
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    margin: 10px;
+    display: block;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li .platform .iconfont:before{
+    position: relative;
+    top: -7.5px;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li .platform .icon-wf_Azhan{
+    color: #fd4c5b;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li .platform .icon-wf_Bzhan{
+    color: #00a1d6;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li .platform .icon-wf_youku{
+    color: #2fb3ff;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li .platform .icon-wf_tengxun{
+    color: #ff6428;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li .platform .icon-wf_aiqiyi{
+    color: #78a526;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li .platform .icon-wf_leshi{
+    color: #d62818;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li .platform .icon-wf_souhu{
+    color: #d80c18;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li.team-one .num{
+    width: 100px;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li.team-one .num li{
+    width: 100px;
+    text-align: center;
+    font-size: 0;
+    margin-top: 24px;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li.team-one .num li .iconfont{
+    font-size: 16px;
+    color: #fff;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li.team-one .num li span{
+    font-size: 14px;
+    color: #fff;
+    margin-left: 5px;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li.team-two .icon-wf_you_qiehuan{
+    font-size: 16px;
+    margin: 0 42px 0 42px;
+    color: #fff;
+    position: relative;
+    top: 23px;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li.team-two .num{
+    overflow: hidden;
+    margin-top: 24px;
+    font-size: 0;
+    white-space: nowrap;
+    display: none;
+}
+
+.taskdetails-top .taskdetails-top-ul .taskdetails-top-ul-li.team-two .num li{
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    color: #fff;
+}
+
+.taskdetails-top .taskdetails-top-ul .mCSB_container{
+    font-size: 0;
+}
+
+.mCSB_scrollTools.mCSB_scrollTools_horizontal{
+    height: 4px;
+}
+
+.mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_dragger .mCSB_dragger_bar{
+     margin: 0 auto;
+}
+
+.mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail{
+    margin: 1px 0;
+}
+
+.unfold-before .two span{
+    display: block;
+    height: 18px;
+    line-height: 18px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+/*# sourceMappingURL=taskdetails.css.map */

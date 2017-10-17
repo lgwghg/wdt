@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.rights.mapper.UserRoleMapper">
+
+	<!-- tb_user_role字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- -->
+			r_id AS "roleId", <!-- 角色id-->
+			u_id AS "userId", <!-- 用户id-->
+			t_create_time AS "createTime", <!-- 创建时间-->
+		</trim>
+	</sql>
+	
+	<!-- 查询tb_user_role分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.rights.model.UserRoleEntity">
+		select  
+			<include refid="columnList"/>
+		from tb_user_role 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="roleId != null and roleId != ''">
+				AND r_id=#{roleId}
+			</if>
+			<if test="userId != null and userId != ''">
+				AND u_id=#{userId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND t_create_time=#{createTime}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增tb_user_role -->
+	<insert id="insert" 
+			parameterType="com.webside.rights.model.UserRoleEntity">
+		insert into tb_user_role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- -->
+		<if test="roleId != null">r_id,</if><!-- 角色id-->
+		<if test="userId != null">u_id,</if><!-- 用户id-->
+		<if test="createTime != null">t_create_time,</if><!-- 创建时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- -->
+		<if test="roleId != null">#{roleId},</if><!-- 角色id-->
+		<if test="userId != null">#{userId},</if><!-- 用户id-->
+		<if test="createTime != null">now(),</if><!-- 创建时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询tb_user_role -->
+	<select id="findById" resultType="com.webside.rights.model.UserRoleEntity" parameterType="String">
+		select  
+			<include refid="columnList"/>
+		from tb_user_role 
+		where id = #{id}
+	</select>
+	
+	<!-- 根据entity查询tb_user_role -->
+	<select id="findByEntity" resultType="com.webside.rights.model.UserRoleEntity" parameterType="String">
+		select  
+			<include refid="columnList"/>
+		from tb_user_role 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="roleId != null and roleId != ''">
+				AND r_id=#{roleId}
+			</if>
+			<if test="userId != null and userId != ''">
+				AND u_id=#{userId}
+			</if>
+			<if test="id != null and id != ''">
+				AND id != #{id}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 根据角色id查询用户数量 -->
+	<select id="findCountByRoleId" parameterType="String" resultType="int" >
+		SELECT count(1)
+		FROM tb_user_role
+		where r_id = #{roleId}
+	</select>
+	
+	<select id="findUserIdByRoleId" parameterType="string" resultType="string">
+		SELECT DISTINCT u_id 
+		FROM tb_user_role 
+		where r_id = #{roleId}
+	</select>
+	
+	<!-- 更新tb_user_role -->
+	<update id="updateById" parameterType="com.webside.rights.model.UserRoleEntity">
+		update tb_user_role
+		<trim prefix="SET" suffixOverrides=",">  
+			<if test="roleId != null">r_id=#{roleId},</if><!-- 角色id-->
+			<if test="userId != null">u_id=#{userId},</if><!-- 用户id-->
+			<if test="createTime != null">t_create_time=#{createTime},</if><!-- 创建时间-->
+		</trim>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据entity更新tb_user_role -->
+	<update id="updateByEntity" parameterType="com.webside.rights.model.UserRoleEntity">
+		update tb_user_role
+		<trim prefix="SET" suffixOverrides=",">  
+			<if test="roleId != null">r_id=#{roleId},</if><!-- 角色id-->
+			<if test="userId != null">u_id=#{userId},</if><!-- 用户id-->
+		</trim>
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="roleId != null and roleId != ''">
+				AND r_id=#{roleId}
+			</if>
+			<if test="userId != null and userId != ''">
+				AND u_id=#{userId}
+			</if>
+		</trim>
+	</update>
+	
+	<!-- 根据ID删除tb_user_role -->
+	<delete id="deleteById" parameterType="String">
+		delete from tb_user_role 
+		where id = #{id}
+	</delete>
+	
+	<!-- 根据entity删除tb_user_role -->
+	<delete id="deleteByEntity" parameterType="String">
+		delete from tb_user_role 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="roleId != null and roleId != ''">
+				AND r_id=#{roleId}
+			</if>
+			<if test="userId != null and userId != ''">
+				AND u_id=#{userId}
+			</if>
+		</trim>
+	</delete>
+</mapper>

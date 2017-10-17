@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.sys.mapper.HelpMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- t_sys_help字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 系统帮助-->
+			title AS "title", <!-- 标题-->
+			content AS "content", <!-- 通知内容-->
+			add_time AS "addTime", <!-- 创建时间-->
+			sys_user_id AS "sysUserId", <!-- 添加人员-->
+			type AS "type", <!-- 1.公告 2.更新 3.介绍 4.使用帮助 5.用户须知 6.反馈-->
+			sequence AS "sequence", <!-- 排序-->
+			status AS "status", <!-- 状态 1：有效 0 无效 ，2：注册，3：底部 默认1-->
+			code AS "code", <!-- 内码-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_sys_help分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.sys.model.HelpEntity" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_sys_help 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="title != null and title != ''">
+				AND title like concat('%',#{title},'%')
+			</if>
+			<if test="content != null and content != ''">
+				AND content=#{content}
+			</if>
+			<if test="addTime != null and addTime != ''">
+				AND add_time=#{addTime}
+			</if>
+			<if test="sysUserId != null and sysUserId != ''">
+				AND sys_user_id=#{sysUserId}
+			</if>
+			<if test="type != null and type != ''">
+				AND type=#{type}
+			</if>
+			<if test="sequence != null and sequence != ''">
+				AND sequence=#{sequence}
+			</if>
+			<if test="status != null and status != ''">
+				AND status=#{status}
+			</if>
+			<if test="code != null and code != ''">
+				AND code=#{code}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_sys_help -->
+	<insert id="insert" 
+			parameterType="com.webside.sys.model.HelpEntity" flushCache="true">
+		insert into t_sys_help
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 系统帮助-->
+		<if test="title != null">title,</if><!-- 标题-->
+		<if test="content != null">content,</if><!-- 通知内容-->
+		<if test="addTime != null">add_time,</if><!-- 创建时间-->
+		<if test="sysUserId != null">sys_user_id,</if><!-- 添加人员-->
+		<if test="type != null">type,</if><!-- 1.公告 2.更新 3.介绍 4.使用帮助 5.用户须知 6.反馈-->
+		<if test="sequence != null">sequence,</if><!-- 排序-->
+		<if test="status != null">status,</if><!-- 状态 1：有效 0 无效 ，2：注册，3：底部 默认1-->
+		<if test="code != null">code,</if><!-- 内码-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 系统帮助-->
+		<if test="title != null">#{title},</if><!-- 标题-->
+		<if test="content != null">#{content},</if><!-- 通知内容-->
+		<if test="addTime != null">#{addTime},</if><!-- 创建时间-->
+		<if test="sysUserId != null">#{sysUserId},</if><!-- 添加人员-->
+		<if test="type != null">#{type},</if><!-- 1.公告 2.更新 3.介绍 4.使用帮助 5.用户须知 6.反馈-->
+		<if test="sequence != null">#{sequence},</if><!-- 排序-->
+		<if test="status != null">#{status},</if><!-- 状态 1：有效 0 无效 ，2：注册，3：底部 默认1-->
+		<if test="code != null">#{code},</if><!-- 内码-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_sys_help -->
+	<select id="findById" resultType="com.webside.sys.model.HelpEntity" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_sys_help 
+		where id = #{id}
+	</select>
+	
+	<!-- 根据ID更新t_sys_help -->
+	<update id="updateById" parameterType="com.webside.sys.model.HelpEntity" flushCache="true">
+		update t_sys_help
+		<trim prefix="SET" suffixOverrides=",">  
+			<if test="title != null">title=#{title},</if><!-- 标题-->
+			<if test="content != null">content=#{content},</if><!-- 通知内容-->
+			<if test="addTime != null">add_time=#{addTime},</if><!-- 创建时间-->
+			<if test="sysUserId != null">sys_user_id=#{sysUserId},</if><!-- 添加人员-->
+			<if test="type != null">type=#{type},</if><!-- 1.公告 2.更新 3.介绍 4.使用帮助 5.用户须知 6.反馈-->
+			<if test="sequence != null">sequence=#{sequence},</if><!-- 排序-->
+			<if test="status != null">status=#{status},</if><!-- 状态 1：有效 0 无效 ，2：注册，3：底部 默认1-->
+			<if test="code != null">code=#{code},</if><!-- 内码-->
+		</trim>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID删除t_sys_help -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_sys_help 
+		where id = #{id}
+	</delete>
+</mapper>

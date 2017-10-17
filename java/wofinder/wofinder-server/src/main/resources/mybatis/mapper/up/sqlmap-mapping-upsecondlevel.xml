@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.up.mapper.IUpSecondLevelMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<!-- <cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.up.model.UpSecondLevel">
+		<id column="id" property="id"/> <!-- 主键-->
+		<result column="parent_id" property="parentId"/> <!-- 父id-->
+		<result column="up_id" property="upId"/> <!-- 人物id-->
+		<result column="title_type" property="titleType"/> <!-- 标题类型，字典存储-->
+		<result column="content" property="content"/> <!-- 内容-->
+		<result column="sort" property="sort"/> <!-- 排序-->
+		<result column="status" property="status"/> <!-- 状态-->
+		<result column="create_id" property="createId"/> <!-- 创建者-->
+		<result column="create_time" property="createTime"/> <!-- 创建时间-->
+		<result column="update_id" property="updateId"/> <!-- 修改者-->
+		<result column="update_time" property="updateTime"/> <!-- 修改时间-->
+	</resultMap>
+	
+	<!-- t_up_second_level字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- 主键-->
+			parent_id, <!-- 父id-->
+			up_id, <!-- 人物id-->
+			title_type, <!-- 标题类型，字典存储-->
+			content, <!-- 内容-->
+			sort, <!-- 排序-->
+			status, <!-- 状态-->
+			create_id, <!-- 创建者-->
+			create_time, <!-- 创建时间-->
+			update_id, <!-- 修改者-->
+			update_time, <!-- 修改时间-->
+		</trim>
+	</sql>
+	
+	
+	<select id="queryUpSecondLevelByUpId" parameterType="String" resultType="com.webside.up.model.UpSecondLevel">
+		select 
+			l.id as id,
+			l.up_id as upId,
+			l.parent_id as parentId,
+			l.title_type as titleType,
+			l.content as content
+		from t_up_second_level l 
+		where l.up_id =#{upId}
+		and l.status = 1
+		order by sort asc
+	</select>
+	
+	
+	<!-- 查询t_up_second_level分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_up_second_level 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="parentId != null and parentId != ''">
+				AND parent_id=#{parentId}
+			</if>
+			<if test="upId != null and upId != ''">
+				AND up_id=#{upId}
+			</if>
+			<if test="titleType != null and titleType != ''">
+				AND title_type=#{titleType}
+			</if>
+			<if test="content != null and content != ''">
+				AND content=#{content}
+			</if>
+			<if test="sort != null and sort != ''">
+				AND sort=#{sort}
+			</if>
+			<if test="status != null and status != ''">
+				AND status=#{status}
+			</if>
+			<if test="createId != null and createId != ''">
+				AND create_id=#{createId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+			<if test="updateId != null and updateId != ''">
+				AND update_id=#{updateId}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND update_time=#{updateTime}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_up_second_level -->
+	<insert id="insert" 
+			parameterType="com.webside.up.model.UpSecondLevel">
+		insert into t_up_second_level
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="parentId != null">parent_id,</if><!-- 父id-->
+		<if test="upId != null">up_id,</if><!-- 人物id-->
+		<if test="titleType != null">title_type,</if><!-- 标题类型，字典存储-->
+		<if test="content != null">content,</if><!-- 内容-->
+		<if test="sort != null">sort,</if><!-- 排序-->
+		<if test="status != null">status,</if><!-- 状态-->
+		<if test="createId != null">create_id,</if><!-- 创建者-->
+		<if test="createTime != null">create_time,</if><!-- 创建时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="parentId != null">#{parentId},</if><!-- 父id-->
+		<if test="upId != null">#{upId},</if><!-- 人物id-->
+		<if test="titleType != null">#{titleType},</if><!-- 标题类型，字典存储-->
+		<if test="content != null">#{content},</if><!-- 内容-->
+		<if test="sort != null">#{sort},</if><!-- 排序-->
+		<if test="status != null">#{status},</if><!-- 状态-->
+		<if test="createId != null">#{createId},</if><!-- 创建者-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_up_second_level -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_up_second_level 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新t_up_second_level -->
+	<update id="updateById" parameterType="com.webside.up.model.UpSecondLevel" flushCache="true">
+		update t_up_second_level
+		<set>
+			<trim suffixOverrides=",">
+				<if test="parentId != null">parent_id=#{parentId},</if><!-- 父id-->
+				<if test="upId != null">up_id=#{upId},</if><!-- 人物id-->
+				<if test="titleType != null">title_type=#{titleType},</if><!-- 标题类型，字典存储-->
+				<if test="content != null">content=#{content},</if><!-- 内容-->
+				<if test="sort != null">sort=#{sort},</if><!-- 排序-->
+				<if test="status != null">status=#{status},</if><!-- 状态-->
+				<if test="updateId != null">update_id=#{updateId},</if><!-- 修改者-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 修改时间-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_up_second_level -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_up_second_level  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_up_second_level -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_up_second_level 
+		where id = #{id}
+	</delete>
+</mapper>

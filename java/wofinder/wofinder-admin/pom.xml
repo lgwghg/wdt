@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>com.wodota</groupId>
+		<artifactId>wofinder</artifactId>
+		<version>${version}</version>
+	</parent>
+	
+	<artifactId>wofinder-admin</artifactId>
+	<packaging>war</packaging>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.wodota</groupId>
+			<artifactId>wofinder-server</artifactId>
+			<version>${version}</version>
+		</dependency>
+ 		<dependency> 
+			<groupId>com.wodota</groupId>
+			<artifactId>wofinder-crawler</artifactId>
+			<version>${version}</version>
+		</dependency> 
+		<dependency>
+			<groupId>com.wodota</groupId>
+			<artifactId>wofinder-schedule</artifactId>
+			<version>${version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.wodota</groupId>
+			<artifactId>wofinder-login</artifactId>
+			<version>${version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>ROOT</finalName>
+		<!-- 
+		<resources>
+            <resource>
+                <directory>../wofinder-base/src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>../wofinder-server/src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>../wofinder-schedule/src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>../wofinder-login/src/main/resources</directory>
+            </resource>
+        </resources> 
+        -->
+		<plugins>
+			<!-- Run the JUnit unit tests in an isolated classloader -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.4.2</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<inherited>true</inherited>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+				</configuration>
+			</plugin>
+			<!-- generate a javasource -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.0.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- generate a javadoc -->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<javadocDirectory>target/javadoc</javadocDirectory>
+					<reportOutputDirectory>target/javadoc</reportOutputDirectory>
+					<charset>UTF-8</charset>
+					<encoding>UTF-8</encoding>
+					<docencoding>UTF-8</docencoding>
+					<show>private</show>
+				</configuration>
+			</plugin>
+
+			<!-- 代码生成 -->
+			<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>1.3.2</version>
+				<configuration>
+					<verbose>true</verbose>
+					<overwrite>true</overwrite>
+				</configuration>
+			</plugin>
+			
+			<plugin> 
+				<groupId>org.apache.tomcat.maven</groupId> 
+				<artifactId>tomcat7-maven-plugin</artifactId> 
+				<version>2.2</version> 
+				<configuration> 
+				<url>http://localhost:8080/manager</url> <!-- tomcat管理路径 -->
+				<server>Tomcat8</server> <!-- 与settings.xml文件中Server的id相同 -->
+				<path>/webapps</path> <!-- 应用的部署位置 -->
+				</configuration> 
+		    </plugin>
+
+			<!-- 部署至本机 -->
+			<!-- <plugin> <groupId>org.codehaus.cargo</groupId> <artifactId>cargo-maven2-plugin</artifactId> 
+				<version>1.0</version> <configuration> <container> <containerId>tomcat7x</containerId> 
+				<home>D:\Program Files\apache-tomcat-7.0.62</home> </container> <configuration> 
+				<type>existing</type> <home>D:\Program Files\apache-tomcat-7.0.62</home> 
+				</configuration> </configuration> </plugin> -->
+		</plugins>
+	</build>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+</project>

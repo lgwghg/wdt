@@ -1,0 +1,2824 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="edge"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>wofinder-搜索结果页</title>
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_7f82nhukauqpk3xr.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap-material-design.css" type="text/css">
+    <link rel="stylesheet" href="css/ripples.min.css" type="text/css">
+    <link rel="stylesheet" href="css/mCustomScrollbar.css" type="text/css">
+    <link rel="stylesheet" href="css/homepage.css" type="text/css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="css/common.css" type="text/css">
+    <link rel="stylesheet" href="css/search-result.css" type="text/css">
+    <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/material.js" type="text/javascript"></script>
+    <script src="js/ripples.min.js" type="text/javascript"></script>
+    <script src="js/mCustomScrollbar.concat.min.js" type="text/javascript"></script>
+    <script src="js/common.js" type="text/javascript"></script>
+</head>
+<body class="o-h">
+    <!--顶部-->
+    <ul class="homepage-top search-result-top">
+        <!--LOGO-->
+        <h2 class="homepage-main-search-logo-outside">
+            <a href="首页.html" class="homepage-main-search-logo">
+                <img src="images/w-b.png" class="one">
+                <img src="images/w-b-b.png" class="two">
+            </a>
+        </h2>
+        <!--搜索框-->
+        <li class="homepage-top-li homepage-main-search-kz" title="点击搜索">
+            <i class="iconfont icon-wf_sousuo iconfont-x" title="菜单"></i>
+        </li>
+        <li class="homepage-top-li homepage-main-search">
+            <div class="form-group label-floating">
+                <input type="text" class="form-control text_input" placeholder="请输入UP主名称或视频关键词">
+                <div class="search-record">
+                    <p>
+                        <span class="search-content">WoDotA</span>
+                        <span class="search-label">热</span>
+                    </p>
+                    <p>
+                        <span class="search-content">WoDotA</span>
+                        <span class="search-content-other">官网</span>
+                        <span class="search-label">荐</span>
+                    </p>
+                    <p>
+                        <span class="search-content">WoDotA</span>
+                        <span class="search-content-other">优酷空间</span>
+                    </p>
+                    <p>
+                        <span class="search-content">WoDotA</span>
+                        <span class="search-content-other">背景音乐</span>
+                    </p>
+                    <p>
+                        <span class="search-content">WoDotA</span>
+                        <span class="search-content-other">&nbsp;dota2</span>
+                    </p>
+                </div>
+            </div>
+            <div class="btn-outside">
+                <div class="btn btn-primary btn-raised">找一下</div>
+            </div>
+        </li>
+        <li class="homepage-top-li homepage-top-li-four dropdown">
+            <i class="iconfont icon-wf_menu iconfont-x dropdown-button" title="菜单"></i>
+            <div class="dropdown-triangle-bd"></div>
+            <div class="dropdown-triangle"></div>
+            <div class="load-schedule">
+                <div class="one"></div>
+            </div>
+            <ul class="dropdown-x menu-content none">
+                <li>
+                    <i class="iconfont icon-wf_tijiaojilu"></i>
+                    <p>提交记录</p>
+                </li>
+                <li class="menu-content-new">
+                    <i class="iconfont icon-wf_bianjicitiao"></i>
+                    <p>编辑词条</p>
+                </li>
+                <li>
+                    <i class="iconfont icon-wf_paihang"></i>
+                    <p>排行榜</p>
+                </li>
+            </ul>
+        </li>
+        <li class="homepage-top-li homepage-top-li-three dropdown">
+            <i class="iconfont icon-wf_touxiang iconfont-x dropdown-button" title="个人中心"></i>
+            <span class="new-message">1.4K</span>
+            <div class="dropdown-triangle-bd"></div>
+            <div class="dropdown-triangle"></div>
+            <div class="load-schedule">
+                <div class="one"></div>
+            </div>
+            <div class="dropdown-x grzx none">
+                <ul class="grzx-content">
+                    <li class="grzx-message checked">
+                        <span class="view1">消息</span>
+                        <span class="view2">14</span>
+                    </li>
+                    <li class="grzx-setting">
+                        <span class="view1">我</span>
+                        <span class="view2">14</span>
+                    </li>
+                </ul>
+                <ul class="grzx-x grzx-message-content">
+                    <li class="no-see">
+                        <strong>
+                            <a href="javascript:;">
+                                <i class="iconfont icon-wf_shezhi-copy"></i>
+                                <p class="view1">你成功完成了个人资料你成功完成了个人资料</p>
+                                <div class="view2"></div>
+                            </a>
+                        </strong>
+                    </li>
+                    <li class="no-see">
+                        <strong>
+                            <a href="javascript:;">
+                                <i class="iconfont icon-wf_shezhi-copy"></i>
+                                <p class="view1">你成功完成了个人资料你成功完成了个人资料</p>
+                                <div class="view2"></div>
+                            </a>
+                        </strong>
+                    </li>
+                    <li class="no-see">
+                        <strong>
+                            <a href="javascript:;">
+                                <i class="iconfont icon-wf_shezhi-copy"></i>
+                                <p class="view1">你成功完成了个人资料你成功完成了个人资料</p>
+                                <div class="view2"></div>
+                            </a>
+                        </strong>
+                    </li>
+                    <li class="no-see">
+                        <strong>
+                            <a href="javascript:;">
+                                <i class="iconfont icon-wf_pinglun1"></i>
+                                <p class="view1"><span class="mb"></span><img src="images/message.png"><span>有8条回复</span></p>
+                                <div class="view2"></div>
+                            </a>
+                        </strong>
+                    </li>
+                    <li>
+                        <strong>
+                            <a href="javascript:;">
+                                <i class="iconfont icon-wf_pinglun1"></i>
+                                <p class="view1"><span class="mb"></span><img src="images/message.png"><span>有8条回复</span></p>
+                                <div class="view2"></div>
+                            </a>
+                        </strong>
+                    </li>
+                    <li>
+                        <strong>
+                            <a href="javascript:;">
+                                <i class="iconfont icon-wf_shezhi-copy"></i>
+                                <p class="view1">你成功完成了个人资料你成功完成了个人资料</p>
+                                <div class="view2"></div>
+                            </a>
+                        </strong>
+                    </li>
+                    <li>
+                        <strong>
+                            <a href="javascript:;">
+                                <i class="iconfont icon-wf_pinglun1"></i>
+                                <p class="view1"><span class="mb"></span><img src="images/message.png"><span>有10W条回复</span></p>
+                                <div class="view2"></div>
+                            </a>
+                        </strong>
+                    </li>
+                    <li>
+                        <strong>
+                            <a href="javascript:;">
+                                <i class="iconfont icon-wf_pinglun1"></i>
+                                <p class="view1"><span class="mb"></span><img src="images/message.png"><span>有1.5K条回复</span></p>
+                                <div class="view2"></div>
+                            </a>
+                        </strong>
+                    </li>
+                    <li>
+                        <strong>
+                            <a href="javascript:;">
+                                <i class="iconfont icon-wf_shezhi-copy"></i>
+                                <p class="view1">你成功完成了个人资料你成功完成了个人资料</p>
+                                <div class="view2"></div>
+                            </a>
+                        </strong>
+                    </li>
+                    <li>
+                        <strong>
+                            <a href="javascript:;">
+                                <i class="iconfont icon-wf_pinglun1"></i>
+                                <p class="view1"><span class="mb"></span><img src="images/message.png"><span>有999条回复</span></p>
+                                <div class="view2"></div>
+                            </a>
+                        </strong>
+                    </li>
+                    <p class="load-more">
+                        <strong>
+                            <a href="javascript:;">
+                                更多
+                            </a>
+                        </strong>
+                    </p>
+                </ul>
+                <div class="grzx-x grzx-setting-content none">
+                    <div class="grzx-view1">
+                        <div class="images-x images-x-content grzx-view1-header">
+                            <img src="images/header2.jpg">
+                        </div>
+                        <div class="grzx-view1-ms">
+                            <p class="one">
+                                <span class="second">D6BEAVDD6BEAVDD6BEAVD</span>
+                                <i class="iconfont icon-wf_tuichu"></i>
+                                <i class="iconfont icon-wf_shezhi-copy"></i>
+                            </p>
+                            <p class="two">
+                                <i class="iconfont icon-wf_xunzhang"></i>
+                                <span class="first">Lv.1</span>
+                                <span class="thirdly">220</span>
+                                <span class="second">110/</span>
+                            </p>
+                            <p class="three">
+                                <span></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grzx-view2">
+                        <div class="one">
+                            <p class="first">
+                                <i class="iconfont icon-wf_qiandao"></i>
+                                <span class="data">12</span>
+                                <span class="title">签到+5</span>
+                            </p>
+                            <p class="second">每日签到获得5经验值</p>
+                        </div>
+                        <button class="btn btn-primary btn-raised">签到</button>
+                    </div>
+                    <ul class="grzx-view3">
+                        <li>
+                            <span class="one">开启竞价广告</span>
+                            <div class="on-off open-x">
+                                <span></span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="one">开启系统提示</span>
+                            <div class="on-off close-x">
+                                <span></span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="one">开启信息弹幕</span>
+                            <div class="on-off close-x">
+                                <span></span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="one">开启评论提示</span>
+                            <div class="on-off close-x">
+                                <span></span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="one">开启我的评论高亮</span>
+                            <div class="on-off close-x">
+                                <span></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="homepage-top-li homepage-top-li-two dropdown">
+            <i class="iconfont icon-wf_lishijilu iconfont-x dropdown-button" title="历史记录"></i>
+            <div class="dropdown-triangle-bd"></div>
+            <div class="dropdown-triangle"></div>
+            <div class="load-schedule">
+                <div class="one"></div>
+            </div>
+            <div class="dropdown-x history-content none">
+                <ul class="history-main has-history">
+                    <li>
+                        <i class="iconfont icon-wf_bofang1"></i>
+                        <strong class="title"><a href="javascript:;">梁博个人干起来了...</a></strong>
+                        <span class="time">1分钟前</span>
+                    </li>
+                    <li>
+                        <i class="iconfont icon-wf_touxiang"></i>
+                        <strong class="title"><a href="javascript:;">鱼嘴滑舌39集</a></strong>
+                        <span class="time">10分钟前</span>
+                    </li>
+                    <li>
+                        <i class="iconfont icon-wf_bofang1"></i>
+                        <strong class="title"><a href="javascript:;">只是一个视频标题...</a></strong>
+                        <span class="time">20分钟前</span>
+                    </li>
+                    <li>
+                        <i class="iconfont icon-wf_bofang1"></i>
+                        <strong class="title"><a href="javascript:;">梁博个人干起来了...</a></strong>
+                        <span class="time">30分钟前</span>
+                    </li>
+                    <li>
+                        <i class="iconfont icon-wf_bofang1"></i>
+                        <strong class="title"><a href="javascript:;">鱼嘴滑舌39集</a></strong>
+                        <span class="time">40分钟前</span>
+                    </li>
+                    <li>
+                        <i class="iconfont icon-wf_bofang1"></i>
+                        <strong class="title"><a href="javascript:;">只是一个视频标题...</a></strong>
+                        <span class="time">50分钟前</span>
+                    </li>
+                    <li>
+                        <i class="iconfont icon-wf_bofang1"></i>
+                        <strong class="title"><a href="javascript:;">梁博个人干起来了...</a></strong>
+                        <span class="time">1小时前</span>
+                    </li>
+                    <li>
+                        <i class="iconfont icon-wf_touxiang"></i>
+                        <strong class="title"><a href="javascript:;">鱼嘴滑舌39集</a></strong>
+                        <span class="time">2小时前</span>
+                    </li>
+                </ul>
+                <p class="delete-history">
+                            <span class="delete-history-btn">
+                                <i class="iconfont icon-lajixiang"></i>
+                                <span>清除记录</span>
+                            </span>
+                </p>
+            </div>
+        </li>
+    </ul>
+    <!--顶部之外-->
+    <div class="main fix">
+        <div class="search-result-main">
+            <!--搜素结果数量预加载-->
+            <div class="search-result-main-number">WoDotA为您找到“<h1>XXX</h1>”的相关结果约10000000个</div>
+            <!--搜素结果数量-->
+            <div class="search-result-main-number">WoDotA为您找到“<h1>卢本伟</h1>”的相关结果约10000000个</div>
+            <!--搜索结果-->
+            <div class="search-result-main-content">
+                <!--left-->
+                <ul class="search-content-left">
+                    <!--游戏人物介绍-->
+                    <li class="people introduce">
+                        <i class="iconfont icon-wf_renwutouxiang lt"></i>
+                        <ul class="top">
+                            <li class="title">卢本伟_游戏人物</li>
+                            <li class="label-x">
+                                <div>
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span>职业选手</span>
+                                </div>
+                                <div>
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span>主播</span>
+                                </div>
+                            </li>
+                            <li class="ranking">
+                                <i class="iconfont icon-wf_renqizhishushi"></i>
+                                <span>WO排名：569,034</span>
+                            </li>
+                            <li class="grade">
+                                <i class="iconfont icon-wf_pingfen"></i>
+                                <span>综合评分：4.7分</span>
+                            </li>
+                        </ul>
+                        <div class="bottom">
+                            <ul class="left">
+                                <li class="images-x images-x-content">
+                                    <div class="bg">
+                                        <img src="images/lbw5.png">
+                                    </div>
+                                </li>
+                                <li class="images-x images-x-content">
+                                    <div class="bg">
+                                        <img src="images/lbw4.png">
+                                    </div>
+                                </li>
+                                <li class="images-x images-x-content">
+                                    <div class="bg">
+                                        <img src="images/lbw3.png">
+                                    </div>
+                                </li>
+                                <li class="images-x images-x-content">
+                                    <div class="bg">
+                                        <img src="images/lbw2.png">
+                                    </div>
+                                </li>
+                                <li class="images-x images-x-content">
+                                    <div class="bg">
+                                        <img src="images/lbw1.png">
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="right">
+                                <p>
+                                    卢本伟 ，ID：Wh1t3zZ，前皇族电子竞技俱乐部英
+                                    雄联盟分部中单，在随即获得S3全球决赛亚军后退役
+                                    。曾获2011TGA成都区冠军、2011TGA总决赛冠军、
+                                    2011WCG中国区冠军、亚军等
+                                </p>
+                                <strong><a href="javascript:;">更多详情<i class="iconfont icon-iconmore"></i></a></strong>
+                            </div>
+                        </div>
+                    </li>
+                    <!--视频节目介绍-->
+                    <li class="program introduce">
+                        <i class="iconfont icon-wf_shipinbiaoqian lt"></i>
+                        <ul class="top">
+                            <li class="title">徐老师来巡山</li>
+                            <li class="label-x">
+                                <div class="one">
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span>电子竞技</span>
+                                </div>
+                                <div class="two">
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span>搞笑</span>
+                                </div>
+                            </li>
+                            <li class="ranking">
+                                <i class="iconfont icon-wf_renqizhishushi"></i>
+                                <span>WO排名：352,503</span>
+                            </li>
+                            <li class="grade">
+                                <i class="iconfont icon-wf_pingfen"></i>
+                                <span>综合评分：4.5分</span>
+                            </li>
+                        </ul>
+                        <div class="bottom">
+                            <ul class="left">
+                                <li class="images-x images-x-content">
+                                    <div class="bg">
+                                        <img src="images/xls5.png">
+                                    </div>
+                                </li>
+                                <li class="images-x images-x-content">
+                                    <div class="bg">
+                                        <img src="images/xls4.png">
+                                    </div>
+                                </li>
+                                <li class="images-x images-x-content">
+                                    <div class="bg">
+                                        <img src="images/xls3.png">
+                                    </div>
+                                </li>
+                                <li class="images-x images-x-content">
+                                    <div class="bg">
+                                        <img src="images/xls2.png">
+                                    </div>
+                                </li>
+                                <li class="images-x images-x-content">
+                                    <div class="bg">
+                                        <img src="images/xls1.png">
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="right">
+                                <p>
+                                    徐老师继《LOL三十六计》《进击的小学生》之后出
+                                    品的全新英雄联盟搞笑系列巨作，保留了一贯的独特
+                                    风格，每周精选最精彩的搞笑镜头，加上独一无二的
+                                    配音与制作
+                                </p>
+                                <strong><a href="javascript:;">更多详情<i class="iconfont icon-iconmore"></i></a></strong>
+                            </div>
+                        </div>
+                    </li>
+                    <!--游戏人物介绍，视频节目介绍预加载-->
+                    <li class="people introduce introduce-yjz">
+                        <div class="left-top"></div>
+                        <ul class="top">
+                            <li class="title"></li>
+                            <li class="label-x">
+                                <div class="one">
+                                </div>
+                                <div class="two">
+                                </div>
+                            </li>
+                            <li class="ranking">
+                            </li>
+                            <li class="grade">
+                            </li>
+                        </ul>
+                        <div class="bottom">
+                            <ul class="left">
+                            </ul>
+                            <div class="right">
+                                <p>
+                                </p>
+                                <strong></strong>
+                            </div>
+                        </div>
+                    </li>
+                    <!--具体视频内容-->
+                    <li class="video">
+                        <!--标题-->
+                        <div class="title-x">
+                            <span class="one"></span>
+                            <h3 class="two">
+                                <strong>
+                                    <a href="javascript:;">55开日服历险记男刀，抗日英雄卢本伟</a>
+                                </strong>
+                            </h3>
+                        </div>
+                        <!--视频封面和介绍-->
+                        <div class="unfold-before">
+                            <div class="images-x images-x-content">
+                                <img src="images/fm-one.png">
+                            </div>
+                            <div class="two">
+                                <div><span>作者：</span><span>五五开</span></div>
+                                <p>
+                                    前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                    退役。曾获2011TGA成都区冠军前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                    退役。曾获2011TGA成都区冠军前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                    退役。曾获2011TGA成都区冠军前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                    退役。曾获2011TGA成都区冠军前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                    退役。曾获2011TGA成都区冠军
+                                </p>
+                            </div>
+                        </div>
+                        <!--视频点击后播放-->
+                        <div class="unfold-after unfold-after-x hide">
+                            <video controls>
+                                <source src="images/bg1.mp4" type="video/mp4">
+                                <source src="images/bg1.mp4" type="video/mp4">
+                                <source src="images/bg1.mp4" type="video/mp4">
+                                <source src="images/bg1.mp4" type="video/mp4">
+                            </video>
+                            <div class="jzq">
+                                <img src="images/loadding_01.gif">
+                            </div>
+                            <span class="time">01:02:03</span>
+                        </div>
+                        <!--切换视频来源-->
+                        <div class="video-source">
+                            <div class="left" title="播放量">
+                                <i class="iconfont icon-wf_bofang"></i>
+                                <span class="two">142万</span>
+                            </div>
+                            <div class="middle">
+                                <i class="iconfont icon-wf_zuo_qiehuan"></i>
+                                <div class="video-source-content">
+                                    <ul>
+                                        <li>
+                                            <i class="iconfont icon-wf_Bzhan checked"></i>
+                                            <i class="iconfont icon-wf_aiqiyi"></i>
+                                            <i class="iconfont icon-wf_leshi"></i>
+                                            <i class="iconfont icon-wf_souhu"></i>
+                                            <i class="iconfont icon-wf_Azhan"></i>
+                                            <i class="iconfont icon-wf_youku"></i>
+                                            <i class="iconfont icon-wf_tengxun"></i>
+                                            <i class="iconfont icon-wf_Azhan"></i>
+                                            <i class="iconfont icon-wf_youku"></i>
+                                            <i class="iconfont icon-wf_tengxun"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <i class="iconfont icon-wf_you_qiehuan"></i>
+                            </div>
+                            <div class="right">
+                                <span class="grade-number">7分</span>
+                                <span>评论：</span>
+                                <strong><a href="http://www.baidu.com">999</a></strong>
+                            </div>
+                        </div>
+                        <!--视频点击后简介模块-->
+                        <div class="grade unfold-after-x hide">
+                            <div class="grade-x">
+                                <div class="left">
+                                    <div class="one"></div>
+                                    <div class="two">
+                                        前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全
+                                        球决赛亚军后退役。曾获2011TGA成都区冠军前皇族电子竞
+                                        技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                        退役。曾获2011TGA成都区冠军
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <div class="grade-number-x">
+                                        <ul>
+                                            <li class="item1">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                            <li class="item2">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                            <li class="item3">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                            <li class="item4">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                            <li class="item5">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                        </ul>
+                                        <div class="two">
+                                            <div class="item1-one"></div>
+                                            <div class="item1-two"></div>
+                                            <div class="item2-one"></div>
+                                            <div class="item2-two"></div>
+                                            <div class="item3-one"></div>
+                                            <div class="item3-two"></div>
+                                            <div class="item4-one"></div>
+                                            <div class="item4-two"></div>
+                                            <div class="item5-one"></div>
+                                            <div class="item5-two"></div>
+                                        </div>
+                                        <span class="three"></span>
+                                    </div>
+                                </div>
+                                <div class="author">
+                                    <span>作者:</span>
+                                    <span>PDD</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--评论未展开-->
+                        <div class="comment-no">
+                            <ul class="comment-inside">
+                                <li>
+                                    <div class="header images-x images-x-content">
+                                        <img src="images/header2.jpg">
+                                        <span class="no_header no_header-X">X</span>
+                                    </div>
+                                    <span class="name">简自豪：</span>
+                                        <span class="content">
+                                            I anticipated some ground fog after the prior day's rain...
+                                        </span>
+                                </li>
+                                <li>
+                                    <div class="header images-x images-x-content">
+                                        <img src="images/header2.jpg">
+                                        <span class="no_header no_header-X">X</span>
+                                    </div>
+                                    <span class="name">简自豪：</span>
+                                        <span class="content">
+                                            I anticipated some ground fog after the prior day's rain...
+                                        </span>
+                                </li>
+                                <li>
+                                    <div class="header images-x images-x-content">
+                                        <img src="images/header2.jpg">
+                                        <span class="no_header no_header-X">X</span>
+                                    </div>
+                                    <span class="name">简自豪：</span>
+                                        <span class="content">
+                                            I anticipated some ground fog after the prior day's rain...
+                                        </span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="comment-x hide">
+                            <!--评论展开后分享模块-->
+                            <div class="share">
+                                <span class="one">分享：</span>
+                                <div class="two">
+                                    <i class="iconfont icon-qq iconfont-x"><div class="ewm"><div class="ewm-fx"><img src="images/header2.jpg"></div><div class="sys-fx">微信扫一扫分享</div></div></i>
+                                    <i class="iconfont icon-weixin iconfont-x"><div class="ewm"><div class="ewm-fx"><img src="images/header2.jpg"></div><div class="sys-fx">微信扫一扫分享</div></div></i>
+                                    <i class="iconfont icon-weibo iconfont-x"><div class="ewm"><div class="ewm-fx"><img src="images/header2.jpg"></div><div class="sys-fx">微信扫一扫分享</div></div></i>
+                                </div>
+                                <strong class="three">
+                                    <a href="javascript:;">视频来源</a>
+                                </strong>
+                            </div>
+                            <!--评论已展开-->
+                            <div class="comment-yes">
+                                <ul class="comment-inside">
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">简自豪</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    <span>回复</span>
+                                                    <span class="hf">卢本伟</span>
+                                                        <span>: I anticipated some ground fog after the prior day's rain and the
+                                                        dropintemper priorday's rain and the ature</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">卢本伟</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">赵梦玥</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">笑笑</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    <span>回复</span>
+                                                    <span class="hf">卢本伟</span>
+                                                        <span>: I anticipated some ground fog after the prior day's rain and the
+                                                        dropintemper priorday's rain and the ature</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">微笑</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">若风</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">微笑</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    <span>回复</span>
+                                                    <span class="hf">卢本伟</span>
+                                                        <span>: I anticipated some ground fog after the prior day's rain and the
+                                                        dropintemper priorday's rain and the ature</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">卷毛</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">PDD</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">Faker</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    <span>回复</span>
+                                                    <span class="hf">卢本伟</span>
+                                                        <span>: I anticipated some ground fog after the prior day's rain and the
+                                                        dropintemper priorday's rain and the ature</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">徐老师</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">董小飒</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="no-comment hide">没有新的评论</li>
+                                    <div class="load-more hide"><img src="images/loadding-02.gif"></div>
+                                </ul>
+                            </div>
+                            <div class="comment-fb-outside">
+                                <div class="header images-x images-x-content">
+                                    <img src="images/header2.jpg">
+                                    <span class="no_header no_header-X">X</span>
+                                </div>
+                                <div class="hf-x hide">
+                                    <span>回复：</span>
+                                    <span class="name">简自豪</span>
+                                </div>
+                                <input type="text" class="comment-fb" placeholder="添加评论...">
+                                <i class="iconfont icon-wf_huiche iconfont-x"></i>
+                            </div>
+                        </div>
+
+                        <!--添加图片和链接评论-->
+                        <!--<div class="add-images hide">
+                            <i class="iconfont icon-camera iconfont-x"></i>
+                            <i class="iconfont icon-link iconfont-x"></i>
+                        </div>-->
+                    </li>
+                    <!--具体视频内容预加载-->
+                    <li class="video video-yjz">
+                        <!--标题-->
+                        <div class="title-x title-x-yjz">
+                            <span class="one"></span>
+                            <h3 class="two">
+                                <strong>
+                                    <a href="javascript:;"></a>
+                                </strong>
+                            </h3>
+                        </div>
+                        <!--视频封面和介绍-->
+                        <div class="unfold-before">
+                            <div class="images-x images-x-content">
+                            </div>
+                            <div class="two">
+                                <p>
+                                </p>
+                            </div>
+                        </div>
+                        <!--切换视频来源-->
+                        <div class="video-source">
+                            <div class="left" title="播放量">
+                            </div>
+                            <div class="middle">
+                            </div>
+                            <div class="right">
+                            </div>
+                        </div>
+                        <!--评论未展开-->
+                        <div class="comment-no">
+                            <ul class="comment-inside">
+                                <li>
+                                    <div class="header images-x images-x-content">
+                                    </div>
+                                    <span class="name"></span>
+                                    <span class="content"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!--具体视频内容-->
+                    <li class="video">
+                        <!--标题-->
+                        <div class="title-x">
+                            <span class="one"></span>
+                            <h3 class="two">
+                                <strong>
+                                    <a href="javascript:;">55开日服历险记男刀，抗日英雄卢本伟</a>
+                                </strong>
+                            </h3>
+                        </div>
+                        <!--视频封面和介绍-->
+                        <div class="unfold-before">
+                            <div class="images-x images-x-content">
+                                <img src="images/fm-one.png">
+                            </div>
+                            <div class="two">
+                                <div><span>作者：</span><span>五五开</span></div>
+                                <p>
+                                    前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                    退役。曾获2011TGA成都区冠军前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                    退役。曾获2011TGA成都区冠军前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                    退役。曾获2011TGA成都区冠军前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                    退役。曾获2011TGA成都区冠军前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                    退役。曾获2011TGA成都区冠军
+                                </p>
+                            </div>
+                        </div>
+                        <!--视频点击后播放-->
+                        <div class="unfold-after unfold-after-x hide">
+                            <video controls>
+                                <source src="images/bg1.mp4" type="video/mp4">
+                                <source src="images/bg1.mp4" type="video/mp4">
+                                <source src="images/bg1.mp4" type="video/mp4">
+                                <source src="images/bg1.mp4" type="video/mp4">
+                            </video>
+                            <div class="jzq">
+                                <img src="images/loadding_01.gif">
+                            </div>
+                            <span class="time">01:02:03</span>
+                        </div>
+                        <!--切换视频来源-->
+                        <div class="video-source">
+                            <div class="left" title="播放量">
+                                <i class="iconfont icon-wf_bofang"></i>
+                                <span class="two">142万</span>
+                            </div>
+                            <div class="middle">
+                                <i class="iconfont icon-wf_zuo_qiehuan"></i>
+                                <div class="video-source-content">
+                                    <ul>
+                                        <li>
+                                            <i class="iconfont icon-wf_Bzhan checked"></i>
+                                            <i class="iconfont icon-wf_aiqiyi"></i>
+                                            <i class="iconfont icon-wf_leshi"></i>
+                                            <i class="iconfont icon-wf_souhu"></i>
+                                            <i class="iconfont icon-wf_Azhan"></i>
+                                            <i class="iconfont icon-wf_youku"></i>
+                                            <i class="iconfont icon-wf_tengxun"></i>
+                                            <i class="iconfont icon-wf_Azhan"></i>
+                                            <i class="iconfont icon-wf_youku"></i>
+                                            <i class="iconfont icon-wf_tengxun"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <i class="iconfont icon-wf_you_qiehuan"></i>
+                            </div>
+                            <div class="right">
+                                <span class="grade-number">7分</span>
+                                <span>评论：</span>
+                                <strong><a href="http://www.baidu.com">999</a></strong>
+                            </div>
+                        </div>
+                        <!--视频点击后简介模块-->
+                        <div class="grade unfold-after-x hide">
+                            <div class="grade-x">
+                                <div class="left">
+                                    <div class="one"></div>
+                                    <div class="two">
+                                        前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全
+                                        球决赛亚军后退役。曾获2011TGA成都区冠军前皇族电子竞
+                                        技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                        退役。曾获2011TGA成都区冠军
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <div class="grade-number-x">
+                                        <ul>
+                                            <li class="item1">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                            <li class="item2">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                            <li class="item3">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                            <li class="item4">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                            <li class="item5">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                        </ul>
+                                        <div class="two">
+                                            <div class="item1-one"></div>
+                                            <div class="item1-two"></div>
+                                            <div class="item2-one"></div>
+                                            <div class="item2-two"></div>
+                                            <div class="item3-one"></div>
+                                            <div class="item3-two"></div>
+                                            <div class="item4-one"></div>
+                                            <div class="item4-two"></div>
+                                            <div class="item5-one"></div>
+                                            <div class="item5-two"></div>
+                                        </div>
+                                        <span class="three"></span>
+                                    </div>
+                                </div>
+                                <div class="author">
+                                    <span>作者:</span>
+                                    <span>PDD</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--评论未展开-->
+                        <div class="comment-no">
+                            <ul class="comment-inside">
+                                <li>
+                                    <div class="header images-x images-x-content">
+                                        <img src="images/header2.jpg">
+                                        <span class="no_header no_header-X">X</span>
+                                    </div>
+                                    <span class="name">简自豪：</span>
+                                        <span class="content">
+                                            I anticipated some ground fog after the prior day's rain...
+                                        </span>
+                                </li>
+                                <li>
+                                    <div class="header images-x images-x-content">
+                                        <img src="images/header2.jpg">
+                                        <span class="no_header no_header-X">X</span>
+                                    </div>
+                                    <span class="name">简自豪：</span>
+                                        <span class="content">
+                                            I anticipated some ground fog after the prior day's rain...
+                                        </span>
+                                </li>
+                                <li>
+                                    <div class="header images-x images-x-content">
+                                        <img src="images/header2.jpg">
+                                        <span class="no_header no_header-X">X</span>
+                                    </div>
+                                    <span class="name">简自豪：</span>
+                                        <span class="content">
+                                            I anticipated some ground fog after the prior day's rain...
+                                        </span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="comment-x hide">
+                            <!--评论展开后分享模块-->
+                            <div class="share">
+                                <span class="one">分享：</span>
+                                <div class="two">
+                                    <i class="iconfont icon-qq iconfont-x"><div class="ewm"><div class="ewm-fx"><img src="images/header2.jpg"></div><div class="sys-fx">微信扫一扫分享</div></div></i>
+                                    <i class="iconfont icon-weixin iconfont-x"><div class="ewm"><div class="ewm-fx"><img src="images/header2.jpg"></div><div class="sys-fx">微信扫一扫分享</div></div></i>
+                                    <i class="iconfont icon-weibo iconfont-x"><div class="ewm"><div class="ewm-fx"><img src="images/header2.jpg"></div><div class="sys-fx">微信扫一扫分享</div></div></i>
+                                </div>
+                                <strong class="three">
+                                    <a href="javascript:;">视频来源</a>
+                                </strong>
+                            </div>
+                            <!--评论已展开-->
+                            <div class="comment-yes">
+                                <ul class="comment-inside">
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">简自豪</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    <span>回复</span>
+                                                    <span class="hf">卢本伟</span>
+                                                        <span>: I anticipated some ground fog after the prior day's rain and the
+                                                        dropintemper priorday's rain and the ature</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">卢本伟</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">赵梦玥</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">笑笑</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    <span>回复</span>
+                                                    <span class="hf">卢本伟</span>
+                                                        <span>: I anticipated some ground fog after the prior day's rain and the
+                                                        dropintemper priorday's rain and the ature</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">微笑</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">若风</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">微笑</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    <span>回复</span>
+                                                    <span class="hf">卢本伟</span>
+                                                        <span>: I anticipated some ground fog after the prior day's rain and the
+                                                        dropintemper priorday's rain and the ature</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">卷毛</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">PDD</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">Faker</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    <span>回复</span>
+                                                    <span class="hf">卢本伟</span>
+                                                        <span>: I anticipated some ground fog after the prior day's rain and the
+                                                        dropintemper priorday's rain and the ature</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">徐老师</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">董小飒</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="no-comment hide">没有新的评论</li>
+                                    <div class="load-more hide"><img src="images/loadding-02.gif"></div>
+                                </ul>
+                            </div>
+                            <div class="comment-fb-outside">
+                                <div class="header images-x images-x-content">
+                                    <img src="images/header2.jpg">
+                                    <span class="no_header no_header-X">X</span>
+                                </div>
+                                <div class="hf-x hide">
+                                    <span>回复：</span>
+                                    <span class="name">简自豪</span>
+                                </div>
+                                <input type="text" class="comment-fb" placeholder="添加评论...">
+                                <i class="iconfont icon-wf_huiche iconfont-x"></i>
+                            </div>
+                        </div>
+
+                        <!--添加图片和链接评论-->
+                        <!--<div class="add-images hide">
+                            <i class="iconfont icon-camera iconfont-x"></i>
+                            <i class="iconfont icon-link iconfont-x"></i>
+                        </div>-->
+                    </li>
+                    <!--具体视频内容-->
+                    <li class="video">
+                        <!--标题-->
+                        <div class="title-x">
+                            <span class="one"></span>
+                            <h3 class="two">
+                                <strong>
+                                    <a href="javascript:;">55开日服历险记男刀，抗日英雄卢本伟</a>
+                                </strong>
+                            </h3>
+                        </div>
+                        <!--视频封面和介绍-->
+                        <div class="unfold-before">
+                            <div class="images-x images-x-content">
+                                <img src="images/fm-one.png">
+                            </div>
+                            <div class="two">
+                                <div><span>作者：</span><span>五五开</span></div>
+                                <p>
+                                    前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                    退役。曾获2011TGA成都区冠军前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                    退役。曾获2011TGA成都区冠军前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                    退役。曾获2011TGA成都区冠军前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                    退役。曾获2011TGA成都区冠军前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                    退役。曾获2011TGA成都区冠军
+                                </p>
+                            </div>
+                        </div>
+                        <!--视频点击后播放-->
+                        <div class="unfold-after unfold-after-x hide">
+                            <video controls>
+                                <source src="images/bg1.mp4" type="video/mp4">
+                                <source src="images/bg1.mp4" type="video/mp4">
+                                <source src="images/bg1.mp4" type="video/mp4">
+                                <source src="images/bg1.mp4" type="video/mp4">
+                            </video>
+                            <div class="jzq">
+                                <img src="images/loadding_01.gif">
+                            </div>
+                            <span class="time">01:02:03</span>
+                        </div>
+                        <!--切换视频来源-->
+                        <div class="video-source">
+                            <div class="left" title="播放量">
+                                <i class="iconfont icon-wf_bofang"></i>
+                                <span class="two">142万</span>
+                            </div>
+                            <div class="middle">
+                                <i class="iconfont icon-wf_zuo_qiehuan"></i>
+                                <div class="video-source-content">
+                                    <ul>
+                                        <li>
+                                            <i class="iconfont icon-wf_Bzhan checked"></i>
+                                            <i class="iconfont icon-wf_aiqiyi"></i>
+                                            <i class="iconfont icon-wf_leshi"></i>
+                                            <i class="iconfont icon-wf_souhu"></i>
+                                            <i class="iconfont icon-wf_Azhan"></i>
+                                            <i class="iconfont icon-wf_youku"></i>
+                                            <i class="iconfont icon-wf_tengxun"></i>
+                                            <i class="iconfont icon-wf_Azhan"></i>
+                                            <i class="iconfont icon-wf_youku"></i>
+                                            <i class="iconfont icon-wf_tengxun"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <i class="iconfont icon-wf_you_qiehuan"></i>
+                            </div>
+                            <div class="right">
+                                <span class="grade-number">7分</span>
+                                <span>评论：</span>
+                                <strong><a href="http://www.baidu.com">999</a></strong>
+                            </div>
+                        </div>
+                        <!--视频点击后简介模块-->
+                        <div class="grade unfold-after-x hide">
+                            <div class="grade-x">
+                                <div class="left">
+                                    <div class="one"></div>
+                                    <div class="two">
+                                        前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全
+                                        球决赛亚军后退役。曾获2011TGA成都区冠军前皇族电子竞
+                                        技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                        退役。曾获2011TGA成都区冠军
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <div class="grade-number-x">
+                                        <ul>
+                                            <li class="item1">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                            <li class="item2">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                            <li class="item3">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                            <li class="item4">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                            <li class="item5">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                        </ul>
+                                        <div class="two">
+                                            <div class="item1-one"></div>
+                                            <div class="item1-two"></div>
+                                            <div class="item2-one"></div>
+                                            <div class="item2-two"></div>
+                                            <div class="item3-one"></div>
+                                            <div class="item3-two"></div>
+                                            <div class="item4-one"></div>
+                                            <div class="item4-two"></div>
+                                            <div class="item5-one"></div>
+                                            <div class="item5-two"></div>
+                                        </div>
+                                        <span class="three"></span>
+                                    </div>
+                                </div>
+                                <div class="author">
+                                    <span>作者:</span>
+                                    <span>PDD</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--评论未展开-->
+                        <div class="comment-no">
+                            <ul class="comment-inside">
+                                <li>
+                                    <div class="header images-x images-x-content">
+                                        <img src="images/header2.jpg">
+                                        <span class="no_header no_header-X">X</span>
+                                    </div>
+                                    <span class="name">简自豪：</span>
+                                        <span class="content">
+                                            I anticipated some ground fog after the prior day's rain...
+                                        </span>
+                                </li>
+                                <li>
+                                    <div class="header images-x images-x-content">
+                                        <img src="images/header2.jpg">
+                                        <span class="no_header no_header-X">X</span>
+                                    </div>
+                                    <span class="name">简自豪：</span>
+                                        <span class="content">
+                                            I anticipated some ground fog after the prior day's rain...
+                                        </span>
+                                </li>
+                                <li>
+                                    <div class="header images-x images-x-content">
+                                        <img src="images/header2.jpg">
+                                        <span class="no_header no_header-X">X</span>
+                                    </div>
+                                    <span class="name">简自豪：</span>
+                                        <span class="content">
+                                            I anticipated some ground fog after the prior day's rain...
+                                        </span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="comment-x hide">
+                            <!--评论展开后分享模块-->
+                            <div class="share">
+                                <span class="one">分享：</span>
+                                <div class="two">
+                                    <i class="iconfont icon-qq iconfont-x"><div class="ewm"><div class="ewm-fx"><img src="images/header2.jpg"></div><div class="sys-fx">微信扫一扫分享</div></div></i>
+                                    <i class="iconfont icon-weixin iconfont-x"><div class="ewm"><div class="ewm-fx"><img src="images/header2.jpg"></div><div class="sys-fx">微信扫一扫分享</div></div></i>
+                                    <i class="iconfont icon-weibo iconfont-x"><div class="ewm"><div class="ewm-fx"><img src="images/header2.jpg"></div><div class="sys-fx">微信扫一扫分享</div></div></i>
+                                </div>
+                                <strong class="three">
+                                    <a href="javascript:;">视频来源</a>
+                                </strong>
+                            </div>
+                            <!--评论已展开-->
+                            <div class="comment-yes">
+                                <ul class="comment-inside">
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">简自豪</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    <span>回复</span>
+                                                    <span class="hf">卢本伟</span>
+                                                        <span>: I anticipated some ground fog after the prior day's rain and the
+                                                        dropintemper priorday's rain and the ature</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">卢本伟</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">赵梦玥</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">笑笑</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    <span>回复</span>
+                                                    <span class="hf">卢本伟</span>
+                                                        <span>: I anticipated some ground fog after the prior day's rain and the
+                                                        dropintemper priorday's rain and the ature</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">微笑</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">若风</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">微笑</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    <span>回复</span>
+                                                    <span class="hf">卢本伟</span>
+                                                        <span>: I anticipated some ground fog after the prior day's rain and the
+                                                        dropintemper priorday's rain and the ature</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">卷毛</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">PDD</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">Faker</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    <span>回复</span>
+                                                    <span class="hf">卢本伟</span>
+                                                        <span>: I anticipated some ground fog after the prior day's rain and the
+                                                        dropintemper priorday's rain and the ature</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">徐老师</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="comment-content">
+                                            <div class="header images-x images-x-content">
+                                                <img src="images/header2.jpg">
+                                                <span class="no_header no_header-X">X</span>
+                                            </div>
+                                            <div class="right">
+                                                <div class="top">
+                                                    <span class="name">董小飒</span>
+                                                    <span class="praise-number">3.5K</span>
+                                                    <span class="add">+1</span>
+                                                    <span class="time">1分钟前</span>
+                                                    <div class="praise praise-yes hide">
+                                                        <i class="iconfont icon-wf_dianzan"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="bottom">
+                                                    I anticipated some ground fog after the prior day's rain and the
+                                                    dropintemper priorday's rain and the ature
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="no-comment hide">没有新的评论</li>
+                                    <div class="load-more hide"><img src="images/loadding-02.gif"></div>
+                                </ul>
+                            </div>
+                            <div class="comment-fb-outside">
+                                <div class="header images-x images-x-content">
+                                    <img src="images/header2.jpg">
+                                    <span class="no_header no_header-X">X</span>
+                                </div>
+                                <div class="hf-x hide">
+                                    <span>回复：</span>
+                                    <span class="name">简自豪</span>
+                                </div>
+                                <input type="text" class="comment-fb" placeholder="添加评论...">
+                                <i class="iconfont icon-wf_huiche iconfont-x"></i>
+                            </div>
+                        </div>
+
+                        <!--添加图片和链接评论-->
+                        <!--<div class="add-images hide">
+                            <i class="iconfont icon-camera iconfont-x"></i>
+                            <i class="iconfont icon-link iconfont-x"></i>
+                        </div>-->
+                    </li>
+                    <!--合集-->
+                    <li class="video compilations">
+                        <!--标题-->
+                        <div class="title-x">
+                            <span class="one"></span>
+                            <h3 class="two">
+                                <strong>
+                                    <a href="javascript:;">主播真会玩 第三季</a>
+                                </strong>
+                            </h3>
+                        </div>
+                        <!--视频封面和介绍-->
+                        <div class="unfold-before">
+                            <div class="images-x images-x-content">
+                                <img src="images/hj-left.png">
+                                <i class="iconfont icon-wf_bofang"></i>
+                            </div>
+                            <div class="two">
+                                <div class="first">
+                                    <span class="first-one">更新至</span>
+                                    <span class="first-two">2017-8-16期</span>
+                                    <span class="first-three">网络更新时间：每周四晚7：50更新一集</span>
+                                </div>
+                                <div class="second">作者：<span>起小点</span></div>
+                                <p>
+                                    主播真会玩是由知名解说起小点出品的一档英雄联盟搞笑节目，收集各大知名主播在
+                                    直播时的精彩和逗比画面，这些主播们真是太逗啦！
+                                </p>
+                                <div class="thirdly">
+                                    <div>
+                                        <i class="iconfont icon-wf_biaoqiantou"></i>
+                                        <span>无厘头</span>
+                                    </div>
+                                    <div>
+                                        <i class="iconfont icon-wf_biaoqiantou"></i>
+                                        <span>无厘头</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--视频点击后播放-->
+                        <div class="unfold-after unfold-after-x hide">
+                            <video controls>
+                                <source src="images/bg1.mp4" type="video/mp4">
+                                <source src="images/bg1.mp4" type="video/mp4">
+                                <source src="images/bg1.mp4" type="video/mp4">
+                                <source src="images/bg1.mp4" type="video/mp4">
+                            </video>
+                            <div class="jzq">
+                                <img src="images/loadding_01.gif">
+                            </div>
+                            <span class="time">01:02:03</span>
+                        </div>
+                        <!--切换视频来源-->
+                        <div class="video-source">
+                            <div class="left" title="播放量">
+                                <i class="iconfont icon-wf_bofang"></i>
+                                <span class="two">142万</span>
+                            </div>
+                            <div class="middle">
+                                <i class="iconfont icon-wf_zuo_qiehuan"></i>
+                                <div class="video-source-content">
+                                    <ul>
+                                        <li>
+                                            <i class="iconfont icon-wf_Bzhan checked"></i>
+                                            <i class="iconfont icon-wf_aiqiyi"></i>
+                                            <i class="iconfont icon-wf_leshi"></i>
+                                            <i class="iconfont icon-wf_souhu"></i>
+                                            <i class="iconfont icon-wf_Azhan"></i>
+                                            <i class="iconfont icon-wf_youku"></i>
+                                            <i class="iconfont icon-wf_tengxun"></i>
+                                            <i class="iconfont icon-wf_Azhan"></i>
+                                            <i class="iconfont icon-wf_youku"></i>
+                                            <i class="iconfont icon-wf_tengxun"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <i class="iconfont icon-wf_you_qiehuan"></i>
+                            </div>
+                            <div class="right">
+                                <span class="grade-number">7分</span>
+                            </div>
+                        </div>
+                        <!--视频点击后简介模块-->
+                        <div class="grade unfold-after-x hide">
+                            <div class="grade-x">
+                                <div class="left">
+                                    <div class="one"></div>
+                                    <div class="two">
+                                        前皇族电子竞技俱乐部英雄联盟分部中单，在随即获得S3全
+                                        球决赛亚军后退役。曾获2011TGA成都区冠军前皇族电子竞
+                                        技俱乐部英雄联盟分部中单，在随即获得S3全球决赛亚军后
+                                        退役。曾获2011TGA成都区冠军
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <div class="grade-number-x">
+                                        <ul>
+                                            <li class="item1">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                            <li class="item2">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                            <li class="item3">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                            <li class="item4">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                            <li class="item5">
+                                                <i class="iconfont icon-wf_weipingfen"></i>
+                                                <i class="iconfont icon-wf_pingfen1"></i>
+                                                <i class="iconfont icon-wf_pingfen"></i>
+                                            </li>
+                                        </ul>
+                                        <div class="two">
+                                            <div class="item1-one"></div>
+                                            <div class="item1-two"></div>
+                                            <div class="item2-one"></div>
+                                            <div class="item2-two"></div>
+                                            <div class="item3-one"></div>
+                                            <div class="item3-two"></div>
+                                            <div class="item4-one"></div>
+                                            <div class="item4-two"></div>
+                                            <div class="item5-one"></div>
+                                            <div class="item5-two"></div>
+                                        </div>
+                                        <span class="three"></span>
+                                    </div>
+                                </div>
+                                <div class="author">
+                                    <span>作者:</span>
+                                    <span>PDD</span>
+                                </div>
+                            </div>
+                            <div class="label-x">
+                                <div class="label-x-inside">
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span class="label-x-inside-content">卢本伟牛逼</span>
+                                </div>
+                                <div class="label-x-inside">
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span class="label-x-inside-content">嫖老师</span>
+                                </div>
+                                <div class="label-x-inside">
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span class="label-x-inside-content">嫖断屌</span>
+                                </div>
+                                <div class="label-x-inside">
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span class="label-x-inside-content">干他妈的卢本伟</span>
+                                </div>
+                                <div class="label-x-inside">
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span class="label-x-inside-content">秃子</span>
+                                </div>
+                                <div class="label-x-inside">
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span class="label-x-inside-content">智哥牛逼</span>
+                                </div>
+                                <div class="label-x-inside">
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span class="label-x-inside-content">电竞三丑</span>
+                                </div>
+                                <div class="label-x-inside">
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span class="label-x-inside-content">我觉得可以</span>
+                                </div>
+                                <div class="label-x-inside">
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span class="label-x-inside-content">我觉得不行</span>
+                                </div>
+                                <div class="label-x-inside">
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span class="label-x-inside-content">我觉得OK</span>
+                                </div>
+                                <div class="label-x-inside">
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span class="label-x-inside-content">每周五更新</span>
+                                </div>
+                                <div class="label-x-inside">
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span class="label-x-inside-content">发姐唱歌太好听了</span>
+                                </div>
+                                <div class="label-x-inside">
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span class="label-x-inside-content">天王盖地虎</span>
+                                </div>
+                                <div class="label-x-inside">
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span class="label-x-inside-content">提莫一米五</span>
+                                </div>
+                                <div class="label-x-inside">
+                                    <i class="iconfont icon-wf_biaoqiantou"></i>
+                                    <span class="label-x-inside-content">阿冷的吉他弹得真好</span>
+                                </div>
+                                <div class="fix" style="clear: both;display: block"></div>
+                            </div>
+                        </div>
+                        <div class="episode-details">
+                            <div class="episode-details-menu">
+                                <div class="one-outside">
+                                    <ul class="one">
+                                        <li class="checked">第三季</li>
+                                        <li>第二季</li>
+                                        <li>第一季</li>
+                                        <li>第三季</li>
+                                        <li>第二季</li>
+                                        <li>第一季</li>
+                                        <li>第三季</li>
+                                        <li>第二季</li>
+                                        <li>第一季</li>
+                                        <li>第三季</li>
+                                        <li>第二季</li>
+                                        <li>第一季</li>
+                                    </ul>
+                                </div>
+                                <div class="two">
+                                    <i class="iconfont icon-wf_zuo_qiehuan"></i>
+                                    <i class="iconfont icon-wf_you_qiehuan"></i>
+                                </div>
+                            </div>
+                            <div class="episode-details-bottom">
+                                <ul class="videos">
+                                    <li class="checked">
+                                        <div class="top images-x images-x-content">
+                                            <img src="images/zbzhw-1.png" class="one"/>
+                                            <p class="two">
+                                                <i class="iconfont icon-wf_bofang"></i>
+                                                <span class="qi">2017-08-16期</span>
+                                            </p>
+                                            <span class="new">最新</span>
+                                        </div>
+                                        <p class="bottom">主播真会玩:金牌讲师新,秘籍落地疯...</p>
+                                    </li>
+                                    <li>
+                                        <div class="top images-x images-x-content">
+                                            <img src="images/zbzhw-2.png" class="one"/>
+                                            <p class="two">
+                                                <i class="iconfont icon-wf_bofang"></i>
+                                                <span class="qi">2017-08-16期</span>
+                                            </p>
+                                        </div>
+                                        <p class="bottom">黑抛女孩 心酸往事遭贴报</p>
+                                    </li>
+                                    <li>
+                                        <div class="top images-x images-x-content">
+                                            <img src="images/zbzhw-3.png" class="one"/>
+                                            <p class="two">
+                                                <i class="iconfont icon-wf_bofang"></i>
+                                                <span class="qi">2017-08-16期</span>
+                                            </p>
+                                        </div>
+                                        <p class="bottom">大周年史</p>
+                                    </li>
+                                    <li>
+                                        <div class="top images-x images-x-content">
+                                            <img src="images/zbzhw-4.png" class="one"/>
+                                            <p class="two">
+                                                <i class="iconfont icon-wf_bofang"></i>
+                                                <span class="qi">2017-08-16期</span>
+                                            </p>
+                                        </div>
+                                        <p class="bottom">你丫闭嘴！</p>
+                                    </li>
+                                    <li>
+                                        <div class="top images-x images-x-content">
+                                            <img src="images/zbzhw-5.png" class="one"/>
+                                            <p class="two">
+                                                <i class="iconfont icon-wf_bofang"></i>
+                                                <span class="qi">2017-08-16期</span>
+                                            </p>
+                                        </div>
+                                        <p class="bottom">前皇族电子竞技俱乐部英雄联盟分部</p>
+                                    </li>
+                                </ul>
+                                <a href="视频详情页.html" class="to-details">查看更多合集视频</a>
+                            </div>
+                        </div>
+                    </li>
+                    <!--翻页-->
+                    <li class="page-turning">
+                        <div class="page-turning-inside">
+                            <div class="left">
+                                <div class="fy">
+                                    <i class="iconfont icon-wf_zuo_qiehuan"></i>
+                                    <span>上一页</span>
+                                </div>
+                                <div class="zm">W</div>
+                            </div>
+                            <ul class="middle">
+                                <li>
+                                    <span class="one">o</span>
+                                    <span class="two">1</span>
+                                </li>
+                                <li>
+                                    <span class="one">o</span>
+                                    <span class="two">2</span>
+                                </li>
+                                <li>
+                                    <span class="one">o</span>
+                                    <span class="two">3</span>
+                                </li>
+                                <li>
+                                    <span class="one">o</span>
+                                    <span class="two">4</span>
+                                </li>
+                                <li class="checked">
+                                    <span class="one">o</span>
+                                    <span class="two">5</span>
+                                </li>
+                                <li>
+                                    <span class="one">o</span>
+                                    <span class="two">6</span>
+                                </li>
+                                <li>
+                                    <span class="one">o</span>
+                                    <span class="two">7</span>
+                                </li>
+                            </ul>
+                            <div class="right">
+                                <div class="zm">F</div>
+                                <div class="fy">
+                                    <i class="iconfont icon-wf_you_qiehuan"></i>
+                                    <span>下一页</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!--没有找到-->
+                    <li class="no-find">
+                        <p class="title">您想要的内容，暂时还没有，不过您可以提交内容给我们。</p>
+                        <label class="label-x" style="margin-top: 50px;">关键字</label>
+                        <div class="form-group label-floating">
+                            <input type="text" class="form-control text_input">
+                        </div>
+                        <label class="label-x" style="margin-top: 36px;">URL<span>(请输入索引URL链接)</span></label>
+                        <div class="form-group label-floating form-group-x">
+                            <input type="text" class="form-control text_input" placeholder="http://">
+                            <span class="help-block">请输入链接地址</span>
+                            <span class="subtract images-x images-x-content">-</span>
+                        </div>
+                        <div class="form-group label-floating form-group-x">
+                            <input type="text" class="form-control text_input" placeholder="http://">
+                            <span class="help-block">请输入链接地址</span>
+                            <span class="subtract images-x images-x-content">-</span>
+                        </div>
+                        <div class="add-outside">
+                            <span class="add iconfont-x images-x images-x-content">+</span>
+                            <span class="text">点击增加，最多可增加4个URL链接</span>
+                        </div>
+                        <div class="yzm">
+                            <img src="images/video-one.png" class="one">
+                            <div class="form-group label-floating form-group-x">
+                                <input type="text" class="form-control text_input">
+                                <span class="help-block">请输入验证码</span>
+                            </div>
+                        </div>
+                        <button class="btn">提交</button>
+                    </li>
+                    <li class="page-turning-before">
+                        <img src="images/loadding-02.gif">
+                    </li>
+                </ul>
+                <!--right有搜索结果-->
+                <div class="search-content-right hide">
+                    <!--右侧title-->
+                    <div class="title-x">
+                        <span class="one"></span>
+                        <h3 class="two">相关人物</h3>
+                    </div>
+                    <!--右侧列表-->
+                    <ul class="team-one">
+                        <li class="team-one-inside">
+                            <div class="header images-x images-x-content">
+                                <img src="images/about1.png">
+                            </div>
+                            <p class="name">简自豪</p>
+                        </li>
+                        <li class="team-one-inside">
+                            <div class="header images-x images-x-content">
+                                <img src="images/about2.png">
+                            </div>
+                            <p class="name">赵梦玥</p>
+                        </li>
+                        <li class="team-one-inside">
+                            <div class="header images-x images-x-content">
+                                <img src="images/about3.png">
+                            </div>
+                            <p class="name">董小飒</p>
+                        </li>
+                        <li class="team-one-inside">
+                            <div class="header images-x images-x-content">
+                                <img src="images/about4.png">
+                            </div>
+                            <p class="name">faker</p>
+                        </li>
+                    </ul>
+                </div>
+                <!--right有搜索结果预加载-->
+                <div class="search-content-right hide">
+                    <!--右侧title预加载-->
+                    <div class="title-x title-x-yjz">
+                        <span class="one"></span>
+                        <h3 class="two"></h3>
+                    </div>
+                    <!--右侧列表预加载-->
+                    <ul class="team-one team-one-yjz">
+                        <li class="team-one-inside">
+                            <div class="header images-x images-x-content">
+                            </div>
+                            <p class="name"></p>
+                        </li>
+                        <li class="team-one-inside">
+                            <div class="header images-x images-x-content">
+                            </div>
+                            <p class="name"></p>
+                        </li>
+                        <li class="team-one-inside">
+                            <div class="header images-x images-x-content">
+                            </div>
+                            <p class="name"></p>
+                        </li>
+                        <li class="team-one-inside">
+                            <div class="header image s-x images-x-content">
+                            </div>
+                            <p class="name"></p>
+                        </li>
+                    </ul>
+                </div>
+                <!--right无搜索结果-->
+                <div class="search-content-right">
+                    <div class="title-x">
+                        <span class="one"></span>
+                        <h3 class="two">热门视频</h3>
+                    </div>
+                    <div class="team-two">
+                        <div class="team-two-inside">
+                            <a href="javascript:;" class="images-x images-x-content">
+                                <img src="images/video-one.png" class="fm">
+                                <span class="time">01:37:06</span>
+                                <span class="pf">3.5分</span>
+                            </a>
+                            <a href="javascript:;" class="title">
+                                前皇族电子竞技俱乐部英雄
+                                联盟分部中单
+                            </a>
+                        </div>
+                        <div class="team-two-inside">
+                            <a href="javascript:;" class="images-x images-x-content">
+                                <img src="images/video-one.png" class="fm">
+                                <span class="time">01:37:06</span>
+                                <span class="pf">3.5分</span>
+                            </a>
+                            <a href="javascript:;" class="title">
+                                前皇族电子竞技俱乐部英雄
+                                联盟分部中单
+                            </a>
+                        </div>
+                        <div class="team-two-inside">
+                            <a href="javascript:;" class="images-x images-x-content">
+                                <img src="images/video-one.png" class="fm">
+                                <span class="time">01:37:06</span>
+                                <span class="pf">3.5分</span>
+                            </a>
+                            <a href="javascript:;" class="title">
+                                前皇族电子竞技俱乐部英雄
+                                联盟分部中单
+                            </a>
+                        </div>
+                        <div class="team-two-inside">
+                            <a href="javascript:;" class="images-x images-x-content">
+                                <img src="images/video-one.png" class="fm">
+                                <span class="time">01:37:06</span>
+                                <span class="pf">3.5分</span>
+                            </a>
+                            <a href="javascript:;" class="title">
+                                前皇族电子竞技俱乐部英雄
+                                联盟分部中单
+                            </a>
+                        </div>
+                        <div class="team-two-inside">
+                            <a href="javascript:;" class="images-x images-x-content">
+                                <img src="images/video-one.png" class="fm">
+                                <span class="time">01:37:06</span>
+                                <span class="pf">3.5分</span>
+                            </a>
+                            <a href="javascript:;" class="title">
+                                前皇族电子竞技俱乐部英雄
+                                联盟分部中单
+                            </a>
+                        </div>
+                        <div class="team-two-inside">
+                            <a href="javascript:;" class="images-x images-x-content">
+                                <img src="images/video-one.png" class="fm">
+                                <span class="time">01:37:06</span>
+                                <span class="pf">3.5分</span>
+                            </a>
+                            <a href="javascript:;" class="title">
+                                前皇族电子竞技俱乐部英雄
+                                联盟分部中单
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!--right无搜索结果预加载-->
+                <div class="search-content-right">
+                    <!--右侧title预加载-->
+                    <div class="title-x title-x-yjz">
+                        <span class="one"></span>
+                        <h3 class="two"></h3>
+                    </div>
+                    <div class="team-two team-two-yjz">
+                        <div class="team-two-inside">
+                            <a href="javascript:;" class="images-x images-x-content"></a>
+                            <a href="javascript:;" class="title">
+                                <div class="one"></div>
+                                <div class="two"></div>
+                            </a>
+                        </div>
+                        <div class="team-two-inside">
+                            <a href="javascript:;" class="images-x images-x-content"></a>
+                            <a href="javascript:;" class="title">
+                                <div class="one"></div>
+                                <div class="two"></div>
+                            </a>
+                        </div>
+                        <div class="team-two-inside">
+                            <a href="javascript:;" class="images-x images-x-content"></a>
+                            <a href="javascript:;" class="title">
+                                <div class="one"></div>
+                                <div class="two"></div>
+                            </a>
+                        </div>
+                        <div class="team-two-inside">
+                            <a href="javascript:;" class="images-x images-x-content"></a>
+                            <a href="javascript:;" class="title">
+                                <div class="one"></div>
+                                <div class="two"></div>
+                            </a>
+                        </div>
+                        <div class="team-two-inside">
+                            <a href="javascript:;" class="images-x images-x-content"></a>
+                            <a href="javascript:;" class="title">
+                                <div class="one"></div>
+                                <div class="two"></div>
+                            </a>
+                        </div>
+                        <div class="team-two-inside">
+                            <a href="javascript:;" class="images-x images-x-content"></a>
+                            <a href="javascript:;" class="title">
+                                <div class="one"></div>
+                                <div class="two"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--底部-->
+    <div class="footer">
+        &copy; Copyright 2012-2017,WODOTA.COM,Inc.All Rights Reserved. 鄂ICP备13011259号-1
+    </div>
+    <!--页面加载动画canvas-->
+    <canvas id="drawNext"></canvas>
+</body>
+<script>
+    $.material.init();
+</script>
+<script>
+    $(function() {
+        $(".comment-yes").mCustomScrollbar({
+            callbacks:{ onTotalScroll:function(){
+                $(this).find(".load-more").removeClass("hide");
+                $(this).mCustomScrollbar("scrollTo","bottom");
+            }}
+        });
+        drawNext();
+        //预加载
+        /*$(".load-start").css("height",$(".load-stop").height());
+        setTimeout(function(){
+            $(".load-start").addClass("hide");
+        },2000)*/
+        //个人中心切换tab
+        $(".grzx-content").on("click","li",function(){
+            $(".grzx-content li").removeClass("checked");
+            $(".grzx-x").addClass("none");
+            $("." + $(this).attr("class") + "-content").removeClass("none").css("opacity","0").animate({
+                "opacity":"1"
+            },400);
+            $(this).addClass("checked");
+        })
+        //首页图标切换
+        /*$(".homepage-main-search-logo").mouseenter(function(){
+         $(this).addClass("icon-wf_shouye").removeClass("icon-wf_logo");
+         }).mouseleave(function(){
+         $(this).addClass("icon-wf_logo").removeClass("icon-wf_shouye");
+         })*/
+        //图片响应式
+        var a = $(".search-content-left .introduce .bottom .left li div img");
+        a.each(function(){
+            var b = $(this).width();
+            var c = $(this).height();
+            if(b>c){
+                $(this).css({
+                    "margin-left":(-(90/c*b/2)) + "px",
+                    "height":"90px",
+                    "left":"50%"
+                });
+            }
+            else{
+                $(this).css({
+                    "margin-top":(-(90/b*c/2))+"px",
+                    "width":"90px",
+                    "top":"50%"
+                });
+            }
+        })
+        //点击播放视频
+        $(".search-content-left .video").on("click",".unfold-before",function(){
+            $(".search-content-left .video .unfold-before").removeClass("hide");
+            $(".search-content-left .video .unfold-after-x").addClass("hide");
+            //定位
+            $('html,body').animate({
+                scrollTop: $(this).parent().offset().top - 60
+            },500);
+            $(this).addClass("hide");
+            $(this).siblings(".unfold-after-x").removeClass("hide");
+        })
+        //切换视频来源
+        $(".search-content-left .video .video-source .middle .video-source-content ul li").on("click","i",function(){
+            $(this).addClass("checked").siblings("i").removeClass("checked");
+        })
+        //鼠标经过显示点赞
+        $(".comment-yes .comment-inside").on("mouseenter","li .comment-content",function(){
+            $(this).find(".right .top .time").addClass("hide");
+            $(this).find(".right .top .praise").removeClass("hide");
+        }).on("mouseleave","li .comment-content",function(){
+            $(this).find(".right .top .time").removeClass("hide");
+            $(this).find(".right .top .praise").addClass("hide");
+        }).on("click","li .comment-content",function(){//回复
+            $(this).parents(".comment-yes").siblings(".comment-fb-outside").find(".hf-x").removeClass("hide").find(".name").html($(this).find(".name").html());
+            $(this).parents(".comment-yes").siblings(".comment-fb-outside").find("input").focus();
+        }).on("click","li .comment-content .right .top .praise",function(e){//点赞
+            var a = $(this);
+            if(a.hasClass("praise-yes") != true){
+                a.siblings(".add").animate({
+                    "opacity":"1"
+                },888,function(){
+                    a.siblings(".add").animate({
+                        "top":"-20px",
+                        "opacity":"0"
+                    },888)
+                })
+            }
+            a.toggleClass("praise-yes");
+            e.stopPropagation();
+        })
+        //取消回复评论
+        $(".search-content-left .comment-fb-outside .hf-x").on("click",function(){
+            $(this).addClass("hide");
+        })
+
+        //切换提交评分
+        $(".search-content-left .video .grade-x .submit").on("click",".icon-wf_zhengque1",function(){
+            var a = $(this);
+            a.animate({
+                "opacity":"0"
+            },288,function(){
+                a.addClass("hide").siblings(".icon-wf_zhongzhi").removeClass("hide").css("opacity","0").animate({"opacity":"1"},288);
+            })
+        }).on("click",".icon-wf_zhongzhi",function(){
+            var a = $(this);
+            a.animate({
+                "opacity":"0"
+            },288,function(){
+                a.addClass("hide").siblings(".icon-wf_zhengque1").removeClass("hide").css("opacity","0").animate({"opacity":"1"},288);
+            })
+        })
+        //评论展开收起
+        $(".search-content-left").on("click",".video .comment-no",function(){
+            if($(this).parent().hasClass("video-yjz") != true){
+                var a = $(this);
+                //定位
+                $('html,body').animate({
+                    scrollTop: a.parent().offset().top - 60
+                },500);
+                a.addClass("hide").siblings(".comment-x").css({"height":"0","display":"block"}).removeClass("hide").animate({
+                    "height":"566px"
+                },500);
+            }
+        }).on("click",".no-find .form-group-x .subtract",function(){//无搜索结果时删除URL
+            $(this).parent().remove();
+        }).on("click",".no-find .add-outside .add",function(){//无搜索结果时添加URL
+            if($(this).parent().siblings(".form-group-x").length < 4){
+                $(this).parent().before('<div class="form-group label-floating form-group-x">' +
+                        '<input type="text" class="form-control text_input"  placeholder="http://">' +
+                        '<span class="help-block">请输入链接地址</span>' +
+                        '<span class="subtract images-x images-x-content">-<div class="images-x-hover"></div></span>' +
+                        '</div>');
+            }
+        })
+        //收起评论
+        $(".search-content-left .video .share").on("click",function(){
+            var a = $(this);
+            if(a.hasClass("no-click") != true){
+                a.addClass("no-click").parent().animate({"height":"65px"},500,function(){
+                    a.removeClass("no-click").parent().addClass("hide").siblings(".comment-no").removeClass("hide");
+                })
+            }
+        }).on("click",".two,.three a",function(e){//点赞
+            e.stopPropagation();
+        })
+        $(".search-content-left").on("click",".comment-no .comment-fb-outside",function(e){
+            e.stopPropagation();
+        })
+        //小尺寸时点击展开搜索
+        $(".search-result-top").on("click",".homepage-main-search-kz",function(){
+            if($(".homepage-top-li-two").hasClass("hide") == true){
+                $(".search-result-top .homepage-main-search").css("display","");
+            }
+            else{
+                $(".search-result-top .homepage-main-search").css({"display":"block","opacity":"0"}).animate({
+                    "opacity":"1"
+                },488);
+            }
+            $(".homepage-top-li-two,.homepage-top-li-three,.homepage-top-li-four").toggleClass("hide");
+        })
+
+        //合集JS
+        //切换期数
+        $(".compilations .episode-details .episode-details-bottom .videos").on("click"," li", function (){
+            $(".compilations .episode-details .episode-details-bottom .videos li").removeClass("checked");
+            $(this).addClass("checked");
+            $(".search-content-left .video .unfold-before").removeClass("hide");
+            $(".search-content-left .video .unfold-after-x").addClass("hide");
+            //定位
+            $('html,body').animate({
+                scrollTop: $(this).parents(".video").offset().top - 60
+            },500);
+            $(this).parents(".episode-details").siblings(".unfold-before").addClass("hide");
+            $(this).parents(".episode-details").siblings(".unfold-after-x").removeClass("hide");
+        })
+        //切换季
+        $(".compilations .episode-details .episode-details-menu .one").on("click"," li", function (){
+            $(".compilations .episode-details .episode-details-menu .one li").removeClass("checked");
+            $(this).addClass("checked");
+        })
+        //季 翻页
+        $(".compilations .episode-details .episode-details-menu .one").each(function () {
+            if($(this).find("li").length <= 7/* && document.documentElement.clientWidth>480*/){
+                $(this).siblings(".two").addClass("hide");
+            }
+        })
+        $(".compilations .episode-details .episode-details-menu .two .icon-wf_zuo_qiehuan").on("click",function(){
+            var _this = $(this);
+            var fi = _this.parent().siblings(".one-outside").find("li:first-child");
+            var al = parseInt(fi.css("margin-left"));
+            if(al != 0 && _this.hasClass("no-click") != true){
+                _this.addClass("no-click");
+                _this.siblings(".icon-wf_you_qiehuan").addClass("no-click");
+                fi.animate({
+                    "margin-left" : al + 80 + "px"
+                },288,function(){
+                    if(parseInt(fi.css("margin-left")) != 0){
+                        _this.removeClass("no-click");
+                    }
+                    _this.siblings(".icon-wf_you_qiehuan").removeClass("no-click");
+                });
+            }
+        })
+        $(".compilations .episode-details .episode-details-menu .two .icon-wf_you_qiehuan").on("click",function(){
+            var _this = $(this);
+            var fi = _this.parent().siblings(".one-outside").find("li:first-child");
+            var al = parseInt(fi.css("margin-left"));
+            var tl = $(this).parent().siblings(".one-outside").find("li").length - 7;
+            if(al != -(tl*80) && _this.hasClass("no-click") != true){
+                _this.addClass("no-click");
+                _this.siblings(".icon-wf_zuo_qiehuan").addClass("no-click");
+                fi.animate({
+                    "margin-left" : al - 80 + "px"
+                },288,function(){
+                    if(al != -((tl-1)*80)){
+                        _this.removeClass("no-click");
+                    }
+                    _this.siblings(".icon-wf_zuo_qiehuan").removeClass("no-click");
+                });
+            }
+        })
+    })
+</script>
+</html>

@@ -1,0 +1,97 @@
+.log-out-main{
+
+}
+.log-out-main .view1{
+    width: 480px;
+    margin: 170px auto 0 auto;
+    overflow: hidden;
+}
+.log-out-main .view1 .one{
+    display: block;
+    float: left;
+    height: 16px;
+    width: 5px;
+    background-color: #db4437;
+}
+.log-out-main .view1 .two{
+    display: block;
+    float: left;
+    color: #414141;
+    margin-left: 15px;
+    height: 16px;
+    line-height: 16px;
+    font-size: 16px;
+}
+.log-out-main .view2{
+    display: block;
+    margin: 100px auto 0 auto;
+    width: 480px;
+    border-radius: 65px;
+}
+.log-out-main .view3{
+    width: 480px;
+    margin: 35px auto 0 auto;
+    height: 38px;
+}
+.log-out-main .view3 div{
+    float: left;
+    height: 38px;
+    line-height: 38px;
+    width: 230px;
+    text-align: center;
+    color: #757575;
+}
+.log-out-main .view3 button{
+    float: right;
+    height: 38px;
+    line-height: 38px;
+    width: 230px;
+    text-align: center;
+    color: #fff;
+    background-color: #db4437;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+.log-out-main .view3 button:hover,.log-out-main .view3 button:focus,.log-out-main .view3 button:active{
+    color: #fff!important;
+    background-color: #db4437!important;
+    outline: none;
+}
+@media screen and (max-width: 480px) {
+    .log-out-main .view1{
+        width: 280px;
+    }
+    .log-out-main .view2{
+        width: 280px;
+        border-radius: 30px;
+    }
+    .log-out-main .view3{
+        width: 280px;
+    }
+    .log-out-main .view3 div{
+        width: 280px;
+    }
+    .log-out-main .view3 button{
+        width: 280px;
+        margin-top: 20px;
+    }
+}
+@media screen and (min-width: 481px) and (max-width: 767px) {
+    .log-out-main .view1{
+        width: 440px;
+    }
+    .log-out-main .view2{
+        width: 440px;
+        border-radius: 50px;
+    }
+    .log-out-main .view3{
+        width: 440px;
+    }
+    .log-out-main .view3 div{
+        width: 210px;
+    }
+    .log-out-main .view3 button{
+        width: 210px;
+    }
+}

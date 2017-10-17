@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.task.mapper.TaskMapper">
+
+	<!-- t_task字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 主键-->
+			up_id AS "up.id", <!-- 人物ID-->
+			title AS "title", <!-- 标题-->
+			content AS "content", <!-- 内容-->
+			view_count AS "viewCount", <!-- 阅读量-->
+			like_count AS "likeCount", <!-- 点赞量-->
+			status AS "status.value", <!-- 状态 -->
+			create_id AS "createUser.id", <!-- 创建者id -->
+			create_time AS "createTime", <!-- 创建时间 -->
+			update_id AS "updateUser.id", <!-- 修改者id -->
+			update_time AS "updateTime", <!-- 修改时间 -->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_task分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.task.model.TaskEntity" >
+		select  
+			<include refid="columnList"/>
+		from t_task 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="upId != null and upId != ''">
+				AND up_id=#{upId}
+			</if>
+			<if test="title != null and title != ''">
+				AND lower(title) like concat('%',lower(#{title}),'%')
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 根据entity查询t_task -->
+	<select id="queryListByEntity" resultType="com.webside.task.model.TaskEntity" parameterType="com.webside.task.model.TaskEntity" flushCache="false" useCache="true">
+		select
+		<include refid="columnList" />
+		from t_task 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="id != null and id != ''">
+				AND id != #{id}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 根据ID查询t_task -->
+	<select id="findById" resultType="com.webside.task.model.TaskEntity" parameterType="String" >
+		select  
+			<include refid="columnList"/>
+		from t_task 
+		where id = #{id}
+	</select>
+	
+	<!-- 查询相关事件 -->
+	<select id="queryListByIdForRelated" parameterType="map" resultType="com.webside.task.model.TaskEntity" >
+		select  
+			<include refid="columnList"/>
+		from t_task 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="upId != null and upId != ''">
+				AND up_id=#{upId}
+			</if>
+			<if test="id != null and id != ''">
+				AND id !=#{id}
+			</if>
+		</trim>
+		order by view_count desc,like_count desc 
+		<if test="startCount != null and pageSize != null">
+			limit #{startCount},#{pageSize}
+		</if>
+	</select>
+	
+	<!-- 新增t_task -->
+	<insert id="insert" 
+			parameterType="com.webside.task.model.TaskEntity">
+		insert into t_task
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		id,<!-- 主键-->
+		up_id,<!-- 人物ID-->
+		<if test="title != null">title,</if><!-- 标题-->
+		<if test="content != null">content,</if><!-- 内容-->
+		<if test="viewCount != null">view_count,</if><!-- 阅读量-->
+		<if test="likeCount != null">like_count,</if><!-- 点赞量-->
+		status,<!-- 状态 -->
+		create_time,<!-- 创建时间 -->
+		<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		#{id},<!-- 主键-->
+		#{up.id},<!-- 人物ID-->
+		<if test="title != null">#{title},</if><!-- 标题-->
+		<if test="content != null">#{content},</if><!-- 内容-->
+		<if test="viewCount != null">#{viewCount},</if><!-- 阅读量-->
+		<if test="likeCount != null">#{likeCount},</if><!-- 点赞量-->
+		#{status.value},<!-- 状态 -->
+		#{createTime},<!-- 创建时间 -->
+		<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者id -->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID更新t_task -->
+	<update id="updateById" parameterType="com.webside.task.model.TaskEntity" >
+		update t_task
+		<trim prefix="SET" suffixOverrides=",">  
+			<if test="up != null and up.id !=null">up_id=#{up.id},</if><!-- 人物ID-->
+			<if test="title != null">title=#{title},</if><!-- 标题-->
+			<if test="content != null">content=#{content},</if><!-- 内容-->
+			<if test="viewCount != null">view_count=#{viewCount},</if><!-- 阅读量-->
+			<if test="likeCount != null">like_count=#{likeCount},</if><!-- 点赞量-->
+			<if test="status != null and status.value != null and status.value != ''">status=#{status.value},</if><!-- 状态 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID删除t_task -->
+	<delete id="deleteById" parameterType="String" >
+		delete from t_task 
+		where id = #{id}
+	</delete>
+
+	<!-- 根据ID更新阅读量 -->
+	<update id="updateViewCountById" parameterType="map">
+		update t_task set view_count = view_count+1,update_time=#{updateTime} where id = #{id}
+	</update>
+	
+	<!-- 根据ID更新事件点赞 -->
+	<update id="updateLikeCountById" parameterType="map">
+		update t_task set like_count = like_count+${likeCount},update_time=#{updateTime} where id = #{id}
+	</update>
+</mapper>

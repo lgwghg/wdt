@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.video.mapper.VideoAlbumValueMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache" />
+
+	<!-- t_video_album_value字段列表 -->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 主键 -->
+			video_album_id AS "videoAlbum.id", <!-- 视频专辑id -->
+			value_id AS "value.id", <!-- 属性值id -->
+			status AS "status.value", <!-- 状态 -->
+			create_id AS "createUser.id", <!-- 创建者id -->
+			create_time AS "createTime", <!-- 创建时间 -->
+			update_id AS "updateUser.id", <!-- 修改者id -->
+			update_time AS "updateTime", <!-- 修改时间 -->
+		</trim>
+	</sql>
+
+	<!-- 查询t_video_album_value分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.video.model.VideoAlbumValueEntity" flushCache="false" useCache="true">
+		select
+		<include refid="columnList" />
+		from t_video_album_value
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="videoAlbumId != null and videoAlbumId != ''">
+				AND video_album_id=#{videoAlbumId}
+			</if>
+			<if test="valueId != null and valueId != ''">
+				AND value_id=#{valueId}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据entity查询t_video_album_value -->
+	<select id="queryListByEntity" resultType="com.webside.video.model.VideoAlbumValueEntity" parameterType="com.webside.video.model.VideoAlbumValueEntity" flushCache="false" useCache="true">
+		select
+		<include refid="columnList" />
+		from t_video_album_value
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="videoAlbum != null and videoAlbum.id != null and videoAlbum.id != ''">
+				AND video_album_id=#{videoAlbum.id}
+			</if>
+			<if test="value != null and value.id != null and value.id != ''">
+				AND value_id=#{value.id}
+			</if>
+			<if test="id != null and id != ''">
+				AND id != #{id}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据ID查询t_video_album_value -->
+	<select id="findById" resultType="com.webside.video.model.VideoAlbumValueEntity" parameterType="String" flushCache="false" useCache="true">
+		select
+		<include refid="columnList" />
+		from t_video_album_value
+		where id = #{id}
+	</select>
+
+	<!-- 新增t_video_album_value -->
+	<insert id="insert" parameterType="com.webside.video.model.VideoAlbumValueEntity" flushCache="true">
+		insert into t_video_album_value
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,<!-- 主键 -->
+			video_album_id,<!-- 视频专辑id -->
+			value_id,<!-- 属性值id -->
+			status,<!-- 状态 -->
+			create_time,<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},<!-- 主键 -->
+			#{videoAlbum.id},<!-- 视频专辑id -->
+			#{value.id},<!-- 属性值id -->
+			#{status.value},<!-- 状态 -->
+			#{createTime},<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者id -->
+		</trim>
+	</insert>
+
+	<!-- 根据ID更新t_video_album_value -->
+	<update id="updateById" parameterType="com.webside.video.model.VideoAlbumValueEntity" flushCache="true">
+		update t_video_album_value
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="videoAlbum != null and videoAlbum.id != null">video_album_id=#{videoAlbum.id},</if><!-- 视频专辑id -->
+			<if test="value != null and value.id != null">value_id=#{value.id},</if><!-- 属性值id -->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where id = #{id}
+	</update>
+
+	<!-- 批量修改视频专辑属性值关联的视频 -->
+	<update id="updateVideoAlbumIdBatchById" parameterType="map" flushCache="true">
+		update t_video_album_value
+		<trim prefix="SET" suffixOverrides=",">
+			video_album_id = #{videoAlbumId},<!-- 视频专辑id -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+			<if test="updateUserId != null">update_id=#{updateUserId},</if><!-- 修改者 -->
+		</trim>
+		<![CDATA[  
+       		where id in 
+    	]]>
+		<foreach collection="ids" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+
+	<!-- 根据ID删除t_video_album_value -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_video_album_value
+		where id = #{id}
+	</delete>
+
+	<!-- 根据ID批量删除t_video_album_value -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		<![CDATA[  
+       delete from t_video_album_value where id in  
+    	]]>
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<!-- 根据entity删除t_video_album_value -->
+	<delete id="deleteByEntity" parameterType="com.webside.video.model.VideoAlbumValueEntity" flushCache="true">
+		delete from t_video_album_value
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="videoAlbum != null and videoAlbum.id != null and videoAlbum.id != ''">
+				AND video_album_id=#{videoAlbum.id}
+			</if>
+			<if test="value != null and value.id != null and value.id != ''">
+				AND value_id=#{value.id}
+			</if>
+		</trim>
+	</delete>
+</mapper>

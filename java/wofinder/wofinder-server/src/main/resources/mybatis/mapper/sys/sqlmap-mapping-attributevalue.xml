@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.sys.mapper.AttributeValueMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache" />
+
+	<!-- t_sys_attribute_value字段列表 -->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			t.id AS "id", <!-- 主键 -->
+			t.attribute_id AS "attribute.id", <!-- 属性id -->
+			a.name AS "attribute.name", <!-- 关联：属性名称 -->
+			t.value_id AS "value.id", <!-- 属性值id -->
+			v.name AS "value.name", <!-- 关联：属性值名称 -->
+			t.status AS "status.value", <!-- 状态 -->
+			t.create_id AS "createUser.id", <!-- 创建者id -->
+			t.create_time AS "createTime", <!-- 创建时间 -->
+			t.update_id AS "updateUser.id", <!-- 修改者id -->
+			t.update_time AS "updateTime", <!-- 修改时间 -->
+		</trim>
+	</sql>
+
+	<sql id="tableJoins">
+		LEFT JOIN t_sys_attribute a ON a.id = t.attribute_id
+		LEFT JOIN t_sys_value v ON v.id = t.value_id
+	</sql>
+
+	<!-- 查询t_sys_attribute_value分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.sys.model.AttributeValueEntity" flushCache="false" useCache="true">
+		select
+		<include refid="columnList" />
+		from t_sys_attribute_value t
+		<include refid="tableJoins" />
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="attributeId != null and attributeId != ''">
+				AND t.attribute_id=#{attributeId}
+			</if>
+			<if test="valueId != null and valueId != ''">
+				AND t.value_id=#{valueId}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND t.status=#{statusValue}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据entity查询t_sys_attribute_value -->
+	<select id="queryListByEntity" resultType="com.webside.sys.model.AttributeValueEntity" parameterType="com.webside.sys.model.AttributeValueEntity" flushCache="false" useCache="true">
+		select
+		<include refid="columnList" />
+		from t_sys_attribute_value t
+		<include refid="tableJoins" />
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="attribute != null and attribute.id != null and attribute.id != ''">
+				AND t.attribute_id = #{attribute.id}
+			</if>
+			<if test="value != null and value.id != null and value.id != ''">
+				AND t.value_id = #{value.id}
+			</if>
+			<if test="id != null and id != ''">
+				AND t.id != #{id}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据ID查询t_sys_attribute_value -->
+	<select id="findById" resultType="com.webside.sys.model.AttributeValueEntity" parameterType="String" flushCache="false" useCache="true">
+		select
+		<include refid="columnList" />
+		from t_sys_attribute_value t
+		<include refid="tableJoins" />
+		where t.id = #{id}
+	</select>
+
+	<!-- 新增t_sys_attribute_value -->
+	<insert id="insert" parameterType="com.webside.sys.model.AttributeValueEntity" flushCache="true">
+		insert into t_sys_attribute_value
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,<!-- 主键 -->
+			attribute_id,<!-- 属性id -->
+			value_id,<!-- 属性值id -->
+			status,<!-- 状态 -->
+			create_time,<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},<!-- 主键 -->
+			#{attribute.id},<!-- 属性id -->
+			#{value.id},<!-- 属性值id -->
+			#{status.value},<!-- 状态 -->
+			#{createTime},<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者id -->
+		</trim>
+	</insert>
+
+	<!-- 根据ID更新t_sys_attribute_value -->
+	<update id="updateById" parameterType="com.webside.sys.model.AttributeValueEntity" flushCache="true">
+		update t_sys_attribute_value
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="attribute != null and attribute.id != null">attribute_id=#{attribute.id},</if><!-- 属性id -->
+			<if test="value != null and value.id != null">value_id=#{value.id},</if><!-- 属性值id -->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where id = #{id}
+	</update>
+
+	<!-- 根据ID删除t_sys_attribute_value -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_sys_attribute_value
+		where id = #{id}
+	</delete>
+
+	<!-- 根据entity删除t_sys_attribute_value -->
+	<delete id="deleteByEntity" parameterType="com.webside.up.model.UpNameEntity" flushCache="true">
+		delete from t_sys_attribute_value
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="attribute != null and attribute.id != null and attribute.id != ''">
+				AND attribute_id=#{attribute.id}
+			</if>
+			<if test="value != null and value.id != null and value.id != ''">
+				AND value_id=#{value.id}
+			</if>
+		</trim>
+	</delete>
+</mapper>

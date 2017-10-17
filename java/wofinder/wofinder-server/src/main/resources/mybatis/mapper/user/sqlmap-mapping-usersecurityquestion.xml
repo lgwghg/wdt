@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.user.question.mapper.IUserSecurityQuestionMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.user.question.model.UserSecurityQuestion">
+		<id column="id" property="id"/> <!-- -->
+		<result column="user_id" property="userId"/> <!-- -->
+		<result column="question" property="question"/> <!-- 问题-->
+		<result column="answer" property="answer"/> <!-- 答案-->
+		<result column="create_time" property="createTime"/> <!-- -->
+		<result column="update_time" property="updateTime"/> <!-- -->
+	</resultMap>
+	
+	<!-- t_user_security_question字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id, <!-- -->
+			user_id, <!-- -->
+			question, <!-- 问题-->
+			answer, <!-- 答案-->
+			create_time, <!-- -->
+			update_time, <!-- -->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_user_security_question分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_security_question 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="question != null and question != ''">
+				AND question=#{question}
+			</if>
+			<if test="answer != null and answer != ''">
+				AND answer=#{answer}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND update_time=#{updateTime}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_user_security_question -->
+	<insert id="insert" 
+			parameterType="com.webside.user.question.model.UserSecurityQuestion">
+		insert into t_user_security_question
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="userId != null">user_id,</if><!-- -->
+		<if test="question != null">question,</if><!-- 问题-->
+		<if test="answer != null">answer,</if><!-- 答案-->
+		<if test="createTime != null">create_time,</if><!-- -->
+		<if test="updateTime != null">update_time,</if><!-- -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if>
+		<if test="userId != null">#{userId},</if><!-- -->
+		<if test="question != null">#{question},</if><!-- 问题-->
+		<if test="answer != null">#{answer},</if><!-- 答案-->
+		<if test="createTime != null">#{createTime},</if><!-- -->
+		<if test="updateTime != null">#{updateTime},</if><!-- -->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_user_security_question -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_security_question 
+		where id = #{id}
+	</select>
+	<select id="queryQuestionByUserId" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_user_security_question 
+		where user_id = #{userId}
+	</select>
+	<!-- 更新t_user_security_question -->
+	<update id="updateById" parameterType="com.webside.user.question.model.UserSecurityQuestion" flushCache="true">
+		update t_user_security_question
+		<set>
+			<trim suffixOverrides=",">
+				<if test="userId != null">user_id=#{userId},</if><!-- -->
+				<if test="question != null">question=#{question},</if><!-- 问题-->
+				<if test="answer != null">answer=#{answer},</if><!-- 答案-->
+				<if test="createTime != null">create_time=#{createTime},</if><!-- -->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- -->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_user_security_question -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_user_security_question  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_user_security_question -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_user_security_question 
+		where id = #{id}
+	</delete>
+</mapper>

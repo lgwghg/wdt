@@ -1,0 +1,232 @@
+.video-details-main{
+    margin: 0 auto!important;
+    margin-top: 71px!important;
+}
+.event .title-x .two a{
+    font-weight: bold;
+    color: #414141;
+}
+
+.incident-content{
+    padding: 25px 0 0 0;
+    width: 100%;
+    background-color: #fff;
+    webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+    -webkit-transition: all .3s cubic-bezier(.4,0,.2,1);
+    transition: all .3s cubic-bezier(.4,0,.2,1);
+    margin-bottom: 10px;
+    border-radius: 2px;
+}
+
+.incident-content:hover{
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
+    box-shadow: 0 0 10px rgba(0,0,0,.3);
+}
+
+.incident-content .title-x .two a{
+    font-weight: bold;
+    color: #414141;
+    display: block;
+    font-size: 18px;
+}
+
+.time-read-prize{
+    height: 50px;
+    line-height: 50px;
+    margin: 0 20px;
+    border-bottom: 1px solid #efefef;
+}
+
+.time-read-prize span{
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    color: #757575;
+}
+
+.time-read-prize .one{
+    float: left;
+}
+
+.time-read-prize .three{
+    margin-right: 5px;
+}
+
+.time-read-prize .four{
+    margin-right: 20px;
+}
+
+.time-read-prize .five{
+    margin-right: 5px;
+}
+
+.time-read-prize .two,.time-read-prize .three,.time-read-prize .four,.time-read-prize .five{
+    float: right;
+}
+
+.incident-content-details .one{
+    padding: 20px;
+}
+
+.incident-content-details .one img{
+    max-width: 100%;
+}
+
+.incident-content-details .two .prize{
+    text-align: center;
+    padding: 20px 0;
+}
+
+.incident-content-details .two .prize .icon-zan{
+    color: #d8d8d8;
+    font-size: 30px;
+    width: 30px;
+    display: block;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.incident-content-details .two .prize .icon-zan.red{
+    color: #db4437;
+}
+
+.incident-content-details .two .prize span{
+    color: #989898;
+    display: block;
+}
+
+.incident-content-details .two .thirdly{
+    line-height: 24px;
+    width: 100%;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+.incident-content-details .two .thirdly div{
+    height: 24px;
+    line-height: 24px;
+    float: left;
+    width: auto;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.incident-content-details .two .thirdly div .icon-wf_biaoqiantou{
+    display: block;
+    float: left;
+    font-size: 25px;
+    width: 24px;
+    height: 24px;
+    color: #db4437;
+}
+
+.incident-content-details .two .thirdly div .icon-wf_biaoqiantou:before{
+    position: relative;
+    top: -5.52px;
+    left: 0.5px;
+}
+
+.incident-content-details .two .thirdly div span{
+    padding: 0 8px 0 0;
+    display: block;
+    float: left;
+    font-size: 14px;
+    background-color: #db4437;
+    height: 24px;
+    line-height: 24px;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+}
+
+.incident-content-details .two .share{
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+    padding: 0 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.incident-content-details .two .share .one{
+    display: block;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    color: #757575;
+    padding: 0;
+}
+
+.incident-content-details .two .share .two{
+    float: left;
+    color: #757575;
+    height: 30px;
+    line-height: 30px;
+}
+
+.incident-content-details .two .share .two i{
+    font-size: 16px;
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+    float: left;
+    margin-top: 7px;
+}
+
+.incident-content-details .two .share .two i:first-child{
+    margin-left: 5px;
+}
+
+.incident-content-details .two .share .two .icon-weixin:before {
+    position: relative;
+    top: -3px;
+}
+
+.incident-content-details .two .share .two .icon-weibo:before {
+    position: relative;
+    top: -6px;
+}
+
+.incident-content-details .two .share .two i .ewm{
+    position: absolute;
+    width: 120px;
+    height: 150px;
+    padding: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px 1px rgba(0,0,0,.2);
+    bottom: 28px;
+    left: -52px;
+    display: none;
+}
+
+.incident-content-details .two .share .two i .ewm .ewm-fx{
+    width: 110px;
+    height: 110px;
+}
+
+.incident-content-details .two .share .two i .ewm .ewm-fx img, .incident-content-details .two .share .two i .ewm .ewm-fx canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.incident-content-details .two .share .two i .ewm .sys-fx{
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    color: #757575;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.incident-content-details .two .share .three {
+    float: right;
+}
+
+.incident-content-details .two .share .three a{
+    color: #757575;
+    height: 30px;
+    line-height: 30px;
+}

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.up.mapper.UpNameMapper">
+
+	<!-- t_up_name字段列表 -->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 主键 -->
+			up_id AS "up.id", <!-- 视频作者id -->
+			name AS "name", <!-- 名称 -->
+			type AS "type.value", <!-- 类别 -->
+			status AS "status.value", <!-- 状态 -->
+			create_id AS "createUser.id", <!-- 创建者id -->
+			create_time AS "createTime", <!-- 创建时间 -->
+			update_id AS "updateUser.id", <!-- 修改者id -->
+			update_time AS "updateTime", <!-- 修改时间 -->
+		</trim>
+	</sql>
+
+	<!-- 查询t_up_name分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.up.model.UpNameEntity">
+		select
+		<include refid="columnList" />
+		from t_up_name
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">
+				AND lower(name) like concat('%',lower(#{name}),'%')
+			</if>
+			<if test="upId != null and upId != ''">
+				AND up_id=#{upId}
+			</if>
+			<if test="typeValue != null and typeValue != ''">
+				AND type=#{typeValue}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据entity查询t_up_name -->
+	<select id="queryListByEntity" resultType="com.webside.up.model.UpNameEntity" parameterType="com.webside.up.model.UpNameEntity">
+		select
+		<include refid="columnList" />
+		from t_up_name
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="up != null and up.id != null and up.id != ''">
+				AND up_id=#{up.id}
+			</if>
+			<if test="name != null and name != ''">
+				AND name=#{name}
+			</if>
+			<if test="type != null and type.value != null and type.value != ''">
+				AND type=#{type.value}
+			</if>
+			<if test="id != null and id != ''">
+				AND id != #{id}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据ID查询t_up_name -->
+	<select id="findById" resultType="com.webside.up.model.UpNameEntity" parameterType="String">
+		select
+		<include refid="columnList" />
+		from t_up_name
+		where id = #{id}
+	</select>
+	
+	<!-- 根据ID批量查询t_up_name -->
+	<select id="queryListBatchById" resultType="com.webside.up.model.UpNameEntity" parameterType="list">
+		select
+		<include refid="columnList" />
+		from t_up_name
+		where id in  
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</select>
+
+	<!-- 新增t_up_name -->
+	<insert id="insert" parameterType="com.webside.up.model.UpNameEntity">
+		insert into t_up_name
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,<!-- 主键 -->
+			up_id,<!-- 视频作者id -->
+			name,<!-- 名称 -->
+			type,<!-- 类别 -->
+			status,<!-- 状态 -->
+			create_time,<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},<!-- 主键 -->
+			#{up.id},<!-- 视频作者id -->
+			#{name},<!-- 名称 -->
+			#{type.value},<!-- 类别 -->
+			#{status.value},<!-- 状态 -->
+			#{createTime},<!-- 创建时间 -->
+			<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者id -->
+		</trim>
+	</insert>
+
+	<!-- 根据ID更新t_up_name -->
+	<update id="updateById" parameterType="com.webside.up.model.UpNameEntity">
+		update t_up_name
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="up != null and up.id != null">up_id=#{up.id},</if><!-- 视频作者id -->
+			<if test="name != null and name != ''">name=#{name},</if><!-- 名称 -->
+			<if test="type != null and type.value != null">type=#{type.value},</if><!-- 类别 -->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where id = #{id}
+	</update>
+
+	<!-- 根据entity更新t_up_name -->
+	<update id="updateByEntity" parameterType="com.webside.up.model.UpNameEntity">
+		update t_up_name
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="name != null">name=#{name},</if><!-- 名称 -->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="up != null and up.Id != null and up.Id != ''">
+				AND up_id=#{up.id}
+			</if>
+			<if test="type != null and type.value != null and type.value != ''">
+				AND type=#{type.value}
+			</if>
+		</trim>
+	</update>
+
+	<!-- 批量修改视频作者名称的视频作者 -->
+	<update id="updateUpIdBatchById" parameterType="map">
+		update t_up_name
+		<trim prefix="SET" suffixOverrides=",">
+			up_id = #{upId},<!-- 视频作者id -->
+			type = #{typeValue},<!-- 类别 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+		</trim>
+		<![CDATA[  
+       		where id in 
+    	]]>
+		<foreach collection="ids" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+
+	<!-- 根据ID删除t_up_name -->
+	<delete id="deleteById" parameterType="String">
+		delete from t_up_name
+		where id = #{id}
+	</delete>
+	
+	<!-- 根据ID批量删除t_up_name -->
+	<delete id="deleteBatchById" parameterType="list">
+		<![CDATA[  
+       delete from t_up_name where id in  
+    	]]>
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<!-- 根据entity删除t_up_name -->
+	<delete id="deleteByEntity" parameterType="com.webside.up.model.UpNameEntity">
+		delete from t_up_name
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="up != null and up.Id != null and up.Id != ''">
+				AND up_id=#{up.id}
+			</if>
+		</trim>
+	</delete>
+</mapper>

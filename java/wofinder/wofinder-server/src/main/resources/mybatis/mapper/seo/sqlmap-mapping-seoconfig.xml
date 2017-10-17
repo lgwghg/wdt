@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.seo.mapper.SeoConfigMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- t_seo_config字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 主键-->
+			keywords AS "keywords", <!-- keywords-->
+			description AS "description", <!-- description-->
+			title AS "title", <!-- 标题-->
+			type AS "type.value", <!-- 类别: 1通用 2首页-->
+			status AS "status.value", <!-- 状态 -->
+			create_id AS "createUser.id", <!-- 创建者id -->
+			create_time AS "createTime", <!-- 创建时间 -->
+			update_id AS "updateUser.id", <!-- 修改者id -->
+			update_time AS "updateTime", <!-- 修改时间 -->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_seo_config分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.seo.model.SeoConfigEntity" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_seo_config 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="typeValue != null and typeValue != ''">
+				AND type=#{typeValue}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 根据entity查询t_seo_config -->
+	<select id="queryListByEntity" resultType="com.webside.seo.model.SeoConfigEntity" parameterType="com.webside.seo.model.SeoConfigEntity" flushCache="false" useCache="true">
+		select
+		<include refid="columnList" />
+		from t_seo_config
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="type != null and type.value != null">
+				AND type = #{type.value}
+			</if>
+			<if test="id != null and id != ''">
+				AND id != #{id}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 根据ID查询t_seo_config -->
+	<select id="findById" resultType="com.webside.seo.model.SeoConfigEntity" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_seo_config 
+		where id = #{id}
+	</select>
+	
+	<!-- 新增t_seo_config -->
+	<insert id="insert" 
+			parameterType="com.webside.seo.model.SeoConfigEntity" flushCache="true">
+		insert into t_seo_config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		id,<!-- 主键-->
+		<if test="keywords != null">keywords,</if><!-- keywords-->
+		<if test="description != null">description,</if><!-- description-->
+		<if test="title != null">title,</if><!-- 标题-->
+		type,<!-- 类别: 1通用 2首页-->
+		status,<!-- 状态 -->
+		create_time,<!-- 创建时间 -->
+		<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		#{id},<!-- 主键-->
+		<if test="keywords != null">#{keywords},</if><!-- keywords-->
+		<if test="description != null">#{description},</if><!-- description-->
+		<if test="title != null">#{title},</if><!-- 标题-->
+		#{type.value},<!-- 类别: 1通用 2首页-->
+		#{status.value},<!-- 状态 -->
+		#{createTime},<!-- 创建时间 -->
+		<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者id -->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID更新t_seo_config -->
+	<update id="updateById" parameterType="com.webside.seo.model.SeoConfigEntity" flushCache="true">
+		update t_seo_config
+		<trim prefix="SET" suffixOverrides=",">  
+			<if test="keywords != null">keywords=#{keywords},</if><!-- keywords-->
+			<if test="description != null">description=#{description},</if><!-- description-->
+			<if test="title != null">title=#{title},</if><!-- 标题-->
+			<if test="type != null and type.value != null">type=#{type.value},</if><!-- 类别: 1通用 2首页-->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态 -->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID删除t_seo_config -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_seo_config 
+		where id = #{id}
+	</delete>
+</mapper>

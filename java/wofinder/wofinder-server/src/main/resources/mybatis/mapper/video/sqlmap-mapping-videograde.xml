@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.video.mapper.VideoGradeMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- t_video_grade字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			g.id AS "id", <!-- 评分-->
+			g.user_id AS "userId", <!-- 评分人-->
+			g.video_id AS "videoId", <!-- 视频 t_video-->
+			g.score AS "score", <!-- 评分-->
+			g.create_time AS "createTime", <!-- 创建时间-->
+			g.status AS "status", <!-- 状态，1有效，0无效-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_video_grade分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.video.model.VideoGradeEntity" flushCache="false" useCache="true">
+		select 
+			v.id  as "video.id",
+			v.short_id  as "video.shortId",
+			v.title as "video.title",
+			<include refid="columnList"/>
+		from t_video_grade g inner join t_video v on v.id = g.video_id and v.status = 1
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="userId != null and userId != ''">
+				AND user_id=#{userId}
+			</if>
+			<if test="videoId != null and videoId != ''">
+				AND video_id=#{videoId}
+			</if>
+			<if test="score != null and score != ''">
+				AND score=#{score}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND create_time=#{createTime}
+			</if>
+			<if test="status != null and status != ''">
+				AND status=#{status}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_video_grade -->
+	<insert id="insert" 
+			parameterType="com.webside.video.model.VideoGradeEntity" flushCache="true">
+		insert into t_video_grade
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 评分-->
+		<if test="userId != null">user_id,</if><!-- 评分人-->
+		<if test="videoId != null">video_id,</if><!-- 视频 t_video-->
+		<if test="score != null">score,</if><!-- 评分-->
+		<if test="createTime != null">create_time,</if><!-- 创建时间-->
+		<if test="status != null">status,</if><!-- 状态，1有效，0无效-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 评分-->
+		<if test="userId != null">#{userId},</if><!-- 评分人-->
+		<if test="videoId != null">#{videoId},</if><!-- 视频 t_video-->
+		<if test="score != null">#{score},</if><!-- 评分-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		<if test="status != null">#{status},</if><!-- 状态，1有效，0无效-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_video_grade -->
+	<select id="findById" resultType="com.webside.video.model.VideoGradeEntity" parameterType="String" flushCache="false" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_video_grade 
+		where id = #{id}
+	</select>
+	<!-- 根据userID查询t_video_grade 当天的评分数量-->
+	<select id="queryUserTodayGradeNumByUserId" parameterType="Map" resultType="Integer">
+		select count(1) from t_video_grade 
+		where user_id = #{userId} 
+		and create_time > #{time} 
+		and status = 1
+	</select>
+	<!-- 更新t_video_grade -->
+	<update id="updateById" parameterType="com.webside.video.model.VideoGradeEntity" flushCache="true">
+		update t_video_grade
+		<trim prefix="SET" suffixOverrides=",">  
+			<if test="userId != null">user_id=#{userId},</if><!-- 评分人-->
+			<if test="videoId != null">video_id=#{videoId},</if><!-- 视频 t_video-->
+			<if test="score != null">score=#{score},</if><!-- 评分-->
+			<if test="createTime != null">create_time=#{createTime},</if><!-- 创建时间-->
+			<if test="status != null">status=#{status},</if><!-- 状态，1有效，0无效-->
+		</trim>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID删除t_video_grade -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_video_grade 
+		where id = #{id}
+	</delete>
+</mapper>

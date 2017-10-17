@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webside.dict.mapper.DictMapper">
+
+	<!-- tb_dict字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			id AS "id", <!-- 主键-->
+			type AS "type", <!-- 类型-->
+			label AS "label", <!-- 名称-->
+			value AS "value", <!-- 值-->
+			sort AS "sort", <!-- 排序-->
+			label_class AS "labelClass", <!-- 文字列表样式-->
+			description AS "description", <!-- 描述-->
+			status AS "status.value", <!-- 状态-->
+			create_id AS "createUser.id", <!-- 创建者id-->
+			create_time AS "createTime", <!-- 创建时间-->
+			update_id AS "updateUser.id", <!-- 修改者id-->
+			update_time AS "updateTime", <!-- 修改时间-->
+		</trim>
+	</sql>
+	
+	<sql id="dictInfo">
+		<trim suffixOverrides=",">
+			id AS id ,
+			type AS type,
+			label AS label,
+			value AS value,
+			description AS "description", <!-- 描述-->
+			label_class AS labelClass,
+		</trim>
+	</sql>
+	
+	<!-- 查询tb_dict分页 -->
+	<select id="queryListByPage" parameterType="map" resultType="com.webside.dict.model.DictEntity">
+		select  
+			<include refid="columnList"/>
+		from tb_dict 
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="type != null and type != ''">
+				AND lower(type) like concat('%',lower(#{type}),'%')
+			</if>
+			<if test="label != null and label != ''">
+				AND lower(label) like concat('%',lower(#{label}),'%')
+			</if>
+			<if test="description != null and description != ''">
+				AND lower(description) like concat('%',lower(#{description}),'%')
+			</if>
+			<if test="value != null and value != ''">
+				AND value=#{value}
+			</if>
+			<if test="statusValue != null and statusValue != ''">
+				AND status=#{statusValue}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 精简查询tb_dict-->
+	<select id="queryList" parameterType="map" resultType="com.webside.dict.model.DictEntity">
+		select 
+			<include refid="dictInfo"/>
+		from tb_dict 
+		<where>
+			<if test="statusValue != null and statusValue != ''">
+				status = #{statusValue}
+			</if>
+		</where>
+		order by sort
+	</select>
+	
+	<!-- 新增tb_dict -->
+	<insert id="insert" 
+			parameterType="com.webside.dict.model.DictEntity">
+		insert into tb_dict
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		id,<!-- 主键-->
+		type,<!-- 类型-->
+		label,<!-- 名称-->
+		value,<!-- 值-->
+		<if test="sort != null">sort,</if><!-- 排序-->
+		<if test="labelClass != null">label_class,</if><!-- 文字列表样式-->
+		<if test="description != null">description,</if><!-- 描述-->
+		status,<!-- 状态-->
+		<if test="createUser != null and createUser.id != null">create_id,</if><!-- 创建者id -->
+		create_time,<!-- 创建时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		#{id},<!-- 主键-->
+		#{type},<!-- 类型-->
+		#{label},<!-- 名称-->
+		#{value},<!-- 值-->
+		<if test="sort != null">#{sort},</if><!-- 排序-->
+		<if test="labelClass != null">#{labelClass},</if><!-- 文字列表样式-->
+		<if test="description != null">#{description},</if><!-- 描述-->
+		#{status.value},<!-- 状态-->
+		<if test="createUser != null and createUser.id != null">#{createUser.id},</if><!-- 创建者id -->
+		#{createTime},<!-- 创建时间 -->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询tb_dict -->
+	<select id="findById" resultType="com.webside.dict.model.DictEntity" parameterType="String">
+		select  
+			<include refid="columnList"/>
+		from tb_dict 
+		where id = #{id}
+	</select>
+	
+	<!-- 更新tb_dict -->
+	<update id="updateById" parameterType="com.webside.dict.model.DictEntity">
+		update tb_dict
+		<trim prefix="SET" suffixOverrides=",">  
+			<if test="label != null">label=#{label},</if><!-- 名称-->
+			<if test="value != null">value=#{value},</if><!-- 值-->
+			<if test="sort != null">sort=#{sort},</if><!-- 排序-->
+			<if test="labelClass != null">label_class=#{labelClass},</if><!-- 文字列表样式-->
+			<if test="description != null">description=#{description},</if><!-- 描述-->
+			<if test="status != null and status.value != null">status=#{status.value},</if><!-- 状态-->
+			<if test="updateUser != null and updateUser.id != null">update_id=#{updateUser.id},</if><!-- 修改者 -->
+			update_time=#{updateTime},<!-- 修改时间 -->
+		</trim>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID删除tb_dict -->
+	<delete id="deleteById" parameterType="String">
+		delete from tb_dict 
+		where id = #{id}
+	</delete>
+</mapper>

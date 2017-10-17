@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webside.video.mapper.IVideoValueInformMapper">
+	<!--mybatis ehcache缓存配置,以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+	<cache eviction="LRU" flushInterval="100000" type="org.mybatis.caches.ehcache.LoggingEhcache"/> 
+
+	<!-- 将实体与字段对应关系 -->
+	<resultMap id="resultMap" type="com.webside.video.model.VideoValueInform">
+		<result column="id" property="id"/> <!-- 主键-->
+		<result column="video_value_id" property="videoValueId"/> <!-- 视频id-->
+		<result column="inform_reason" property="informReason"/> <!-- 举报原因  0:内容不相关 1：敏感信息 2：恶意攻击 3：剧透内容 4：恶意删除-->
+		<result column="status" property="status"/> <!-- 状态  1有效  0无效-->
+		<result column="create_id" property="createId"/> <!-- 创建者-->
+		<result column="create_time" property="createTime"/> <!-- 创建时间-->
+		<result column="update_id" property="updateId"/> <!-- 修改者-->
+		<result column="update_time" property="updateTime"/> <!-- 修改时间-->
+		<result column="inform_status" property="informStatus"/>
+		<result column="value_id" property="valueId"/>
+		<result column="video_id" property="videoId"/>
+	</resultMap>
+	
+	<!-- t_video_value_inform字段列表-->
+	<sql id="columnList">
+		<trim suffixOverrides=",">
+			t.id, <!-- 主键-->
+			t.video_value_id, <!-- 视频id-->
+			t.inform_reason, <!-- 举报原因  0:内容不相关 1：敏感信息 2：恶意攻击 3：剧透内容 4：恶意删除-->
+			t.status, <!-- 状态  1有效  0无效-->
+			t.create_id, <!-- 创建者-->
+			t.create_time, <!-- 创建时间-->
+			t.update_id, <!-- 修改者-->
+			t.update_time, <!-- 修改时间-->
+		</trim>
+	</sql>
+	
+	<!-- 查询t_video_value_inform分页 -->
+	<select id="queryListByPage" parameterType="map" resultMap="resultMap" flushCache="true" useCache="true">
+		select  
+			vv.inform_status,
+			vv.value_id,
+			vv.video_id,
+			<include refid="columnList"/>
+		from t_video_value_inform t inner join t_video_value vv on t.video_value_id = vv.id
+		<trim prefix="WHERE" prefixOverrides="AND | OR">  
+			<if test="id != null and id != ''">
+				AND t.id=#{id}
+			</if>
+			<if test="videoValueId != null and videoValueId != ''">
+				AND t.video_value_id=#{videoValueId}
+			</if>
+			<if test="informReason != null and informReason != ''">
+				AND t.inform_reason=#{informReason}
+			</if>
+			<if test="status != null and status != ''">
+				AND t.status=#{status}
+			</if>
+			<if test="createId != null and createId != ''">
+				AND t.create_id=#{createId}
+			</if>
+			<if test="createTime != null and createTime != ''">
+				AND t.create_time=#{createTime}
+			</if>
+			<if test="updateId != null and updateId != ''">
+				AND t.update_id=#{updateId}
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				AND t.update_time=#{updateTime}
+			</if>
+			<if test="informStatus != null and informStatus != ''">
+				AND vv.inform_status=#{informStatus}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增t_video_value_inform -->
+	<insert id="insert" 
+			useGeneratedKeys="true" 
+			parameterType="com.webside.video.model.VideoValueInform">
+		insert into t_video_value_inform
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if><!-- 主键-->
+		<if test="videoValueId != null">video_value_id,</if><!-- 视频id-->
+		<if test="informReason != null">inform_reason,</if><!-- 举报原因  0:内容不相关 1：敏感信息 2：恶意攻击 3：剧透内容 4：恶意删除-->
+		<if test="status != null">status,</if><!-- 状态  1有效  0无效-->
+		<if test="createId != null">create_id,</if><!-- 创建者-->
+		<if test="createTime != null">create_time,</if><!-- 创建时间-->
+		<if test="updateId != null">update_id,</if><!-- 修改者-->
+		<if test="updateTime != null">update_time,</if><!-- 修改时间-->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id},</if><!-- 主键-->
+		<if test="videoValueId != null">#{videoValueId},</if><!-- 视频id-->
+		<if test="informReason != null">#{informReason},</if><!-- 举报原因  0:内容不相关 1：敏感信息 2：恶意攻击 3：剧透内容 4：恶意删除-->
+		<if test="status != null">#{status},</if><!-- 状态  1有效  0无效-->
+		<if test="createId != null">#{createId},</if><!-- 创建者-->
+		<if test="createTime != null">#{createTime},</if><!-- 创建时间-->
+		<if test="updateId != null">#{updateId},</if><!-- 修改者-->
+		<if test="updateTime != null">#{updateTime},</if><!-- 修改时间-->
+		</trim>
+	</insert>
+	
+	<!-- 根据ID查询t_video_value_inform -->
+	<select id="findById" resultMap="resultMap" parameterType="String" flushCache="true" useCache="true">
+		select  
+			<include refid="columnList"/>
+		from t_video_value_inform t
+		where t.id = #{id}
+	</select>
+	
+	<!-- 更新t_video_value_inform -->
+	<update id="updateById" parameterType="com.webside.video.model.VideoValueInform" flushCache="true">
+		update t_video_value_inform
+		<set>
+			<trim suffixOverrides=",">
+				<if test="videoValueId != null">video_value_id=#{videoValueId},</if><!-- 视频id-->
+				<if test="informReason != null">inform_reason=#{informReason},</if><!-- 举报原因  0:内容不相关 1：敏感信息 2：恶意攻击 3：剧透内容 4：恶意删除-->
+				<if test="status != null">status=#{status},</if><!-- 状态  1有效  0无效-->
+				<if test="createId != null">create_id=#{createId},</if><!-- 创建者-->
+				<if test="createTime != null">create_time=#{createTime},</if><!-- 创建时间-->
+				<if test="updateId != null">update_id=#{updateId},</if><!-- 修改者-->
+				<if test="updateTime != null">update_time=#{updateTime},</if><!-- 修改时间-->
+			</trim>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据ID列表删除t_video_value_inform -->
+	<delete id="deleteBatchById" parameterType="list" flushCache="true">
+		delete from t_video_value_log  
+		where id in
+		<foreach collection="list" item = "id" open="(" separator="," close=")">
+	    	#{id}  
+	    </foreach>
+	</delete>
+	
+	<!-- 根据ID删除t_video_value_inform -->
+	<delete id="deleteById" parameterType="String" flushCache="true">
+		delete from t_video_value_log 
+		where id = #{id}
+	</delete>
+</mapper>

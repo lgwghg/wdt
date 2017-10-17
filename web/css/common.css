@@ -1,0 +1,674 @@
+.none{display: none;}
+/*iconfont*/
+.iconfont-x{
+    position: relative;
+    cursor: pointer;
+    display: block;
+}
+.iconfont-x:before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    line-height: normal;
+}
+.iconfont-x span{
+    position: absolute;
+    display: block;
+    left: -30%;
+    top: -30%;
+    width: 160%;
+    height: 160%;
+    background-color: #000;
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    opacity: 0;
+}
+.dropdown{
+    position: relative;
+}
+.dropdown .dropdown-triangle-bd{
+    border-color: transparent;
+    border-style: dashed dashed solid;
+    border-width: 0 8.5px 8.5px;
+    display: none;
+    position: absolute;
+    left: 3.5px;
+    z-index: 10000;
+    height: 0;
+    width: 0;
+    border-bottom-color: #ccc;
+    border-bottom-color: rgba(0,0,0,.2);
+    top: 42px;
+}
+.dropdown .dropdown-triangle{
+    border-color: transparent;
+    border-bottom-color: #fff;
+    border-style: dashed dashed solid;
+    border-width: 0 8.5px 8.5px;
+    display: none;
+    position: absolute;
+    left: 3.5px;
+    top: 43px;
+    z-index: 10000;
+    height: 0;
+    width: 0;
+}
+.images-x-content{
+    position: relative;
+}
+.images-x .images-x-hover{
+    position: absolute!important;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: #fff;
+    opacity: 0.1;
+}
+.images-x:hover .images-x-hover{
+    opacity: 0;
+    animation:mymove 0.99s linear ;
+    -webkit-animation:mymove 0.99s linear ;
+    -moz-animation: mymove 0.99s linear ;
+    -o-animation: mymove 0.99s linear ;
+}
+@keyframes mymove
+{
+    0% {opacity: 0.1}
+    100% {opacity: 0}
+}
+
+@-moz-keyframes mymove /* Firefox */
+{
+    0% {opacity: 0.1}
+    100% {opacity: 0}
+}
+
+@-webkit-keyframes mymove /* Safari 和 Chrome */
+{
+    0% {opacity: 0.1}
+    100% {opacity: 0}
+}
+
+@-o-keyframes mymove /* Opera */
+{
+    0% {opacity: 0.1}
+    100% {opacity: 0}
+}
+.title-x{
+    padding: 0 20px 0 0;
+    overflow: hidden;
+}
+.title-x .one{
+    display: block;
+    float: left;
+    width: 5px;
+    height: 17px;
+    background-color: #db4437;
+    margin-top: 5px;
+}
+.title-x .two{
+    display: block;
+    float: left;
+    font-size: 18px;
+    margin-left: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 240px;
+    font-weight: bold;
+    color: #757575;
+}
+.grade-number-x{
+    width: 100px;
+    height: 24px;
+    position: relative;
+}
+.grade-number-x ul{
+    position: relative;
+    z-index: 1;
+    width: 100px;
+    height: 24px;
+    line-height: 24px;
+    overflow: hidden;
+}
+.grade-number-x ul li{
+    width: 16px;
+    height: 24px;
+    margin-left: 5px;
+    float: left;
+}
+.grade-number-x ul li:first-child{
+    margin-left: 0;
+}
+.grade-number-x ul li i{
+    color: #db4437;
+    font-size: 16px;
+}
+.grade-number-x ul li .icon-wf_pingfen1,.grade-number-x ul li .icon-wf_pingfen{
+    display: none;
+}
+.grade-number-x ul.item1-one .item1 .icon-wf_weipingfen,
+.grade-number-x ul.item1-two .item1 .icon-wf_weipingfen,
+.grade-number-x ul.item2-one .item1 .icon-wf_weipingfen,
+.grade-number-x ul.item2-two .item1 .icon-wf_weipingfen,
+.grade-number-x ul.item3-one .item1 .icon-wf_weipingfen,
+.grade-number-x ul.item3-two .item1 .icon-wf_weipingfen,
+.grade-number-x ul.item4-one .item1 .icon-wf_weipingfen,
+.grade-number-x ul.item4-two .item1 .icon-wf_weipingfen,
+.grade-number-x ul.item5-one .item1 .icon-wf_weipingfen,
+.grade-number-x ul.item5-two .item1 .icon-wf_weipingfen,
+.grade-number-x ul.item2-one .item2 .icon-wf_weipingfen,
+.grade-number-x ul.item2-two .item2 .icon-wf_weipingfen,
+.grade-number-x ul.item3-one .item2 .icon-wf_weipingfen,
+.grade-number-x ul.item3-two .item2 .icon-wf_weipingfen,
+.grade-number-x ul.item4-one .item2 .icon-wf_weipingfen,
+.grade-number-x ul.item4-two .item2 .icon-wf_weipingfen,
+.grade-number-x ul.item5-one .item2 .icon-wf_weipingfen,
+.grade-number-x ul.item5-two .item2 .icon-wf_weipingfen,
+.grade-number-x ul.item3-one .item3 .icon-wf_weipingfen,
+.grade-number-x ul.item3-two .item3 .icon-wf_weipingfen,
+.grade-number-x ul.item4-one .item3 .icon-wf_weipingfen,
+.grade-number-x ul.item4-two .item3 .icon-wf_weipingfen,
+.grade-number-x ul.item5-one .item3 .icon-wf_weipingfen,
+.grade-number-x ul.item5-two .item3 .icon-wf_weipingfen,
+.grade-number-x ul.item4-one .item4 .icon-wf_weipingfen,
+.grade-number-x ul.item4-two .item4 .icon-wf_weipingfen,
+.grade-number-x ul.item5-one .item4 .icon-wf_weipingfen,
+.grade-number-x ul.item5-two .item4 .icon-wf_weipingfen,
+.grade-number-x ul.item5-one .item5 .icon-wf_weipingfen,
+.grade-number-x ul.item5-two .item5 .icon-wf_weipingfen
+{
+    display: none;
+}
+.grade-number-x ul.item1-one .item1 .icon-wf_pingfen1,
+.grade-number-x ul.item1-two .item1 .icon-wf_pingfen,
+.grade-number-x ul.item2-one .item1 .icon-wf_pingfen,
+.grade-number-x ul.item2-one .item2 .icon-wf_pingfen1,
+.grade-number-x ul.item2-two .item1 .icon-wf_pingfen,
+.grade-number-x ul.item2-two .item2 .icon-wf_pingfen,
+.grade-number-x ul.item3-one .item1 .icon-wf_pingfen,
+.grade-number-x ul.item3-one .item2 .icon-wf_pingfen,
+.grade-number-x ul.item3-one .item3 .icon-wf_pingfen1,
+.grade-number-x ul.item3-two .item1 .icon-wf_pingfen,
+.grade-number-x ul.item3-two .item2 .icon-wf_pingfen,
+.grade-number-x ul.item3-two .item3 .icon-wf_pingfen,
+.grade-number-x ul.item4-one .item1 .icon-wf_pingfen,
+.grade-number-x ul.item4-one .item2 .icon-wf_pingfen,
+.grade-number-x ul.item4-one .item3 .icon-wf_pingfen,
+.grade-number-x ul.item4-one .item4 .icon-wf_pingfen1,
+.grade-number-x ul.item4-two .item1 .icon-wf_pingfen,
+.grade-number-x ul.item4-two .item2 .icon-wf_pingfen,
+.grade-number-x ul.item4-two .item3 .icon-wf_pingfen,
+.grade-number-x ul.item4-two .item4 .icon-wf_pingfen,
+.grade-number-x ul.item5-one .item1 .icon-wf_pingfen,
+.grade-number-x ul.item5-one .item2 .icon-wf_pingfen,
+.grade-number-x ul.item5-one .item3 .icon-wf_pingfen,
+.grade-number-x ul.item5-one .item4 .icon-wf_pingfen,
+.grade-number-x ul.item5-one .item5 .icon-wf_pingfen1,
+.grade-number-x ul.item5-two .item1 .icon-wf_pingfen,
+.grade-number-x ul.item5-two .item2 .icon-wf_pingfen,
+.grade-number-x ul.item5-two .item3 .icon-wf_pingfen,
+.grade-number-x ul.item5-two .item4 .icon-wf_pingfen,
+.grade-number-x ul.item5-two .item5 .icon-wf_pingfen
+{
+    display: block;
+}
+.grade-number-x .two{
+    position: absolute;
+    z-index: 2;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    cursor: pointer;
+}
+.grade-number-x .two .item1-one{
+    width: 8px;
+    height: 24px;
+    float: left;
+}
+.grade-number-x .two .item1-two{
+    width: 13px;
+    height: 24px;
+    float: left;
+}
+.grade-number-x .two .item2-one{
+    width: 8px;
+    height: 24px;
+    float: left;
+}
+.grade-number-x .two .item2-two{
+    width: 13px;
+    height: 24px;
+    float: left;
+}
+.grade-number-x .two .item3-one{
+    width: 8px;
+    height: 24px;
+    float: left;
+}
+.grade-number-x .two .item3-two{
+    width: 13px;
+    height: 24px;
+    float: left;
+}
+.grade-number-x .two .item4-one{
+    width: 8px;
+    height: 24px;
+    float: left;
+}
+.grade-number-x .two .item4-two{
+    width: 13px;
+    height: 24px;
+    float: left;
+}
+.grade-number-x .two .item5-one{
+    width: 8px;
+    height: 24px;
+    float: left;
+}
+.grade-number-x .two .item5-two{
+    width: 8px;
+    height: 24px;
+    float: left;
+}
+.grade-number-x .three{
+    position: absolute;
+    bottom: 24px;
+    background-color: #db4437;
+    width: 20px;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 5px;
+    display: none;
+}
+.grade-number-x:hover .three{
+    display: block;
+}
+.on-off{display: block;float: right;width: 34px;height: 16px;margin-top:14px;border-radius: 8px;cursor: pointer;}
+.on-off span{display: block;width: 12px;height: 12px;border-radius: 50%;}
+.open-x.on-off{background-color: #db4437;}
+.open-x.on-off span{background-color: #ffffff;float: right;margin: 2px;}
+.close-x.on-off{background-color: #ffffff;border: 1px solid #d8d8d8;}
+.close-x.on-off span{background-color: #d8d8d8;float: left;margin: 1px 2px;}
+.no_header{
+    display: block;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    background-color: #de4a1c;
+}
+.no_header i{
+    font-size: 20px;
+}
+/*无头像时26字母颜色*/
+.no_header-A{
+    background-color: #fdc109;
+}
+.no_header-B{
+    background-color: #7a544b;
+}
+.no_header-C{
+    background-color: #01bdd6;
+}
+.no_header-D{
+    background-color: #643bbd;
+}
+.no_header-E{
+    background-color: #00579c;
+}
+.no_header-F{
+    background-color: #f44236;
+}
+.no_header-G{
+    background-color: #9e9e9e;
+}
+.no_header-H{
+    background-color: #ff542c;
+}
+.no_header-I{
+    background-color: #4251b6;
+}
+.no_header-J{
+    background-color: #01bfa6;
+}
+.no_header-K{
+    background-color: #b0b42c;
+}
+.no_header-L{
+    background-color: #8bc24a;
+}
+.no_header-M{
+    background-color: #ec407a;
+}
+.no_header-N{
+    background-color: #27a69d;
+}
+.no_header-O{
+    background-color: #ff9801;
+}
+.no_header-P{
+    background-color: #9d28b4;
+}
+.no_header-Q{
+    background-color: #2e1d8d;
+}
+.no_header-R{
+    background-color: #ef6c00;
+}
+.no_header-S{
+    background-color: #f58017;
+}
+.no_header-T{
+    background-color: #029688;
+}
+.no_header-U{
+    background-color: #364751;
+}
+.no_header-V{
+    background-color: #4f332f;
+}
+.no_header-W{
+    background-color: #1865c1;
+}
+.no_header-X{
+    background-color: #de4a1c;
+}
+.no_header-Y{
+    background-color: #414141;
+}
+.no_header-Z{
+    background-color: #607d8b;
+}
+/*页面加载canvas*/
+.o-h{
+    overflow: hidden!important;
+}
+#drawNext{
+    position:fixed;
+    z-index: 10000;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+}
+#drawLoad{
+    position:fixed;
+    z-index: 10000;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+}
+.to-homepage{
+    display: block;
+    width: 100%;
+    height: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.to-homepage img{
+    height: 28px;
+}
+/*任务完成数量条*/
+.task-x{
+    overflow: hidden;
+    height: 65px;
+}
+.task-x .title-a{
+    float: left;
+    color: #414141;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 24px;
+}
+.task-x .number{
+    float: left;
+    font-size: 14px;
+    margin-top: 24px;
+    margin-left: 20px;
+}
+.task-x .number .over{
+    color: #db4437;
+    height: 40px;
+    line-height: 40px;
+}
+.task-x .number .all{
+    color: #757575;
+    height: 40px;
+    line-height: 40px;
+}
+.task-x .graph{
+    float: left;
+    height: 65px;
+    margin-left: 20px;
+    overflow: hidden;
+}
+.task-x .graph li{
+    float: left;
+    position: relative;
+}
+.task-x .graph li .top{
+    color: #414141;
+    position: absolute;
+    right: -20px;
+    font-size: 14px;
+}
+.task-x .graph li .bottom{
+    overflow: hidden;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 25px;
+}
+.task-x .graph li .bottom .line{
+    float: left;
+    width: 100px;
+    height: 3px;
+    background-color: #dbdbdb;
+    margin-top: 18.5px;
+}
+.task-x .graph li .bottom .roundness{
+    float: left;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #dbdbdb;
+    margin-top: 12px;
+}
+.task-x .graph li.ywc .bottom .line,.task-x .graph li.ywc .bottom .roundness{
+    background-color: #db4437;
+}
+.task-x .line1{
+    width: 796px;
+    height: 3px;
+    background-color: #dbdbdb;
+    float: left;
+    margin-top: 43.5px;
+    margin-left: 20px;
+}
+.task-x .line2{
+    width: 10%;
+    max-width: 100%;
+    height: 100%;
+    background-color: #db4437;
+}
+.task-x .button{
+    float: left;
+    margin-left: 25px;
+    width: 76px;
+    height: 40px;
+    margin-top: 25px;
+    position: relative;
+}
+.task-x .button .btn{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+}
+/*.task-x .button .btn[disabled]{
+    background-color: #e7e7e7;
+}
+.task-x .button .btn[disabled]:hover{
+    background-color: #e7e7e7;
+}*/
+.task-x .button.wwc .btn,.task-x .button.wwc .btn[disabled]{
+    background-color: transparent;
+    color: #757575;
+}
+.task-x .button.wc .btn,.task-x .button.wc .btn[disabled]{
+    background-color: #db4437;
+    color: #fff;
+}
+.task-x .button.ywc .btn,.task-x .button.ywc .btn:hover,.task-x .button.ywc .btn:focus,.task-x .button.ywc .btn:active,.task-x .button.ywc .btn[disabled],.task-x .button.ywc .btn[disabled]:hover,.task-x .button.ywc .btn[disabled]:focus,.task-x .button.ywc .btn[disabled]:active{
+    background-color: #e7e7e7;
+    color: #fff;
+}
+.task-x .button.wwc .btn:hover,.task-x .button.wwc .btn:focus{
+    background-color: transparent;
+    color: #757575;
+}
+.task-x .button .btn:focus,.task-x .button .btn:active{
+    box-shadow: none!important;
+}
+.task-x .button span{
+    position: absolute;
+    height: 20px;
+    line-height: 20px;
+    width: 76px;
+    text-align: center;
+    left: 0;
+    top: -20px;
+    color: #db4437;
+    display: none;
+}
+.bottom-hint{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+.bottom-hint-inside{
+    background-color: rgba(0,0,0,0.87);
+    display: inline-flex;
+    overflow: hidden;
+    padding: 0 25px;
+    border-radius: 4px;
+}
+.bottom-hint1{
+    display: block;
+    float: left;
+    color: #fff;
+    height: 40px;
+    line-height: 40px;
+}
+.bottom-hint2{
+    display: block;
+    float: left;
+    color: #db4437;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 90px;
+    cursor: pointer;
+}
+@media screen and (max-width: 480px) {
+    .task-x{
+        height: 130px;
+        position: relative;
+    }
+    .task-x .button{
+        float: right;
+    }
+    .task-x .graph{
+        position: absolute;
+        top: 65px;
+        margin-left: 0;
+    }
+    .task-x .graph li .top{
+        display: none;
+    }
+    .task-x .graph li .bottom .line{
+        width: 20.5px;
+    }
+    .task-x .line1{
+        position: absolute;
+        top: 65px;
+        margin-left: 0;
+        width: 100%;
+    }
+}
+@media screen and (min-width: 481px) and (max-width: 767px) {
+    .task-x{
+        height: 130px;
+        position: relative;
+    }
+    .task-x .button{
+        float: right;
+    }
+    .task-x .graph{
+        position: absolute;
+        top: 65px;
+        margin-left: 0;
+    }
+    .task-x .graph li .top{
+        display: none;
+    }
+    .task-x .graph li .bottom .line{
+        width: 43.5px;
+    }
+    .task-x .line1{
+        position: absolute;
+        top: 65px;
+        margin-left: 0;
+        width: 100%;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+    .task-x{
+        height: 130px;
+        position: relative;
+    }
+    .task-x .button{
+        float: right;
+    }
+    .task-x .graph{
+        position: absolute;
+        top: 65px;
+        margin-left: 0;
+    }
+    .task-x .graph li .top{
+        display: none;
+    }
+    .task-x .graph li .bottom .line{
+        width: 44px;
+    }
+    .task-x .line1{
+        position: absolute;
+        top: 65px;
+        margin-left: 0;
+        width: 100%;
+    }
+}
+@media screen and (min-width: 1200px) and (max-width: 1519px) {
+    .task-x .graph li .bottom .line{
+        width: 54px;
+    }
+    .task-x .line1{
+        width: 474px;
+    }
+}
